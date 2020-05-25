@@ -29,6 +29,8 @@ public class Customer {
         this.cardCVV = cardCVV;
     }
 
+    public Customer(){};
+
     public int getId() {
         return id;
     }

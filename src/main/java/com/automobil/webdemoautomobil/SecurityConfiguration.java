@@ -70,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-    //Defining
+    //Defining restrictions for different user roles
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
