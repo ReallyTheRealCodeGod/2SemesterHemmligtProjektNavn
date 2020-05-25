@@ -20,7 +20,6 @@ public class JDBCConnection {
 
 
     public static Connection getDatabaseConnection() {
-        System.out.println(user);
         if(conn == null) {
             try {
                 conn = DriverManager.getConnection(url, user, password);

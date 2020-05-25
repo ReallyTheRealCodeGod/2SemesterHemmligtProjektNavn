@@ -166,6 +166,31 @@ CREATE TABLE bill (
   rental_cost SMALLINT NULL,
   netto_price INT NULL
   );
+
+create table users(
+    username varchar(50) not null primary key,
+    password varchar(50) not null,
+    enabled TINYINT not null default 1
+);
+
+create table authorities (
+    username varchar(50) not null,
+    authority varchar(50) not null,
+    foreign key(username) references users(username)
+);
+create unique index ix_auth_username on authorities (username,authority);
+
+insert into users(username, password, enabled)
+values('admin', 'pass', 1);
+
+insert into users(username, password, enabled)
+values('user', 'pass', 1);
+
+INSERT INTO authorities (username, authority)
+values('admin', 'ROLE_ADMIN');
+
+INSERT INTO authorities (username, authority)
+values('user', 'ROLE_USER');
   
   
 
