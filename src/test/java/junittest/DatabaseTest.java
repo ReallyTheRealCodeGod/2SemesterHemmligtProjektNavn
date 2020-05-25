@@ -2,6 +2,7 @@ package junittest;
 
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,16 +19,14 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 
-@ContextConfiguration(classes = JDBCConnection.class)
-@TestPropertySource("/resources/application.properties")
 public class DatabaseTest {
     Properties prop;
 
-    @BeforeAll()
+    @BeforeEach()
     public void testConditions(){
         try {
             prop = new Properties();
-            prop.load(new FileInputStream("application.properties"));
+            prop.load(new FileInputStream("C:\\Users\\123al\\Desktop\\Programming-Design\\coding\\Skole\\Mandatory\\2SemesterHemmligtProjektNavn\\src\\main\\resources\\application.properties"));
         }catch(FileNotFoundException file){
             file.printStackTrace();
         }catch(IOException io){
