@@ -1,7 +1,4 @@
-DROP database if exists test;
-create database test;
-
-use test;
+use autocamper_db;
 
 create table users(
     username varchar(50) not null primary key,

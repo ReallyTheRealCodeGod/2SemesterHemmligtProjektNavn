@@ -13,12 +13,19 @@ CREATE TABLE autocamper_type (
 	horse_power INT NOT NULL,
 	max_speed INT NOT NULL,
 	standing_height INT NOT NULL,
-	area_sqm INT NOT NULL,
+	area_sqm INT NOT NULL,
 	height VARCHAR(45) NOT NULL,
 	length INT NOT NULL,
 	description VARCHAR(1000) NOT NULL,
   PRIMARY KEY (brand, model)
 );
+
+CREATE TABLE built_in_feature(
+  feature_id INT PRIMARY KEY AUTO_INCREMENT,
+  picture VARCHAR(45) NULL,
+  name VARCHAR(45) NOT NULL,
+  description VARCHAR(200) NULL
+  );
 
 CREATE TABLE type_features (
   type_brand VARCHAR(25) NOT NULL,
@@ -27,18 +34,11 @@ CREATE TABLE type_features (
   PRIMARY KEY (type_brand, type_model, feature_id),
   CONSTRAINT fk_type_features_type1
     FOREIGN KEY (type_brand , type_model)
-    REFERENCES type (brand , model),
-  CONSTRAINT fk_type_features_built_in_feature1
+    REFERENCES autocamper_type (brand , model),
+  CONSTRAINT fk_type_features_built_in_feature
     FOREIGN KEY (feature_id)
     REFERENCES built_in_feature (feature_id)
 );
-
-CREATE TABLE built_in_feature (
-  feature_id INT PRIMARY KEY AUTO_INCREMENT,
-  picture VARCHAR(45) NULL,
-  name VARCHAR(45) NOT NULL,
-  description VARCHAR(200) NULL
-  );
 
 
 CREATE TABLE autocamper(
