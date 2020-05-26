@@ -1,15 +1,12 @@
-package Repositories;
+package repositories;
 
-import models.Customer;
-import models.Rental;
+import models.Season;
 import models.VariablePrices;
-import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Value;
 import utility.JDBCConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class VariablePricesRepository {
 
@@ -140,5 +137,17 @@ public class VariablePricesRepository {
             sql.printStackTrace();
         }
         return false;
+    }
+
+    private Season[] getSeasons(){
+        try {
+            PreparedStatement prep = conn.prepareStatement("SELECT * FROM seasons");
+            ResultStprep.executeQuery();
+
+            return
+        }catch(SQLException sql){
+            sql.printStackTrace();
+            return null;
+        }
     }
 }

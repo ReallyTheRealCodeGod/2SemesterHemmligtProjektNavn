@@ -1,6 +1,6 @@
 package junittest;
 
-import Repositories.AccessoryRepository;
+import repositories.AccessoryRepository;
 import models.Accessory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;

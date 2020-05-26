@@ -1,11 +1,9 @@
-package Repositories;
+package repositories;
 
-import com.mysql.cj.protocol.Resultset;
 import models.Rental;
 import org.springframework.beans.factory.annotation.Value;
 import utility.JDBCConnection;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 

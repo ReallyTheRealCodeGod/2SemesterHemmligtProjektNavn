@@ -1,12 +1,8 @@
-package Repositories;
+package repositories;
 
-import models.Accessory;
 import models.Accessory;
 import utility.JDBCConnection;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
 
