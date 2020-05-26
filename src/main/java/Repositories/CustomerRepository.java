@@ -5,6 +5,7 @@ import models.Customer;
 import org.springframework.beans.factory.annotation.Value;
 import utility.JDBCConnection;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -127,7 +128,7 @@ public class CustomerRepository {
         try {
             PreparedStatement createCustomer = conn.prepareStatement
                     ("INSERT INTO customer " +
-                    "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+                    "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?" + Statement.RETURN_GENERATED_KEYS);
             createCustomer.setString(1, customer.getLastName());
             createCustomer.setString(2,customer.getFirstName());
             createCustomer.setString(3, customer.getEmail());
@@ -140,12 +141,14 @@ public class CustomerRepository {
             createCustomer.setInt(10, customer.getCardNr());
             createCustomer.setInt(11, customer.getCardCVV());
             createCustomer.executeUpdate();
-
+            ResultSet rs = createCustomer.getGeneratedKeys();
+            rs.next();
+            customer.setId(rs.getInt(1));
         }
         catch(SQLException sql){
             sql.printStackTrace();
         }
-        return null;
+        return customer;
     }
 
     public boolean update(Customer customer){
