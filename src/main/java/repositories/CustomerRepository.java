@@ -27,7 +27,7 @@ public class CustomerRepository {
         Customer customerToReturn = new Customer();
         try {
             PreparedStatement getSingleCustomer = conn.prepareStatement
-                    ("SELECT * FROM costumer WHERE id_costumer = ?");
+                    ("SELECT * FROM customer WHERE id = ?");
             getSingleCustomer.setInt(1, id);
             ResultSet rs = getSingleCustomer.executeQuery();
 

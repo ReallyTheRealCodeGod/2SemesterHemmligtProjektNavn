@@ -5,15 +5,14 @@ import java.util.Arrays;
 public class Autocamper {
     private int id;
     private int status;
-    private String photo;
+    private String picture;
     private int mileage;
     private AutocamperType type;
 
     public Autocamper() {}
-    public Autocamper(int id, int status, String photo, int mileage, AutocamperType type) {
-        this.id = id;
+    public Autocamper(int status, String picture, int mileage, AutocamperType type) {
         this.status = status;
-        this.photo = photo;
+        this.picture = picture;
         this.mileage = mileage;
         this.type = type;
     }
@@ -34,12 +33,12 @@ public class Autocamper {
         this.status = status;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public AutocamperType getType() {

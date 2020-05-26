@@ -9,25 +9,17 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class VariablePricesRepository {
-
-    private Connection conn;
-    @Value("db.user")
-    private String username;
-    @Value("db.password")
-    private String password;
-    @Value("db.url")
-    private String url;
+    Connection conn;
 
     public VariablePricesRepository(){
         this.conn = JDBCConnection.getDatabaseConnection();
     }
 
-    public VariablePrices getById(int id){
+    public VariablePrices getPrices(){
         VariablePrices varPriceToReturn = new VariablePrices();
         try {
             PreparedStatement getSingleVarPrice = conn.prepareStatement
-                    ("SELECT * FROM variable_prices WHERE variable_prices_id = ?");
-            getSingleVarPrice.setInt(1, id);
+                    ("SELECT * FROM variable_prices WHERE variable_prices_id = 1");
             ResultSet rs = getSingleVarPrice.executeQuery();
 
             while (rs.next()) {
@@ -37,6 +29,7 @@ public class VariablePricesRepository {
                 varPriceToReturn.setPickUpKilometerPrice(rs.getInt(4));
                 varPriceToReturn.setCleaningMaxPrice(rs.getInt(5));
                 varPriceToReturn.setCleaningMinPrice(rs.getInt(6));
+                varPriceToReturn.setSeasons(getSeasons());
             }
         }
         catch (SQLException e){
@@ -44,11 +37,54 @@ public class VariablePricesRepository {
         }
         return varPriceToReturn;
     }
+    public boolean editPrices(VariablePrices variablePrices){
+        try {
+            PreparedStatement updateVarPrice = conn.prepareStatement
+                    ("UPDATE variable_prices SET  " +
+                            "excessKilometer_price = ?, " +
+                            "fuel_price = ?, " +
+                            "dropOffKilometer_price = ?, " +
+                            "pickUpKilometer_price = ?, " +
+                            "cleaning_max_price = ?, " +
+                            "cleaning_min_price = ?");
 
-    public void getByParameter(String parameter){
+            updateVarPrice.setInt(1, variablePrices.getExcessKilometerPrice());
+            updateVarPrice.setInt(2, variablePrices.getFuelPrice());
+            updateVarPrice.setInt(3, variablePrices.getDropOffKilometerPrice());
+            updateVarPrice.setInt(4, variablePrices.getPickUpKilometerPrice());
+            updateVarPrice.setInt(5, variablePrices.getCleaningMaxPrice());
+            updateVarPrice.setInt(6, variablePrices.getCleaningMinPrice());
+            updateVarPrice.setInt(7, variablePrices.getVariablePricesId());
 
+            updateVarPrice.executeUpdate();
+            return true;
+        }
+        catch(SQLException sql){
+            sql.printStackTrace();
+        }
+        return false;
     }
 
+    private Season[] getSeasons(){
+        ArrayList<Season> list = new ArrayList<>();
+        try {
+            PreparedStatement prep = conn.prepareStatement("SELECT * FROM seasons");
+            ResultSet rs = prep.executeQuery();
+            while(rs.next()){
+                Season s = new Season();
+                s.setName(rs.getString("name"));
+                s.setSurchargePercentage(rs.getInt("surcharge_percentage"));
+                s.setStartDate(rs.getDate("start_date").toLocalDate());
+                s.setEndDate(rs.getDate("end_date").toLocalDate());
+                list.add(s);
+            }
+            return list.toArray(new Season[list.size()]);
+        }catch(SQLException sql){
+            sql.printStackTrace();
+            return null;
+        }
+
+    /*tænker det ikke rigtig den her er nødvendigt siden priserne kun har en række;
     public VariablePrices[] getAll(){
         ArrayList<VariablePrices> priceList = new ArrayList<VariablePrices>();
         try {
@@ -74,6 +110,7 @@ public class VariablePricesRepository {
         return priceList.toArray(new VariablePrices[priceList.size()]);
     }
 
+
     public VariablePrices create(VariablePrices variablePrices){
         try {
             PreparedStatement createVariablePrice = conn.prepareStatement
@@ -94,37 +131,9 @@ public class VariablePricesRepository {
             sql.printStackTrace();
         }
         return variablePrices;
-    }
+    }*/
 
-    public boolean update(VariablePrices variablePrices){
-        try {
-            PreparedStatement updateVarPrice = conn.prepareStatement
-                    ("UPDATE variable_prices SET  " +
-                            "excessKilometer_price = ?, " +
-                            "fuel_price = ?, " +
-                            "dropOffKilometer_price = ?, " +
-                            "pickUpKilometer_price = ?, " +
-                            "cleaning_max_price = ?, " +
-                            "cleaning_min_price = ?, " +
-                            "WHERE variable_prices_id = ?");
-
-            updateVarPrice.setInt(1, variablePrices.getExcessKilometerPrice());
-            updateVarPrice.setInt(2, variablePrices.getFuelPrice());
-            updateVarPrice.setInt(3, variablePrices.getDropOffKilometerPrice());
-            updateVarPrice.setInt(4, variablePrices.getPickUpKilometerPrice());
-            updateVarPrice.setInt(5, variablePrices.getCleaningMaxPrice());
-            updateVarPrice.setInt(6, variablePrices.getCleaningMinPrice());
-            updateVarPrice.setInt(7, variablePrices.getVariablePricesId());
-
-            updateVarPrice.executeUpdate();
-            return true;
-        }
-        catch(SQLException sql){
-            sql.printStackTrace();
-        }
-        return false;
-    }
-
+    /*
     public boolean delete(int id){
         try {
             PreparedStatement deleteVarPrice = conn.prepareStatement
@@ -137,25 +146,7 @@ public class VariablePricesRepository {
             sql.printStackTrace();
         }
         return false;
-    }
+    }*/
 
-    private Season[] getSeasons(){
-        ArrayList<Season> list = new ArrayList<>();
-        try {
-            PreparedStatement prep = conn.prepareStatement("SELECT * FROM seasons");
-            ResultSet rs = prep.executeQuery();
-            while(rs.next()){
-                 Season s = new Season();
-                 s.setName(rs.getString("name"));
-                 s.setSurchargePercentage(rs.getInt("surcharge_percentage"));
-                 s.setStartDate(rs.getDate("start_date").toLocalDate());
-                 s.setEndDate(rs.getDate("end_date").toLocalDate());
-                 list.add(s);
-            }
-            return list.toArray(new Season[list.size()]);
-        }catch(SQLException sql){
-            sql.printStackTrace();
-            return null;
-        }
     }
 }

@@ -19,7 +19,6 @@ public class Rental {
     }
 
     public Rental(int id, int accumulatedPrice, LocalDate startDate, LocalDate endDate, long longPickUpLoc, long latPickUpLoc, long longDropOffLoc, long latDropOffLoc, int autocamperId, int maintenanceId, int customerId) {
-        this.id = id;
         this.accumulatedPrice = accumulatedPrice;
         this.startDate = startDate;
         this.endDate = endDate;

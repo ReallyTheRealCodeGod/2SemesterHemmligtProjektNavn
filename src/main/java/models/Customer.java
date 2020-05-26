@@ -15,7 +15,6 @@ public class Customer {
     private int cardCVV;
 
     public Customer(int id, String firstName, String lastName, String email, String phoneNr, int cprNr, int postalCode, String streetName, String houseNr, String floor, int cardNr, int cardCVV) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

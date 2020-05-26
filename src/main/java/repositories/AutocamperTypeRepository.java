@@ -11,14 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AutocamperTypeRepository {
-
     private Connection conn;
-    @Value("db.user")
-    private String username;
-    @Value("db.password")
-    private String password;
-    @Value("db.url")
-    private String url;
 
     public AutocamperTypeRepository(){
         this.conn = JDBCConnection.getDatabaseConnection();

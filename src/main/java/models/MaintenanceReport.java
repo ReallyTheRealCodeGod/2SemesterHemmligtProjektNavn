@@ -14,7 +14,6 @@ public class MaintenanceReport {
     private int autocamperId;
 
     public MaintenanceReport(int id, int cleaningPrice, int fuelGauge, int mileage, HashMap<String, Boolean> partStatus, int repairCost, LocalDate date, int autocamperId) {
-        this.id = id;
         this.cleaningPrice = cleaningPrice;
         this.fuelGauge = fuelGauge;
         this.mileage = mileage;

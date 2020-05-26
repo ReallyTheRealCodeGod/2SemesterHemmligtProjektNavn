@@ -9,8 +9,7 @@ public class Accessory {
     private int typeId;
 
     public Accessory(){};
-    public Accessory(int id, int price, String name, String description, int rentalId, int typeId) {
-        this.id = id;
+    public Accessory(int price, String name, String description, int rentalId, int typeId) {
         this.price = price;
         this.name = name;
         this.description = description;

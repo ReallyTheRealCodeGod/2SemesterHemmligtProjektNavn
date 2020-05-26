@@ -155,7 +155,7 @@ CREATE TABLE season (
 );
 
 CREATE TABLE bill (
-  bill_id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   billing_date DATE NULL,
   cus_first_name VARCHAR(45) NULL,
   cus_last_name VARCHAR(45) NULL,
@@ -164,8 +164,7 @@ CREATE TABLE bill (
   street_nr VARCHAR(45) NOT NULL,
   apartment_floor VARCHAR(45) NOT NULL,
   accessory_cost SMALLINT NULL,
-  rental_cost SMALLINT NULL,
-  netto_price INT NULL
+  rental_cost SMALLINT NULL
   );
 
 create table users(

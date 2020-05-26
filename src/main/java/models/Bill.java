@@ -15,8 +15,8 @@ public class Bill {
     private int rentalCost;
     private int totalPrice;
 
-    public Bill(int id, LocalDate billingDate, String customerFirstName, String customerLastName, int postalCode, String streetName, String streetNr, String apartmentFloor, int accessoryCost, int rentalCost, int totalPrice) {
-        this.id = id;
+    public Bill(){}
+    public Bill(LocalDate billingDate, String customerFirstName, String customerLastName, int postalCode, String streetName, String streetNr, String apartmentFloor, int accessoryCost, int rentalCost, int totalPrice) {
         this.billingDate = billingDate;
         this.customerFirstName = customerFirstName;
         this.customerLastName = customerLastName;

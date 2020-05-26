@@ -8,6 +8,7 @@ public class Season {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    public Season(){}
     public Season(int surchargePercentage, String name, LocalDate startDate, LocalDate endDate) {
         this.surchargePercentage = surchargePercentage;
         this.name = name;

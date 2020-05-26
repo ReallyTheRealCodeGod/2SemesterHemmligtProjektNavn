@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class AutocamperRepository{
     Connection connection;
 
-    AutocamperRepository(){
+    public AutocamperRepository(){
         connection = JDBCConnection.getDatabaseConnection();
     }
 
@@ -20,7 +20,7 @@ public class AutocamperRepository{
             String select = "SELECT * \n" +
                         "FROM autocamper auto\n" +
                         "JOIN autocamper_type autotype\n" +
-                        "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model;" +
+                        "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model " +
                     "WHERE id = ?";
             PreparedStatement prep = connection.prepareStatement(select);
             prep.setInt(1, id);
@@ -29,27 +29,27 @@ public class AutocamperRepository{
             ResultSet rs = prep.executeQuery();
             while(rs.next()) {
                 autocamper.setId(rs.getInt("id"));
-                autocamper.setStatus(rs.getInt("status"));
+                autocamper.setStatus(rs.getInt("current_status"));
                 AutocamperType type = new AutocamperType();
 
                 autocamper.setId(rs.getInt("id"));
-                autocamper.setStatus(rs.getInt("status"));
-                autocamper.setPhoto(rs.getString("photo"));
+                autocamper.setStatus(rs.getInt("current_status"));
+                autocamper.setPicture(rs.getString("picture"));
 
                 type.setModel(rs.getString("model"));
                 type.setBrand(rs.getString("brand"));
                 type.setBuiltInFeatures(null);
                 type.setPrice(rs.getInt("price"));
-                type.setHorsePower(rs.getInt("horsePower"));
+                type.setHorsePower(rs.getInt("horse_power"));
 
-                type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
-                type.setFuelType("fuelType");
-                type.setStandingHeight(rs.getInt("standingHeight"));
-                type.setMaxSpeed(rs.getInt("maxSpeed"));
+                //type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
+                //type.setFuelType("fuelType");
+                type.setStandingHeight(rs.getInt("standing_height"));
+                type.setMaxSpeed(rs.getInt("max_speed"));
                 type.setHeight(rs.getInt("height"));
                 type.setLength(rs.getInt("length"));
                 type.setWidth(rs.getInt("width"));
-                type.setArea(rs.getInt("area"));
+                type.setArea(rs.getInt("area_sqm"));
                 type.setDescription(rs.getString("description"));
                 autocamper.setType(type);
             }
@@ -92,22 +92,22 @@ public class AutocamperRepository{
 
                 autocamper.setId(rs.getInt("id"));
                 autocamper.setStatus(rs.getInt("status"));
-                autocamper.setPhoto(rs.getString("photo"));
+                autocamper.setPicture(rs.getString("picture"));
 
                 type.setModel(rs.getString("model"));
                 type.setBrand(rs.getString("brand"));
                 type.setBuiltInFeatures(null);
                 type.setPrice(rs.getInt("price"));
-                type.setHorsePower(rs.getInt("horsePower"));
+                type.setHorsePower(rs.getInt("horse_power"));
 
-                type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
-                type.setFuelType("fuelType");
-                type.setStandingHeight(rs.getInt("standingHeight"));
-                type.setMaxSpeed(rs.getInt("maxSpeed"));
+                //type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
+                //type.setFuelType("fuelType");
+                type.setStandingHeight(rs.getInt("standing_height"));
+                type.setMaxSpeed(rs.getInt("max_speed"));
                 type.setHeight(rs.getInt("height"));
                 type.setLength(rs.getInt("length"));
                 type.setWidth(rs.getInt("width"));
-                type.setArea(rs.getInt("area"));
+                type.setArea(rs.getInt("area_sqm"));
                 type.setDescription(rs.getString("description"));
                 type.setBuiltInFeatures(getBuiltInFeatures(type));
                 autocamper.setType(type);
@@ -135,21 +135,21 @@ public class AutocamperRepository{
             AutocamperType type = new AutocamperType();
             autocamper.setId(rs.getInt("id"));
             autocamper.setStatus(rs.getInt("status"));
-            autocamper.setPhoto(rs.getString("photo"));
+            autocamper.setPicture(rs.getString("picture"));
 
             type.setModel(rs.getString("model"));
             type.setBrand(rs.getString("brand"));
             type.setBuiltInFeatures(null);
             type.setPrice(rs.getInt("price"));
-            type.setHorsePower(rs.getInt("horsePower"));
-            type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
-            type.setFuelType("fuelType");
-            type.setStandingHeight(rs.getInt("standingHeight"));
-            type.setMaxSpeed(rs.getInt("maxSpeed"));
+            type.setHorsePower(rs.getInt("horse_power"));
+            //type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
+            //type.setFuelType("fuelType");
+            type.setStandingHeight(rs.getInt("standing_height"));
+            type.setMaxSpeed(rs.getInt("max_speed"));
             type.setHeight(rs.getInt("height"));
             type.setLength(rs.getInt("length"));
             type.setWidth(rs.getInt("width"));
-            type.setArea(rs.getInt("area"));
+            type.setArea(rs.getInt("area_sqm"));
             type.setDescription(rs.getString("description"));
             type.setBuiltInFeatures(getBuiltInFeatures(type));
             autocamper.setType(type);
@@ -165,7 +165,7 @@ public class AutocamperRepository{
             PreparedStatement prep = connection.prepareStatement(create, Statement.RETURN_GENERATED_KEYS);
             prep.setInt(1, autocamper.getMileage());
             prep.setInt(2, autocamper.getStatus());
-            prep.setString(3, autocamper.getPhoto());
+            prep.setString(3, autocamper.getPicture());
             prep.setString(4, autocamper.getType().getBrand());
             prep.setString(5, autocamper.getType().getModel());
             prep.executeUpdate();
@@ -184,14 +184,14 @@ public class AutocamperRepository{
             String update = "UPDATE autocamper " +
                     "SET mileage = ?," +
                     "current_status = ?," +
-                    "photo = ?" +
+                    "picture = ?" +
                     "fk_brand = ?" +
                     "fk_model = ?;" +
                     "WHERE id = ?";
             PreparedStatement prep = connection.prepareStatement(update);
             prep.setInt(1, autocamper.getMileage());
             prep.setInt(2, autocamper.getStatus());
-            prep.setString(3, autocamper.getPhoto());
+            prep.setString(3, autocamper.getPicture());
             prep.setString(4,autocamper.getType().getBrand());
             prep.setString(5,autocamper.getType().getModel());
             prep.setInt(6, autocamper.getId());
@@ -236,7 +236,7 @@ public class AutocamperRepository{
                 bif.setId(rs.getInt("id"));
                 bif.setName(rs.getString("name"));
                 bif.setDescription(rs.getString("description"));
-                bif.setPhoto(rs.getString("photo"));
+                bif.setIcon(rs.getString("picture"));
                 list.add(bif);
             }
             return list.toArray(new BuiltInFeature[list.size()]);

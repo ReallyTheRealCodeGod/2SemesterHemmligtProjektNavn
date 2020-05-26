@@ -12,8 +12,7 @@ public class VariablePrices {
 
     public VariablePrices(){};
 
-    public VariablePrices(int variablePricesId, int excessKilometerPrice, int fuelPrice, int dropOffKilometerPrice, int pickUpKilometerPrice, int cleaningMinPrice, int cleaningMaxPrice, Season[] seasons) {
-        this.variablePricesId = variablePricesId;
+    public VariablePrices(int excessKilometerPrice, int fuelPrice, int dropOffKilometerPrice, int pickUpKilometerPrice, int cleaningMinPrice, int cleaningMaxPrice, Season[] seasons) {
         this.excessKilometerPrice = excessKilometerPrice;
         this.fuelPrice = fuelPrice;
         this.dropOffKilometerPrice = dropOffKilometerPrice;

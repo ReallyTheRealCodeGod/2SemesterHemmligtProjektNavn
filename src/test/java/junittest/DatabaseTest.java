@@ -1,6 +1,8 @@
 package junittest;
 
-import repositories.AccessoryRepository;
+import models.Customer;
+import org.junit.jupiter.api.BeforeEach;
+import repositories.*;
 import models.Accessory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -19,6 +21,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DatabaseTest {
     private static Properties prop;
+    AccessoryRepository acc;
+    AutocamperRepository auto;
+    BillRepository bill;
+    CustomerRepository cus;
+    MaintenanceReportRepository maintenance;
+    RentalRepository rent;
 
     @BeforeAll()
     public static void testConditions(){
@@ -35,6 +43,16 @@ public class DatabaseTest {
         }
     }
 
+    @BeforeEach
+    public void initilizeRepos(){
+        acc = new AccessoryRepository();
+        auto = new AutocamperRepository();
+        bill = new BillRepository();
+        cus = new CustomerRepository();
+        maintenance = new MaintenanceReportRepository();
+        rent = new RentalRepository();
+    }
+
     @Test
     public void databaseInitilizationTest(){
         try{
@@ -46,11 +64,12 @@ public class DatabaseTest {
 
     @Test
     public void getEntities(){
-        AccessoryRepository ar = new AccessoryRepository();
-        Accessory model = null;
-        model = ar.getById(4);
-        System.out.println(model.toString());
-        assertNotNull(model.getDescription(), "accessory could not be loaded");
+        assertTrue(acc.getById(1) != null, "accessory could not be Created");
+        assertTrue(auto.getById(1) != null, "accessory could not be Created");
+        assertTrue(bill.getById(1) != null, "accessory could not be Created");
+        assertTrue(cus.getById(1) != null, "accessory could not be Created");
+        //assertTrue(maintenance.getById(1) != null, "accessory could not be Created");
+        assertTrue(rent.getById(1) != null, "accessory could not be Created");
     }
 
     @Test
@@ -65,7 +84,7 @@ public class DatabaseTest {
     @Test
     public void addEntity(){
         AccessoryRepository ra = new AccessoryRepository();
-        Accessory a = new Accessory(0, 100, "name", "description", 2, 2);
+        Accessory a = new Accessory(0, 100, "name", "description", 1, 1);
         assertNotNull(ra.create(a), "could not create entity");
         System.out.println(a);
     }
@@ -73,7 +92,7 @@ public class DatabaseTest {
     @Test
     public void updateEntity(){
         AccessoryRepository ra = new AccessoryRepository();
-        Accessory a = new Accessory(3,12, "hello", "this is a test accessory", 1,3);
+        Accessory a = new Accessory(3,12, "hello", "this is a test accessory", 1,1);
         assertTrue(ra.update(a), "could not create entity");
         System.out.println(a);
     }

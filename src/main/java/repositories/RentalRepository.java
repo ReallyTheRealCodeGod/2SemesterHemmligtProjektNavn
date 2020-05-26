@@ -19,7 +19,7 @@ public class RentalRepository {
 
         try {
             PreparedStatement getSingleRental = conn.prepareStatement
-                    ("SELECT * FROM rental WHERE rental_id = ?");
+                    ("SELECT * FROM rental WHERE id = ?");
             getSingleRental.setInt(1, id);
             ResultSet rs = getSingleRental.executeQuery();
 
