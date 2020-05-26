@@ -16,6 +16,7 @@ CREATE TABLE autocamper_type (
 	area_sqm INT NOT NULL,
 	height VARCHAR(45) NOT NULL,
 	length INT NOT NULL,
+	width INT NOT NULL,
 	description VARCHAR(1000) NOT NULL,
   PRIMARY KEY (brand, model)
 );
