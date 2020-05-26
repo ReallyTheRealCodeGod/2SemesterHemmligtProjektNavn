@@ -6,14 +6,16 @@ public class Accessory {
     private String name;
     private String description;
     private int rentalId;
+    private int typeId;
 
     public Accessory(){};
-    public Accessory(int id, int price, String name, String description, int rentalId) {
+    public Accessory(int id, int price, String name, String description, int rentalId, int typeId) {
         this.id = id;
         this.price = price;
         this.name = name;
         this.description = description;
         this.rentalId = rentalId;
+        this.typeId = typeId;
     }
 
     public int getId() {
@@ -49,6 +51,14 @@ public class Accessory {
     }
     public void setRentalId(int rentalId) {
         this.rentalId = rentalId;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     @Override

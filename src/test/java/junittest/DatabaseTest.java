@@ -66,7 +66,7 @@ public class DatabaseTest {
     @Test
     public void addEntity(){
         AccessoryRepository ra = new AccessoryRepository();
-        Accessory a = new Accessory(0, 100, "name", "description", 2);
+        Accessory a = new Accessory(0, 100, "name", "description", 2, 2);
         assertNotNull(ra.create(a), "could not create entity");
         System.out.println(a);
     }
@@ -74,7 +74,7 @@ public class DatabaseTest {
     @Test
     public void updateEntity(){
         AccessoryRepository ra = new AccessoryRepository();
-        Accessory a = new Accessory(3,12, "hello", "this is a test accessory", 10);
+        Accessory a = new Accessory(3,12, "hello", "this is a test accessory", 1,3);
         assertTrue(ra.update(a), "could not create entity");
         System.out.println(a);
     }

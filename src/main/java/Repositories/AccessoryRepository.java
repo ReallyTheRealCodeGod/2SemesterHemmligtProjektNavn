@@ -18,10 +18,10 @@ public class AccessoryRepository {
 
     public Accessory getById(int id){
 	 try{
-        String select = "SELECT * FROM accessory_type acctype\n" +
-                "JOIN Accessory access\n" +
-                "ON acctype.id = access.fk_accessory_type_id;" +
-                "WHERE id = ?";
+        String select = "SELECT * FROM accessory_type acctype " +
+                "JOIN Accessory access " +
+                "ON acctype.id = access.fk_accessory_type_id " +
+                "WHERE acctype.id = ?";
         PreparedStatement prep = connection.prepareStatement(select);
         Accessory accessory = new Accessory();
         
@@ -111,11 +111,9 @@ public class AccessoryRepository {
 
     public Accessory create(Accessory accessory) {
 	 try {
-         String create = "INSERT INTO accessory(id, name, price, description) Values (DEFAULT, ?, ?, ?)";
+         String create = "INSERT INTO accessory(id, fk_accessory_type_id) Values (DEFAULT, ?)";
          PreparedStatement prep = connection.prepareStatement(create, Statement.RETURN_GENERATED_KEYS);
-         prep.setString(1, accessory.getName());
-         prep.setInt(2, accessory.getPrice());
-         prep.setString(3, accessory.getDescription());
+         prep.setInt(1, accessory.getTypeId());
          prep.executeUpdate();
          ResultSet rs = prep.getGeneratedKeys();
          rs.next();
@@ -132,16 +130,24 @@ public class AccessoryRepository {
 	     String update = "UPDATE accessory_type " +
                  "SET name = ?," +
                  "price = ?, " +
-                 "description = ?, " +
+                 "description = ? " +
+                 "WHERE id = ?";
+         PreparedStatement prepAccType = connection.prepareStatement(update);
+         prepAccType.setString(1, accessory.getName());
+         prepAccType.setInt(2, accessory.getPrice());
+         prepAccType.setString(3, accessory.getDescription());
+         prepAccType.setInt(4, accessory.getTypeId());
+
+         update = "UPDATE accessory " +
+                 " SET fk_accessory_type_id = ?," +
                  "fk_rental_id = ? " +
                  "WHERE id = ?";
-         PreparedStatement prep = connection.prepareStatement(update);
-         prep.setString(1, accessory.getName());
-         prep.setInt(2, accessory.getPrice());
-         prep.setString(3, accessory.getDescription());
-         prep.setInt(4, accessory.getRentalId());
-         prep.setInt(5, accessory.getId());
-         prep.executeUpdate();
+         PreparedStatement prepAcc = connection.prepareStatement(update);
+         prepAcc.setInt(1, accessory.getTypeId());
+         prepAcc.setInt(2, accessory.getRentalId());
+         prepAcc.setInt(3, accessory.getId());
+         prepAcc.executeUpdate();
+         prepAccType.executeUpdate();
          return true;
      }catch(SQLException sql){
              sql.printStackTrace();

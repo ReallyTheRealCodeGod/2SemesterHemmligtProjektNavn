@@ -51,8 +51,46 @@ public class RentalRepository {
         return rentalToReturn;
     }
 
-    public Rental[] getBytParameter(String parameter){
+    public Rental[] getBytParameter(String parameter, String... columns){
+        ArrayList<Rental> rentalList = new ArrayList<Rental>();
 
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for(String s: columns){
+            if(sb.length() != 0){
+                sb.append(", ");
+            }
+            sb.append(s);
+            i++;
+        }
+
+        try {
+            PreparedStatement getAllRentals = conn.prepareStatement(
+                    "SELECT * FROM rental" +
+                    "WHERE "+sb+" LIKE %?%");
+            getAllRentals.setString(1,parameter);
+            ResultSet rs = getAllRentals.executeQuery();
+
+            while (rs.next()) {
+                Rental addRentalToList = new Rental();
+                addRentalToList.setId(rs.getInt(1));
+                addRentalToList.setAccumulatedPrice(rs.getInt(2));
+                addRentalToList.setStartDate(rs.getDate(3).toLocalDate());
+                addRentalToList.setEndDate(rs.getDate(4).toLocalDate());
+                addRentalToList.setLongPickUpLoc(rs.getLong(5));
+                addRentalToList.setLatPickUpLoc(rs.getLong(6));
+                addRentalToList.setLongDropOffLoc(rs.getLong(7));
+                addRentalToList.setLatDropOffLoc(rs.getLong(8));
+                addRentalToList.setAutocamperId(rs.getInt(9));
+                addRentalToList.setMaintenanceId(rs.getInt(10));
+                addRentalToList.setCustomerId(rs.getInt(11));
+                rentalList.add(addRentalToList);
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rentalList.toArray(new Rental[rentalList.size()]);
     }
 
     public Rental[] getAll(){
