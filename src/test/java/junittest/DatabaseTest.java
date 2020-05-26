@@ -1,6 +1,6 @@
 package junittest;
 
-import Repositories.Repository;
+import Repositories.AccessoryRepository;
 import models.Accessory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -47,16 +47,17 @@ public class DatabaseTest {
 
     @Test
     public void getEntities(){
-        Repository<Accessory> ar = new Repository<>("accessory_type", Accessory.class);
-        Accessory model = ar.getById(4);
+        AccessoryRepository ar = new AccessoryRepository();
+        Accessory model = null;
+        model = ar.getById(4);
         System.out.println(model.toString());
         assertNotNull(model.getDescription(), "accessory could not be loaded");
     }
 
     @Test
     public void getAllEntities(){
-        Repository<Accessory> ar = new Repository<>("accessory_type", Accessory.class);
-        ArrayList<Accessory> model = ar.getAll();
+        AccessoryRepository ar = new AccessoryRepository();
+        Accessory[] model = ar.getAll();
         for(Accessory m: model) {
             assertNotNull(m.getDescription(), "accessory could not be loaded");
         }
@@ -64,16 +65,16 @@ public class DatabaseTest {
 
     @Test
     public void addEntity(){
-        Repository<Accessory> ra = new Repository<>("accessory_type", Accessory.class);
-        Accessory a = new Accessory(0,100, "name", "description");
-        assertTrue(ra.insert(a) != 0, "could not create entity");
+        AccessoryRepository ra = new AccessoryRepository();
+        Accessory a = new Accessory(0, 100, "name", "description", 2);
+        assertNotNull(ra.create(a), "could not create entity");
         System.out.println(a);
     }
 
     @Test
     public void updateEntity(){
-        Repository<Accessory> ra = new Repository<>("accessory_type", Accessory.class);
-        Accessory a = new Accessory(12,12, "hello", "descridsdsption");
+        AccessoryRepository ra = new AccessoryRepository();
+        Accessory a = new Accessory(3,12, "hello", "this is a test accessory", 10);
         assertTrue(ra.update(a), "could not create entity");
         System.out.println(a);
     }

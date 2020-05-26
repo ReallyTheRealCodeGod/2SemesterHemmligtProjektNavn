@@ -16,7 +16,8 @@ public class AccessoryRepository {
         connection = JDBCConnection.getDatabaseConnection();
     }
 
-    public Accessory getById(int id) throws SQLException {
+    public Accessory getById(int id){
+	 try{
         String select = "SELECT * FROM accessory_type acctype\n" +
                 "JOIN Accessory access\n" +
                 "ON acctype.id = access.fk_accessory_type_id;" +
@@ -34,8 +35,14 @@ public class AccessoryRepository {
             accessory.setRentalId(rs.getInt("fk_rental_id"));
         }
         return accessory;
+     }catch(SQLException sql) {
+         sql.printStackTrace();
+         return null;
+     }
     }
-    public Accessory[] getByParameter(String parameter, String... columns) throws SQLException{
+
+    public Accessory[] getByParameter(String parameter, String... columns){
+        try{
         ArrayList<Accessory> list = new ArrayList<>();
 
         StringBuilder sb = new StringBuilder();
@@ -68,9 +75,14 @@ public class AccessoryRepository {
             list.add(accessory);
         }
         return list.toArray(new Accessory[list.size()]);
-
+        }catch(SQLException sql){
+            sql.printStackTrace();
+            return null;
+        }
     }
-    public Accessory[] getAll() throws SQLException {
+
+    public Accessory[] getAll() {
+	 try{
         ArrayList<Accessory> list = new ArrayList<>();
 
         String select = "SELECT * FROM accessory_type acctype\n" +
@@ -91,44 +103,62 @@ public class AccessoryRepository {
             list.add(accessory);
         }
         return list.toArray(new Accessory[list.size()]);
+     }catch(SQLException sql){
+         sql.printStackTrace();
+         return null;
+     }
     }
 
-    public Accessory create(Accessory accessory) throws SQLException {
-        String create = "INSERT INTO accessory(id, name, price, description) Values (DEFAULT, ?, ?, ?)";
-        PreparedStatement prep = connection.prepareStatement(create, Statement.RETURN_GENERATED_KEYS);
-        prep.setString(1, accessory.getName());
-        prep.setInt(2, accessory.getPrice());
-        prep.setString(3, accessory.getDescription());
-        prep.executeUpdate();
-        ResultSet rs = prep.getGeneratedKeys();
-        rs.next();
-        accessory.setId(rs.getInt(1));
-        return accessory;
-
+    public Accessory create(Accessory accessory) {
+	 try {
+         String create = "INSERT INTO accessory(id, name, price, description) Values (DEFAULT, ?, ?, ?)";
+         PreparedStatement prep = connection.prepareStatement(create, Statement.RETURN_GENERATED_KEYS);
+         prep.setString(1, accessory.getName());
+         prep.setInt(2, accessory.getPrice());
+         prep.setString(3, accessory.getDescription());
+         prep.executeUpdate();
+         ResultSet rs = prep.getGeneratedKeys();
+         rs.next();
+         accessory.setId(rs.getInt(1));
+         return accessory;
+     }catch(SQLException sql){
+             sql.printStackTrace();
+             return null;
+         }
     }
 
-    public boolean update(Accessory accessory) throws SQLException {
-        String update = "UPDATE accessory " +
-                "SET name = ?," +
-                "price = ?," +
-                "description = ?" +
-                "fk_rental_id = ?" +
-                "WHERE id = ?";
-        PreparedStatement prep = connection.prepareStatement(update);
-        prep.setString(1, accessory.getName());
-        prep.setInt(2, accessory.getPrice());
-        prep.setString(3, accessory.getDescription());
-        prep.setInt(4,accessory.getRentalId());
-        prep.setInt(5, accessory.getId());
-        prep.executeUpdate();
-        return true;
+    public boolean update(Accessory accessory) {
+	 try {
+	     String update = "UPDATE accessory_type " +
+                 "SET name = ?," +
+                 "price = ?, " +
+                 "description = ?, " +
+                 "fk_rental_id = ? " +
+                 "WHERE id = ?";
+         PreparedStatement prep = connection.prepareStatement(update);
+         prep.setString(1, accessory.getName());
+         prep.setInt(2, accessory.getPrice());
+         prep.setString(3, accessory.getDescription());
+         prep.setInt(4, accessory.getRentalId());
+         prep.setInt(5, accessory.getId());
+         prep.executeUpdate();
+         return true;
+     }catch(SQLException sql){
+             sql.printStackTrace();
+             return false;
+         }
     }
 
-    public boolean delete(Accessory accessory) throws SQLException {
+    public boolean delete(Accessory accessory) {
+	 try{
         String delete = "DELETE FROM accessory WHERE id = ?";
         PreparedStatement prep = connection.prepareStatement(delete);
         prep.setInt(1, accessory.getRentalId());
         prep.executeUpdate();
         return true;
-    }
+	 }catch(SQLException sql){
+	     sql.printStackTrace();
+	     return false;
+	 }
+	 }
 }
