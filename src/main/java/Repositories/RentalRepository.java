@@ -123,7 +123,8 @@ public class RentalRepository {
                             "lat_dropOff_loc = ?, " +
                             "fk_autocamper_id = ?, " +
                             "fk_customer_id = ?, " +
-                            "fk_maintenance_id = ?");
+                            "fk_maintenance_id = ?" +
+                            "WHERE rental_id = ?");
             updateRental.setInt(1, rental.getAccumulatedPrice());
             updateRental.setDate(2, Date.valueOf(rental.getStartDate()));
             updateRental.setDate(3,Date.valueOf(rental.getEndDate()));
@@ -134,6 +135,7 @@ public class RentalRepository {
             updateRental.setInt(8, rental.getAutocamperId());
             updateRental.setInt(9, rental.getMaintenanceId());
             updateRental.setInt(10, rental.getCustomerId());
+            updateRental.setInt(11, rental.getId());
             updateRental.executeUpdate();
         }
         catch (SQLException e){

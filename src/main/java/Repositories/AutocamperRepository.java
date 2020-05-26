@@ -53,6 +53,7 @@ public class AutocamperRepository{
                 "    -> FROM information_schema.COLUMNS" +
                 "    -> WHERE table_name = 'autocamper') LIKE ?";
     }
+
     public Autocamper[] getAll() throws SQLException {
         ArrayList<Autocamper> list = new ArrayList<>();
 
@@ -110,7 +111,7 @@ public class AutocamperRepository{
                 "current_status = ?," +
                 "photo = ?" +
                 "fk_brand = ?" +
-                "fk_model = ?;" +
+                "fk_model = ?" +
                 "WHERE id = ?";
         PreparedStatement prep = connection.prepareStatement(update);
         prep.setInt(1, autocamper.getMileage());
