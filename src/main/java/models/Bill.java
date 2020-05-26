@@ -2,7 +2,7 @@ package models;
 
 import java.time.LocalDate;
 
-public class Bill extends Model{
+public class Bill {
     private int id;
     private LocalDate billingDate;
     private String customerFirstName;

@@ -3,7 +3,7 @@ package models;
 import java.time.LocalDate;
 import java.util.HashMap;
 
-public class MaintenanceReport extends Model{
+public class MaintenanceReport {
     private int id;
     private int cleaningPrice;
     private int fuelGauge;
