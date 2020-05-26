@@ -2,35 +2,39 @@ package models;
 
 public class AutocamperType {
     private String brand;
-    private String model;;
+    private String model;
     private BuiltInFeature[] builtInFeatures;
     private int price;
+    private int productionYear;
+    private int weight;
+    private int fuelCapacity;
     private int horsePower;
-    private int fuelEfficiency;
-    private String fuelType;
-    private int standingHeight;
     private int maxSpeed;
+    private int standingHeight;
+    private int area;
     private int height;
     private int length;
     private int width;
-    private int area;
     private String description;
 
-    public AutocamperType() {}
-    public AutocamperType(String brand, String model, BuiltInFeature[] builtInFeatures, int price, int horsePower, int fuelEfficiency, String fuelType, int standingHeight, int maxSpeed, int height, int length, int width, int area, String description) {
+    public AutocamperType() {
+    }
+
+    public AutocamperType(String brand, String model, BuiltInFeature[] builtInFeatures, int price, int productionYear, int weight, int fuelCapacity, int horsePower, int maxSpeed, int standingHeight, int area, int height, int length, int width, String description) {
         this.brand = brand;
         this.model = model;
         this.builtInFeatures = builtInFeatures;
         this.price = price;
+        this.productionYear = productionYear;
+        this.weight = weight;
+        this.fuelCapacity = fuelCapacity;
         this.horsePower = horsePower;
-        this.fuelEfficiency = fuelEfficiency;
-        this.fuelType = fuelType;
-        this.standingHeight = standingHeight;
         this.maxSpeed = maxSpeed;
+        this.standingHeight = standingHeight;
+        this.area = area;
         this.height = height;
         this.length = length;
         this.width = width;
-        this.area = area;
         this.description = description;
     }
 
@@ -66,6 +70,30 @@ public class AutocamperType {
         this.price = price;
     }
 
+    public int getProductionYear() {
+        return productionYear;
+    }
+
+    public void setProductionYear(int productionYear) {
+        this.productionYear = productionYear;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public int getFuelCapacity() {
+        return fuelCapacity;
+    }
+
+    public void setFuelCapacity(int fuelCapacity) {
+        this.fuelCapacity = fuelCapacity;
+    }
+
     public int getHorsePower() {
         return horsePower;
     }
@@ -74,20 +102,12 @@ public class AutocamperType {
         this.horsePower = horsePower;
     }
 
-    public int getFuelEfficiency() {
-        return fuelEfficiency;
+    public int getMaxSpeed() {
+        return maxSpeed;
     }
 
-    public void setFuelEfficiency(int fuelEfficiency) {
-        this.fuelEfficiency = fuelEfficiency;
-    }
-
-    public String getFuelType() {
-        return fuelType;
-    }
-
-    public void setFuelType(String fuelType) {
-        this.fuelType = fuelType;
+    public void setMaxSpeed(int maxSpeed) {
+        this.maxSpeed = maxSpeed;
     }
 
     public int getStandingHeight() {
@@ -98,12 +118,12 @@ public class AutocamperType {
         this.standingHeight = standingHeight;
     }
 
-    public int getMaxSpeed() {
-        return maxSpeed;
+    public int getArea() {
+        return area;
     }
 
-    public void setMaxSpeed(int maxSpeed) {
-        this.maxSpeed = maxSpeed;
+    public void setArea(int area) {
+        this.area = area;
     }
 
     public int getHeight() {
@@ -128,14 +148,6 @@ public class AutocamperType {
 
     public void setWidth(int width) {
         this.width = width;
-    }
-
-    public int getArea() {
-        return area;
-    }
-
-    public void setArea(int area) {
-        this.area = area;
     }
 
     public String getDescription() {
