@@ -1,18 +1,22 @@
 package models;
 
-public class Accessory {
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Accessory extends Model{
     private int id;
     private int price;
     private String name;
     private String description;
-    private int autocamperId;
 
-    public Accessory(int id, int price, String name, String description, int autocamperId) {
+    public Accessory(){};
+    public Accessory(int id, int price, String name, String description) {
         this.id = id;
         this.price = price;
         this.name = name;
         this.description = description;
-        this.autocamperId = autocamperId;
     }
 
     public int getId() {
@@ -43,10 +47,14 @@ public class Accessory {
         this.description = description;
     }
 
-    public int getAutocamperId() {
-        return autocamperId;
-    }
-    public void setAutocamperId(int autocamperId) {
-        this.autocamperId = autocamperId;
+
+    @Override
+    public String toString() {
+        return "Accessory{" +
+                "id=" + id +
+                ", price=" + price +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

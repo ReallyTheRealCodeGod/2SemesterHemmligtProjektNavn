@@ -1,6 +1,14 @@
 package models;
 
-public class Autocamper {
+import org.aspectj.runtime.reflect.FieldSignatureImpl;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class Autocamper extends Model{
     private int id;
     private int status;
     private String brand;
@@ -19,6 +27,9 @@ public class Autocamper {
     private int width;
     private int area;
     private String description;
+
+    public Autocamper() {
+    }
 
     public Autocamper(int id, int status, String brand, String model, String photo, String[] builtInFeatures, int price, int horsePower, int mileage, int fuelEfficiency, String fuelType, int standingHeight, int maxSpeed, int height, int length, int width, int area, String description) {
         this.id = id;
@@ -44,6 +55,7 @@ public class Autocamper {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -51,6 +63,7 @@ public class Autocamper {
     public int getStatus() {
         return status;
     }
+
     public void setStatus(int status) {
         this.status = status;
     }
@@ -58,6 +71,7 @@ public class Autocamper {
     public String getBrand() {
         return brand;
     }
+
     public void setBrand(String brand) {
         this.brand = brand;
     }
@@ -65,6 +79,7 @@ public class Autocamper {
     public String getModel() {
         return model;
     }
+
     public void setModel(String model) {
         this.model = model;
     }
@@ -72,6 +87,7 @@ public class Autocamper {
     public String getPhoto() {
         return photo;
     }
+
     public void setPhoto(String photo) {
         this.photo = photo;
     }
@@ -79,6 +95,7 @@ public class Autocamper {
     public String[] getBuiltInFeatures() {
         return builtInFeatures;
     }
+
     public void setBuiltInFeatures(String[] builtInFeatures) {
         this.builtInFeatures = builtInFeatures;
     }
@@ -86,6 +103,7 @@ public class Autocamper {
     public int getPrice() {
         return price;
     }
+
     public void setPrice(int price) {
         this.price = price;
     }
@@ -93,6 +111,7 @@ public class Autocamper {
     public int getHorsePower() {
         return horsePower;
     }
+
     public void setHorsePower(int horsePower) {
         this.horsePower = horsePower;
     }
@@ -100,6 +119,7 @@ public class Autocamper {
     public int getMileage() {
         return mileage;
     }
+
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
@@ -107,6 +127,7 @@ public class Autocamper {
     public int getFuelEfficiency() {
         return fuelEfficiency;
     }
+
     public void setFuelEfficiency(int fuelEfficiency) {
         this.fuelEfficiency = fuelEfficiency;
     }
@@ -114,6 +135,7 @@ public class Autocamper {
     public String getFuelType() {
         return fuelType;
     }
+
     public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
     }
@@ -121,6 +143,7 @@ public class Autocamper {
     public int getStandingHeight() {
         return standingHeight;
     }
+
     public void setStandingHeight(int standingHeight) {
         this.standingHeight = standingHeight;
     }
@@ -128,6 +151,7 @@ public class Autocamper {
     public int getMaxSpeed() {
         return maxSpeed;
     }
+
     public void setMaxSpeed(int maxSpeed) {
         this.maxSpeed = maxSpeed;
     }
@@ -135,6 +159,7 @@ public class Autocamper {
     public int getHeight() {
         return height;
     }
+
     public void setHeight(int height) {
         this.height = height;
     }
@@ -142,6 +167,7 @@ public class Autocamper {
     public int getLength() {
         return length;
     }
+
     public void setLength(int length) {
         this.length = length;
     }
@@ -149,6 +175,7 @@ public class Autocamper {
     public int getWidth() {
         return width;
     }
+
     public void setWidth(int width) {
         this.width = width;
     }
@@ -156,6 +183,7 @@ public class Autocamper {
     public int getArea() {
         return area;
     }
+
     public void setArea(int area) {
         this.area = area;
     }
@@ -163,7 +191,32 @@ public class Autocamper {
     public String getDescription() {
         return description;
     }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Autocamper{" +
+                "id=" + id +
+                ", status=" + status +
+                ", brand='" + brand + '\'' +
+                ", model='" + model + '\'' +
+                ", photo='" + photo + '\'' +
+                ", builtInFeatures=" + Arrays.toString(builtInFeatures) +
+                ", price=" + price +
+                ", horsePower=" + horsePower +
+                ", mileage=" + mileage +
+                ", fuelEfficiency=" + fuelEfficiency +
+                ", fuelType='" + fuelType + '\'' +
+                ", standingHeight=" + standingHeight +
+                ", maxSpeed=" + maxSpeed +
+                ", height=" + height +
+                ", length=" + length +
+                ", width=" + width +
+                ", area=" + area +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

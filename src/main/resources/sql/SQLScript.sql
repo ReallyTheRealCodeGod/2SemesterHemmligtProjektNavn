@@ -21,7 +21,7 @@ CREATE TABLE autocamper_type (
 );
 
 CREATE TABLE built_in_feature(
-  feature_id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   picture VARCHAR(45) NULL,
   name VARCHAR(45) NOT NULL,
   description VARCHAR(200) NULL
@@ -37,12 +37,12 @@ CREATE TABLE type_features (
     REFERENCES autocamper_type (brand , model),
   CONSTRAINT fk_type_features_built_in_feature
     FOREIGN KEY (feature_id)
-    REFERENCES built_in_feature (feature_id)
+    REFERENCES built_in_feature (id)
 );
 
 
 CREATE TABLE autocamper(
-  autocamper_id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   mileage INT NOT NULL,
   current_status TINYINT NOT NULL,
   picture VARCHAR(20) DEFAULT NULL,
@@ -55,7 +55,7 @@ CREATE TABLE autocamper(
 
 
 CREATE TABLE customer(
-  id_costumer INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   last_name VARCHAR(45) NOT NULL,
   first_name VARCHAR(45) NOT NULL,
   email VARCHAR(45) NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE customer(
 
 
 CREATE TABLE maintenance (
-  maintenance_id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   fuel_gauge INT NOT NULL,
   mileage INT NOT NULL,
   cleaning_price INT NOT NULL,
@@ -90,11 +90,11 @@ CREATE TABLE maintenance (
   fk_autocamper_id INT NOT NULL,
   CONSTRAINT fk_autocamper
     FOREIGN KEY (fk_autocamper_id)
-    REFERENCES autocamper (autocamper_id)
+    REFERENCES autocamper (id)
 );
 
 CREATE TABLE rental (
-  rental_id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   acc_price INT NULL DEFAULT NULL,
   start_date DATE NULL DEFAULT NULL,
   end_date DATE NULL DEFAULT NULL,
@@ -108,36 +108,36 @@ CREATE TABLE rental (
 
   CONSTRAINT fk_camper
     FOREIGN KEY (fk_autocamper_id)
-    REFERENCES autocamper (autocamper_id),
+    REFERENCES autocamper (id),
   CONSTRAINT fk_cus
     FOREIGN KEY (fk_customer_id)
-    REFERENCES customer (id_costumer),
+    REFERENCES customer (id),
   CONSTRAINT fk_rental_maintenance1
     FOREIGN KEY (fk_maintenance_id)
-    REFERENCES maintenance (maintenance_id)
+    REFERENCES maintenance (id)
     );
 
     CREATE TABLE accessory_type(
-	discription VARCHAR(1000),
+    id INT	PRIMARY KEY	AUTO_INCREMENT,
+	description VARCHAR(1000),
 	price INT NOT NULL,
-	type_id INT	PRIMARY KEY	AUTO_INCREMENT,
 	name VARCHAR(45) NOT NULL
     );
     
 CREATE TABLE accessory (
-  accessory_id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   fk_accessory_type_id INT NOT NULL,
-  fk_rental_id INT NOT NULL,
+  fk_rental_id INT,
   CONSTRAINT fk_accessory_type
     FOREIGN KEY (fk_accessory_type_id)
-    REFERENCES accessory_type (type_id),
+    REFERENCES accessory_type (id),
   CONSTRAINT fk_accessory_rental
     FOREIGN KEY (fk_rental_id)
-    REFERENCES rental (rental_id)
+    REFERENCES rental (id)
     );
     
   CREATE TABLE variable_prices (
-  variable_prices_id INT PRIMARY KEY AUTO_INCREMENT,
+  id INT PRIMARY KEY AUTO_INCREMENT,
   excessKilometer_price VARCHAR(45) NULL,
   fuel_price INT NULL,
   dropOffKilometer_price INT NULL,

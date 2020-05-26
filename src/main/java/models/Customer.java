@@ -1,6 +1,6 @@
 package models;
 
-public class Customer {
+public class Customer extends Model{
     private int id;
     private String firstName;
     private String lastName;

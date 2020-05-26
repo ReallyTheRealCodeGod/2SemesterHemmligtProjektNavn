@@ -18,7 +18,7 @@ public class JDBCConnection {
     @Value("password")
     public static String password;
 
-
+    // singleton for getting an instance of the database connection
     public static Connection getDatabaseConnection() {
         if(conn == null) {
             try {

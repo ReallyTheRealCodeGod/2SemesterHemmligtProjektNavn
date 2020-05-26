@@ -1,6 +1,6 @@
 package models;
 
-public class VariablePrices {
+public class VariablePrices extends Model{
     private int excessKilometerPrice;
     private int fuelPrice;
     private int dropOffKilometerPrice;

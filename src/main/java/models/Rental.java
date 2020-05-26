@@ -2,7 +2,7 @@ package models;
 
 import java.time.LocalDate;
 
-public class Rental {
+public class Rental extends Model{
     private int id;
     private int accumulatedPrice;
     private LocalDate startDate;
