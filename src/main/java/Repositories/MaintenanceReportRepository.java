@@ -1,4 +1,4 @@
 package Repositories;
 
-public class MaintenanceReportRepository {
+public class MaintenanceReportRepository  {
 }

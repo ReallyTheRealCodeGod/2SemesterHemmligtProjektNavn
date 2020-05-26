@@ -5,13 +5,15 @@ public class Accessory {
     private int price;
     private String name;
     private String description;
+    private int rentalId;
 
     public Accessory(){};
-    public Accessory(int id, int price, String name, String description) {
+    public Accessory(int id, int price, String name, String description, int rentalId) {
         this.id = id;
         this.price = price;
         this.name = name;
         this.description = description;
+        this.rentalId = rentalId;
     }
 
     public int getId() {
@@ -42,6 +44,12 @@ public class Accessory {
         this.description = description;
     }
 
+    public int getRentalId() {
+        return rentalId;
+    }
+    public void setRentalId(int rentalId) {
+        this.rentalId = rentalId;
+    }
 
     @Override
     public String toString() {
@@ -50,6 +58,8 @@ public class Accessory {
                 ", price=" + price +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", rentalId=" + rentalId +
                 '}';
     }
 }
+

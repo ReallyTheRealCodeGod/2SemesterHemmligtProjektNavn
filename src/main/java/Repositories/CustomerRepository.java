@@ -51,9 +51,45 @@ public class CustomerRepository {
         return customerToReturn;
     }
 
-    public Customer[] getByParameter(Customer[] parameter){
-        Customer[] customerArr = {};
-        return customerArr;
+    public Customer[] getByParameter(String parameter, String... columns) throws SQLException{
+        ArrayList<Customer> list = new ArrayList<>();
+
+        StringBuilder sb = new StringBuilder();
+        int i = 1;
+        for(String s: columns){
+            if(sb.length() != 0){
+                sb.append(", ");
+            }
+            sb.append(s);
+            i++;
+        }
+
+        String select = "SELECT * FROM customer" +
+                "WHERE" + sb + " LIKE %?% ";
+
+        PreparedStatement prep = conn.prepareStatement(select);
+        prep.setString(1, parameter);
+        ResultSet rs = prep.executeQuery();
+
+        while (rs.next()) {
+            Customer sampleCustomer = new Customer();
+            sampleCustomer.setId(rs.getInt(1));
+            sampleCustomer.setLastName(rs.getString(2));
+            sampleCustomer.setFirstName(rs.getString(3));
+            sampleCustomer.setEmail(rs.getString(4));
+            sampleCustomer.setPhoneNr(rs.getString(5));
+            sampleCustomer.setCprNr(rs.getInt(6));
+            sampleCustomer.setPostalCode(rs.getInt(7));
+            sampleCustomer.setStreetName(rs.getString(8));
+            sampleCustomer.setHouseNr(rs.getString(9));
+            sampleCustomer.setFloor(rs.getString(10));
+            sampleCustomer.setCardNr(rs.getInt(1));
+            sampleCustomer.setCardCVV(rs.getInt(12));
+
+            list.add(sampleCustomer);
+        }
+        return list.toArray(new Customer[list.size()]);
+
     }
 
     public List<Customer> getAll(){
