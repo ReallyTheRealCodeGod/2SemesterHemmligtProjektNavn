@@ -1,14 +1,8 @@
 package models;
 
-import org.aspectj.runtime.reflect.FieldSignatureImpl;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
-public class Autocamper extends Model{
+public class Autocamper {
     private int id;
     private int status;
     private String brand;

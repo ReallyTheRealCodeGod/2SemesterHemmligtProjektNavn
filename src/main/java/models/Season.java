@@ -2,7 +2,7 @@ package models;
 
 import java.time.LocalDate;
 
-public class Season extends Model {
+public class Season {
     private int surchargePercentage;
     private String name;
     private LocalDate startDate;

@@ -1,7 +1,5 @@
 package Repositories;
 
-import models.Autocamper;
-import models.Model;
 import utility.JDBCConnection;
 
 import java.lang.reflect.Field;
@@ -12,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class Repository<T extends Model> {
+public class Repository<T> {
     Connection conn;
     Class<T> cls;
     String table;

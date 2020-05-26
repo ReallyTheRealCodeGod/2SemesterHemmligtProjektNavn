@@ -1,8 +1,6 @@
 package Repositories;
 
-import models.Model;
-
-public interface IRepository<Model extends models.Model>{
+public interface IRepository<Model>{
     public Model getById(int id);
     public Model[] getAll();
     public Model[] filter(String parameter);
