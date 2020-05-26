@@ -2,24 +2,31 @@ package models;
 
 import java.time.LocalDate;
 
-public class Rental extends Model{
+public class Rental implements Model {
     private int id;
     private int accumulatedPrice;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String pickUpLoc;
-    private String dropOffLoc;
+    private long longPickUpLoc;
+    private long latPickUpLoc;
+    private long longDropOffLoc;
+    private long latDropOffLoc;
     private int autocamperId;
     private int maintenanceId;
     private int customerId;
 
-    public Rental(int id, int accumulatedPrice, LocalDate startDate, LocalDate endDate, String pickUpLoc, String dropOffLoc, int autocamperId, int maintenanceId, int customerId) {
+    public Rental() {
+    }
+
+    public Rental(int id, int accumulatedPrice, LocalDate startDate, LocalDate endDate, long longPickUpLoc, long latPickUpLoc, long longDropOffLoc, long latDropOffLoc, int autocamperId, int maintenanceId, int customerId) {
         this.id = id;
         this.accumulatedPrice = accumulatedPrice;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.pickUpLoc = pickUpLoc;
-        this.dropOffLoc = dropOffLoc;
+        this.longPickUpLoc = longPickUpLoc;
+        this.latPickUpLoc = latPickUpLoc;
+        this.longDropOffLoc = longDropOffLoc;
+        this.latDropOffLoc = latDropOffLoc;
         this.autocamperId = autocamperId;
         this.maintenanceId = maintenanceId;
         this.customerId = customerId;
@@ -57,20 +64,36 @@ public class Rental extends Model{
         this.endDate = endDate;
     }
 
-    public String getPickUpLoc() {
-        return pickUpLoc;
+    public long getLongPickUpLoc() {
+        return longPickUpLoc;
     }
 
-    public void setPickUpLoc(String pickUpLoc) {
-        this.pickUpLoc = pickUpLoc;
+    public void setLongPickUpLoc(long longPickUpLoc) {
+        this.longPickUpLoc = longPickUpLoc;
     }
 
-    public String getDropOffLoc() {
-        return dropOffLoc;
+    public long getLatPickUpLoc() {
+        return latPickUpLoc;
     }
 
-    public void setDropOffLoc(String dropOffLoc) {
-        this.dropOffLoc = dropOffLoc;
+    public void setLatPickUpLoc(long latPickUpLoc) {
+        this.latPickUpLoc = latPickUpLoc;
+    }
+
+    public long getLongDropOffLoc() {
+        return longDropOffLoc;
+    }
+
+    public void setLongDropOffLoc(long longDropOffLoc) {
+        this.longDropOffLoc = longDropOffLoc;
+    }
+
+    public long getLatDropOffLoc() {
+        return latDropOffLoc;
+    }
+
+    public void setLatDropOffLoc(long latDropOffLoc) {
+        this.latDropOffLoc = latDropOffLoc;
     }
 
     public int getAutocamperId() {
