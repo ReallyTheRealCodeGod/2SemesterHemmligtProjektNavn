@@ -8,14 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class RentalRepository {
-
-    private Connection conn;
-    @Value("db.user")
-    private String username;
-    @Value("db.password")
-    private String password;
-    @Value("db.url")
-    private String url;
+    Connection conn;
 
     public RentalRepository(){
         this.conn = JDBCConnection.getDatabaseConnection();

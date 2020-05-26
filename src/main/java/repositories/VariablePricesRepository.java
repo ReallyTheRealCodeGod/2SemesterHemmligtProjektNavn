@@ -140,11 +140,19 @@ public class VariablePricesRepository {
     }
 
     private Season[] getSeasons(){
+        ArrayList<Season> list = new ArrayList<>();
         try {
             PreparedStatement prep = conn.prepareStatement("SELECT * FROM seasons");
-            ResultStprep.executeQuery();
-
-            return
+            ResultSet rs = prep.executeQuery();
+            while(rs.next()){
+                 Season s = new Season();
+                 s.setName(rs.getString("name"));
+                 s.setSurchargePercentage(rs.getInt("surcharge_percentage"));
+                 s.setStartDate(rs.getDate("start_date").toLocalDate());
+                 s.setEndDate(rs.getDate("end_date").toLocalDate());
+                 list.add(s);
+            }
+            return list.toArray(new Season[list.size()]);
         }catch(SQLException sql){
             sql.printStackTrace();
             return null;
