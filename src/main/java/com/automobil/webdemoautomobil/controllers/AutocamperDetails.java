@@ -10,12 +10,10 @@ import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
 @Controller
 @RequestMapping("/autocampers")
 public class AutocamperDetails {
-    @Autowired
-    AutocamperRepository autoRepo;
 
-    @GetMapping("/hello")
+    @GetMapping("")
     public String list(Model model){
-        model.addAttribute("autos", autoRepo.getAll());
+       // model.addAttribute("autos", autoRepo.getAll());
         System.out.println("hello");
         return "autocamperList";
     }
