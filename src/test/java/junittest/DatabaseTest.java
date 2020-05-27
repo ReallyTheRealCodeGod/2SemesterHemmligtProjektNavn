@@ -25,7 +25,7 @@ public class DatabaseTest {
     AutocamperRepository auto;
     BillRepository bill;
     CustomerRepository cus;
-    MaintenanceReportRepository maintenance;
+    MaintenanceReportRepository maintenanceRep;
     RentalRepository rent;
 
     @BeforeAll()
@@ -49,7 +49,7 @@ public class DatabaseTest {
         auto = new AutocamperRepository();
         bill = new BillRepository();
         cus = new CustomerRepository();
-        maintenance = new MaintenanceReportRepository();
+        maintenanceRep = new MaintenanceReportRepository();
         rent = new RentalRepository();
     }
 
@@ -74,8 +74,8 @@ public class DatabaseTest {
 
     @Test
     public void getAllEntities(){
-        AccessoryRepository ar = new AccessoryRepository();
-        Accessory[] model = ar.getAll();
+        acc = new AccessoryRepository();
+        Accessory[] model = acc.getAll();
         for(Accessory m: model) {
             assertNotNull(m.getDescription(), "accessory could not be loaded");
         }
@@ -83,17 +83,17 @@ public class DatabaseTest {
 
     @Test
     public void addEntity(){
-        AccessoryRepository ra = new AccessoryRepository();
-        Accessory a = new Accessory(0, 100, "name", "description", 1, 1);
-        assertNotNull(ra.create(a), "could not create entity");
+        acc = new AccessoryRepository();
+        Accessory a = new Accessory(100, "name", "description", 1, 1);
+        assertNotNull(acc.create(a), "could not create entity");
         System.out.println(a);
     }
 
     @Test
     public void updateEntity(){
-        AccessoryRepository ra = new AccessoryRepository();
-        Accessory a = new Accessory(3,12, "hello", "this is a test accessory", 1,1);
-        assertTrue(ra.update(a), "could not create entity");
+        acc = new AccessoryRepository();
+        Accessory a = new Accessory(12, "hello", "this is a test accessory", 1,1);
+        assertTrue(acc.update(a), "could not create entity");
         System.out.println(a);
     }
 }

@@ -8,12 +8,14 @@ public class MaintenanceReport {
     private int cleaningPrice;
     private int fuelGauge;
     private int mileage;
-    private HashMap<String, Boolean> partStatus;
+    private HashMap<String, Integer> partStatus;
+    private String maintenanceNote;
     private int repairCost;
     private LocalDate Date;
     private int autocamperId;
 
-    public MaintenanceReport(int id, int cleaningPrice, int fuelGauge, int mileage, HashMap<String, Boolean> partStatus, int repairCost, LocalDate date, int autocamperId) {
+    public MaintenanceReport(){}
+    public MaintenanceReport(int id, int cleaningPrice, int fuelGauge, int mileage, HashMap<String, Integer> partStatus, int repairCost, LocalDate date, int autocamperId) {
         this.cleaningPrice = cleaningPrice;
         this.fuelGauge = fuelGauge;
         this.mileage = mileage;
@@ -55,12 +57,20 @@ public class MaintenanceReport {
         this.mileage = mileage;
     }
 
-    public HashMap<String, Boolean> getPartStatus() {
+    public HashMap<String, Integer> getPartStatus() {
         return partStatus;
     }
 
-    public void setPartStatus(HashMap<String, Boolean> partStatus) {
+    public void setPartStatus(HashMap<String, Integer> partStatus) {
         this.partStatus = partStatus;
+    }
+
+    public String getMaintenanceNote() {
+        return maintenanceNote;
+    }
+
+    public void setMaintenanceNote(String maintenanceNote) {
+        this.maintenanceNote = maintenanceNote;
     }
 
     public int getRepairCost() {
