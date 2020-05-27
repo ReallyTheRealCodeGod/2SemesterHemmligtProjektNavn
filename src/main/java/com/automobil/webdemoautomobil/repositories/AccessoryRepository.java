@@ -2,12 +2,15 @@ package com.automobil.webdemoautomobil.repositories;
 
 import com.automobil.webdemoautomobil.models.Accessory;
 import com.automobil.webdemoautomobil.utility.JDBCConnection;
+import org.springframework.context.annotation.Bean;
 
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class AccessoryRepository {
     Connection connection;
+
     public AccessoryRepository(){
         connection = JDBCConnection.getDatabaseConnection();
     }

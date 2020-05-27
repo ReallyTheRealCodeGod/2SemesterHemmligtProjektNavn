@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,20 +10,17 @@
 </head>
 <body>
 <div id="accordianTable">
-    <button class="btn" data-toggle="collapse" data-target="statusField">Status</button>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#statusField" aria-expanded="false" aria-controls="statusField">Status</button>
     <div class="collapse" id="statusField">
         <input type="radio"><label> Ledige</label>
         <input type="radio"><label> Udlejet</label>
         <input type="radio"><label> Reserveret</label>
         <input type="radio"><label> Under Vedligeholdelse</label>
     </div>
-
-    <button class="accordian">Mærker</button>
-    <div class="panel"></div>
-    <button class="accordian">Pris</button>
-    <div class="panel"></div>
-    <button class="accordian">Attributer</button>
-    <div class="panel"></div>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#mærker" aria-expanded="false" aria-controls="mærke">Mærker</button>
+    <div class="collapse" id="mærker">
+        <tr th:each="auto : ${autos}
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
