@@ -9,10 +9,17 @@ import utility.JDBCConnection;
 public class IndexController {
 
     @GetMapping("/")
-    public String index(Model model){
-        String url = "hello";
-        System.out.println(JDBCConnection.user + ": this is user");
-        model.addAttribute("url", url);
-        return "index";
+    public String home(){
+        return "/index";
+    }
+
+    @GetMapping("/user")
+    public String user(){
+        return "/user";
+    }
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "/admin";
     }
 }

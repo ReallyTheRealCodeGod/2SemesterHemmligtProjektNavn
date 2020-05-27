@@ -3,6 +3,11 @@ package models;
 import java.util.Arrays;
 
 public class Autocamper {
+    public final static int AVAILABLE = 1;
+    public final static int RESERVED = 2;
+    public final static int UNDER_MAINTENANCE = 3;
+    public final static int RENTED = 4;
+
     private int id;
     private int status;
     private String picture;

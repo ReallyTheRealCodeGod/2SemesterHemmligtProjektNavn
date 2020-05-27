@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class AutocamperRepository{
+
     Connection connection;
 
     public AutocamperRepository(){
@@ -59,7 +60,7 @@ public class AutocamperRepository{
             return null;
         }
     }
-    public Autocamper[] getByParameter(String parameter, String... columns) throws SQLException{
+    public Autocamper[] getByParameter(String parameter, String... columns){
         try{
             ArrayList<Autocamper> list = new ArrayList<>();
 
@@ -120,41 +121,45 @@ public class AutocamperRepository{
             return null;
         }
     }
-    public Autocamper[] getAll() throws SQLException {
+    public Autocamper[] getAll(){
         ArrayList<Autocamper> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * \n" +
+                    "FROM autocamper auto\n" +
+                    "JOIN autocamper_type autotype\n" +
+                    "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model;";
+            PreparedStatement prep = connection.prepareStatement(sql);
+            ResultSet rs = prep.executeQuery();
 
-        String sql = "SELECT * \n" +
-                "FROM autocamper auto\n" +
-                "JOIN autocamper_type autotype\n" +
-                "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model;";
-        PreparedStatement prep = connection.prepareStatement(sql);
-        ResultSet rs = prep.executeQuery();
+            while (rs.next()){
+                Autocamper autocamper = new Autocamper();
+                AutocamperType type = new AutocamperType();
+                autocamper.setId(rs.getInt("id"));
+                autocamper.setStatus(rs.getInt("status"));
+                autocamper.setPicture(rs.getString("picture"));
 
-        while(rs.next()) {
-            Autocamper autocamper = new Autocamper();
-            AutocamperType type = new AutocamperType();
-            autocamper.setId(rs.getInt("id"));
-            autocamper.setStatus(rs.getInt("status"));
-            autocamper.setPicture(rs.getString("picture"));
+                type.setModel(rs.getString("model"));
+                type.setBrand(rs.getString("brand"));
+                type.setBuiltInFeatures(null);
+                type.setPrice(rs.getInt("price"));
+                type.setHorsePower(rs.getInt("horse_power"));
+                //type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
+                //type.setFuelType("fuelType");
+                type.setStandingHeight(rs.getInt("standing_height"));
+                type.setMaxSpeed(rs.getInt("max_speed"));
+                type.setHeight(rs.getInt("height"));
+                type.setLength(rs.getInt("length"));
+                type.setWidth(rs.getInt("width"));
+                type.setArea(rs.getInt("area_sqm"));
+                type.setDescription(rs.getString("description"));
+                type.setBuiltInFeatures(getBuiltInFeatures(type));
+                autocamper.setType(type);
 
-            type.setModel(rs.getString("model"));
-            type.setBrand(rs.getString("brand"));
-            type.setBuiltInFeatures(null);
-            type.setPrice(rs.getInt("price"));
-            type.setHorsePower(rs.getInt("horse_power"));
-            //type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
-            //type.setFuelType("fuelType");
-            type.setStandingHeight(rs.getInt("standing_height"));
-            type.setMaxSpeed(rs.getInt("max_speed"));
-            type.setHeight(rs.getInt("height"));
-            type.setLength(rs.getInt("length"));
-            type.setWidth(rs.getInt("width"));
-            type.setArea(rs.getInt("area_sqm"));
-            type.setDescription(rs.getString("description"));
-            type.setBuiltInFeatures(getBuiltInFeatures(type));
-            autocamper.setType(type);
-
-            list.add(autocamper);
+                list.add(autocamper);
+            }
+        }catch(SQLException sql){
+            sql.printStackTrace();
+            return null;
         }
         return list.toArray(new Autocamper[list.size()]);
     }

@@ -1,4 +1,4 @@
-package com.automobil.webdemoautomobil;
+package controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -77,7 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // Starting with the most restricted path. In this case /admin can only be accessed by a user with the admin role.
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/", "static/css", "static/img").permitAll() // Accessible by all roles, without authentication
+                .antMatchers("/**", "static/css", "static/img").permitAll() // Accessible by all roles, without authentication
                 .and().formLogin();
 
     }
