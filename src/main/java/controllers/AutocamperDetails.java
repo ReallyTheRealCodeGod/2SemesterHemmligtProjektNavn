@@ -9,13 +9,14 @@ import repositories.AutocamperRepository;
 
 import java.sql.SQLException;
 
+
+//@RequestMapping("/autocampers")
 @Controller
-@RequestMapping("/autocampers")
 public class AutocamperDetails {
     @Autowired
     AutocamperRepository autoRepo;
 
-    @GetMapping("/hello")
+    @GetMapping("/autocampers")
     public String list(Model model){
         model.addAttribute("autos", autoRepo.getAll());
         System.out.println("hello");

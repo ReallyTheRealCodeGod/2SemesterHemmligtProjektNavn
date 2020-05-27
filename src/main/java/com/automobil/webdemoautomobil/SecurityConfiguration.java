@@ -1,7 +1,8 @@
-package controllers;
+package com.automobil.webdemoautomobil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.sql.DataSource;
 
 // Tells spring that this is a web security application
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -21,8 +22,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // set configuration on the auth object here
+        System.out.println(dataSource.toString());
 
+        // set configuration on the auth object here
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username,password,enabled "
@@ -32,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     + "from authorities "
                     + "where username = ? ");
 
-        /*
+/*
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .withDefaultSchema() // h2 default database
@@ -46,9 +48,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .password("pass")
                                 .roles("ADMIN")
                 );
-         */
 
-        /* This is an in memory implementation
+
+        // This is an in memory implementation
         auth.inMemoryAuthentication()
                 .withUser("user")
                 .password("pass")
@@ -57,9 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .withUser("admin")
                 .password("pass")
                 .roles("ADMIN");
-
-         */
-
+*/
     }
 
     //You need to provide a password encoder for web apps. Don't use NoOpPasswordEncoder in final product as it does not
@@ -79,6 +79,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/**", "static/css", "static/img").permitAll() // Accessible by all roles, without authentication
                 .and().formLogin();
-
     }
 }
