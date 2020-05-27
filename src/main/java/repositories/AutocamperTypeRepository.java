@@ -1,6 +1,7 @@
 package repositories;
 
 import models.AutocamperType;
+import org.hibernate.sql.Select;
 import org.springframework.beans.factory.annotation.Value;
 import utility.JDBCConnection;
 
@@ -50,7 +51,51 @@ public class AutocamperTypeRepository {
         }
         return autocamperType;
     }
+    public AutocamperType[] getByParameter(String parameter, String... columns){
+        ArrayList<AutocamperType> autoList = new ArrayList<AutocamperType>();
+        try {
 
+            StringBuilder sb = new StringBuilder();
+            int i = 1;
+            for(String s: columns){
+                if(sb.length() != 0){
+                    sb.append(", ");
+                }
+                sb.append(s);
+                i++;
+            }
+
+            PreparedStatement select = conn.prepareStatement
+                    ("SELECT * FROM autocamper_type WHERE" +
+                            sb + " LIKE %?%");
+            select.setString(1, "parameter");
+            ResultSet rs = select.executeQuery();
+
+            while(rs.next()){
+                AutocamperType autoType = new AutocamperType();
+
+                autoType.setBrand(rs.getString(1));
+                autoType.setModel(rs.getString(2));
+                autoType.setPrice(rs.getInt(3));
+                autoType.setProductionYear(rs.getInt(4));
+                autoType.setWeight(rs.getInt(5));
+                autoType.setFuelCapacity(rs.getInt(6));
+                autoType.setHorsePower(rs.getInt(7));
+                autoType.setMaxSpeed(rs.getInt(8));
+                autoType.setStandingHeight(rs.getInt(9));
+                autoType.setArea(rs.getInt(10));
+                autoType.setHeight(rs.getInt(11));
+                autoType.setLength(rs.getInt(12));
+                autoType.setWidth(rs.getInt(13));
+                autoType.setDescription(rs.getString(14));
+
+                autoList.add(autoType);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return autoList.toArray(new AutocamperType[autoList.size()]);
+    }
     public AutocamperType[] getAll() {
         ArrayList<AutocamperType> autoList = new ArrayList<AutocamperType>();
 

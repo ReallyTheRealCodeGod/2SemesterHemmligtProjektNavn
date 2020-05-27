@@ -121,6 +121,23 @@ public class AccessoryRepository {
          }
     }
 
+    public Accessory addType(Accessory accessory){
+        try {
+            PreparedStatement prep = connection.prepareStatement("INSERT INTO accessory_type (name, description, price) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            prep.setString(1, accessory.getName());
+            prep.setString(2, accessory.getDescription());
+            prep.setInt(3, accessory.getPrice());
+            prep.executeUpdate();
+            ResultSet rs = prep.getGeneratedKeys();
+            rs.next();
+            accessory.setId(rs.getInt(1));
+            return accessory;
+        }catch(SQLException sql){
+            sql.printStackTrace();
+            return null;
+        }
+        }
+
     public boolean update(Accessory accessory) {
 	 try {
 	     String update = "UPDATE accessory_type " +

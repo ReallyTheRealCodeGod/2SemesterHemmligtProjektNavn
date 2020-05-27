@@ -68,23 +68,23 @@ public class DatabaseTest {
         assertTrue(auto.getById(1) != null, "accessory could not be Created");
         assertTrue(bill.getById(1) != null, "accessory could not be Created");
         assertTrue(cus.getById(1) != null, "accessory could not be Created");
-        //assertTrue(maintenance.getById(1) != null, "accessory could not be Created");
+        assertTrue(maintenanceRep.getById(1) != null, "accessory could not be Created");
         assertTrue(rent.getById(1) != null, "accessory could not be Created");
     }
 
     @Test
     public void getAllEntities(){
-        acc = new AccessoryRepository();
         Accessory[] model = acc.getAll();
         for(Accessory m: model) {
-            assertNotNull(m.getDescription(), "accessory could not be loaded");
+            System.out.println(m);
+            assertNotNull(m, "accessory could not be loaded");
         }
     }
 
     @Test
     public void addEntity(){
-        acc = new AccessoryRepository();
-        Accessory a = new Accessory(100, "name", "description", 1, 1);
+        Accessory a = new Accessory(100, "name", "description", 0, 1);
+        a = acc.addType(a);
         assertNotNull(acc.create(a), "could not create entity");
         System.out.println(a);
     }
