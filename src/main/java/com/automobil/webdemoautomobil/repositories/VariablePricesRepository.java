@@ -1,9 +1,8 @@
-package repositories;
+package com.automobil.webdemoautomobil.repositories;
 
-import models.Season;
-import models.VariablePrices;
-import org.springframework.beans.factory.annotation.Value;
-import utility.JDBCConnection;
+import com.automobil.webdemoautomobil.models.Season;
+import com.automobil.webdemoautomobil.models.VariablePrices;
+import com.automobil.webdemoautomobil.utility.JDBCConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

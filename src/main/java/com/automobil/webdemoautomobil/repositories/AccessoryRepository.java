@@ -1,7 +1,7 @@
-package repositories;
+package com.automobil.webdemoautomobil.repositories;
 
-import models.Accessory;
-import utility.JDBCConnection;
+import com.automobil.webdemoautomobil.models.Accessory;
+import com.automobil.webdemoautomobil.utility.JDBCConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

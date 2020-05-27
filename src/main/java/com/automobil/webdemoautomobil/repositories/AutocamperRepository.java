@@ -1,9 +1,9 @@
-package repositories;
+package com.automobil.webdemoautomobil.repositories;
 
-import models.Autocamper;
-import models.AutocamperType;
-import models.BuiltInFeature;
-import utility.JDBCConnection;
+import com.automobil.webdemoautomobil.models.Autocamper;
+import com.automobil.webdemoautomobil.models.AutocamperType;
+import com.automobil.webdemoautomobil.models.BuiltInFeature;
+import com.automobil.webdemoautomobil.utility.JDBCConnection;
 
 import java.sql.*;
 import java.util.ArrayList;

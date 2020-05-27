@@ -1,13 +1,12 @@
 package junittest;
 
-import models.Customer;
 import org.junit.jupiter.api.BeforeEach;
-import repositories.*;
-import models.Accessory;
+import com.automobil.webdemoautomobil.repositories.*;
+import com.automobil.webdemoautomobil.models.Accessory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.util.ReflectionTestUtils;
-import utility.JDBCConnection;
+import com.automobil.webdemoautomobil.utility.JDBCConnection;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package models;
+package com.automobil.webdemoautomobil.models;
 
 public class VariablePrices {
     private int variablePricesId;

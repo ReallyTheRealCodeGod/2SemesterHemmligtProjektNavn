@@ -1,13 +1,10 @@
-package utility;
+package com.automobil.webdemoautomobil.utility;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class JDBCConnection {
     private static Connection conn;

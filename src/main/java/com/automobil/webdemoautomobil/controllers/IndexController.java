@@ -1,9 +1,7 @@
-package controllers;
+package com.automobil.webdemoautomobil.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import utility.JDBCConnection;
 
 @Controller
 public class IndexController {
