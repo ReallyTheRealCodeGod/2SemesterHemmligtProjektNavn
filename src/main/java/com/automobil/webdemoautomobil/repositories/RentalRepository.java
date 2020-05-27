@@ -6,7 +6,7 @@ import com.automobil.webdemoautomobil.utility.JDBCConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class RentalRepository {
+public class RentalRepository implements IRepository<Rental>{
     Connection conn;
 
     public RentalRepository(){
@@ -41,7 +41,7 @@ public class RentalRepository {
         return rentalToReturn;
     }
 
-    public Rental[] getBytParameter(String parameter, String... columns){
+    public Rental[] getByParameter(String parameter, String... columns){
         ArrayList<Rental> rentalList = new ArrayList<Rental>();
 
         StringBuilder sb = new StringBuilder();
@@ -172,11 +172,11 @@ public class RentalRepository {
         return true;
     }
 
-    public boolean delete(int id){
+    public boolean delete(Rental rental){
         try {
             PreparedStatement deleteRental = conn.prepareStatement
                     ("DELETE FROM rental WHERE id = ?");
-            deleteRental.setInt(1, id);
+            deleteRental.setInt(1, rental.getId());
             deleteRental.executeUpdate();
             return true;
         }

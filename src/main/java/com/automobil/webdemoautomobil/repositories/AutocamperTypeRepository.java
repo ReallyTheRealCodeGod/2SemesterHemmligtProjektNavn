@@ -3,6 +3,7 @@ package com.automobil.webdemoautomobil.repositories;
 import com.automobil.webdemoautomobil.models.AutocamperType;
 import org.hibernate.sql.Select;
 import com.automobil.webdemoautomobil.utility.JDBCConnection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,7 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AutocamperTypeRepository {
+public class AutocamperTypeRepository{
+    @Autowired
     private Connection conn;
 
     public AutocamperTypeRepository(){
@@ -18,37 +20,25 @@ public class AutocamperTypeRepository {
     }
 
     //finder ikke med id men med autocamperType
-    public AutocamperType getByAutocamperType(AutocamperType autocamperType){
+    public AutocamperType getByBrandAndModel(String brand, String model){
         try{
             PreparedStatement getSingleType = conn.prepareStatement
                     ("SELECT * FROM autocamper_type " +
                             "WHERE brand = ? AND model = ?");
-            getSingleType.setString(1, autocamperType.getBrand());
-            getSingleType.setString(2, autocamperType.getModel());
+            getSingleType.setString(1, brand);
+            getSingleType.setString(2, model);
 
             ResultSet rs = getSingleType.executeQuery();
             AutocamperType aT = new AutocamperType();
             while (rs.next()){
-                aT.setBrand(rs.getString(1));
-                aT.setModel(rs.getString(2));
-                aT.setPrice(rs.getInt(3));
-                aT.setProductionYear(rs.getInt(4));
-                aT.setWeight(rs.getInt(5));
-                aT.setFuelCapacity(rs.getInt(6));
-                aT.setHorsePower(rs.getInt(7));
-                aT.setMaxSpeed(rs.getInt(8));
-                aT.setStandingHeight(rs.getInt(9));
-                aT.setArea(rs.getInt(10));
-                aT.setHeight(rs.getInt(11));
-                aT.setLength(rs.getInt(12));
-                aT.setWidth(rs.getInt(13));
-                aT.setDescription(rs.getString(14));
+                load(rs);
             }
+            return aT;
         }
         catch (SQLException e){
             e.printStackTrace();
         }
-        return autocamperType;
+        return null;
     }
     public AutocamperType[] getByParameter(String parameter, String... columns){
         ArrayList<AutocamperType> autoList = new ArrayList<AutocamperType>();
@@ -70,25 +60,8 @@ public class AutocamperTypeRepository {
             select.setString(1, "parameter");
             ResultSet rs = select.executeQuery();
 
-            while(rs.next()){
-                AutocamperType autoType = new AutocamperType();
-
-                autoType.setBrand(rs.getString(1));
-                autoType.setModel(rs.getString(2));
-                autoType.setPrice(rs.getInt(3));
-                autoType.setProductionYear(rs.getInt(4));
-                autoType.setWeight(rs.getInt(5));
-                autoType.setFuelCapacity(rs.getInt(6));
-                autoType.setHorsePower(rs.getInt(7));
-                autoType.setMaxSpeed(rs.getInt(8));
-                autoType.setStandingHeight(rs.getInt(9));
-                autoType.setArea(rs.getInt(10));
-                autoType.setHeight(rs.getInt(11));
-                autoType.setLength(rs.getInt(12));
-                autoType.setWidth(rs.getInt(13));
-                autoType.setDescription(rs.getString(14));
-
-                autoList.add(autoType);
+            while (rs.next()){
+                autoList.add(load(rs));
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -103,25 +76,8 @@ public class AutocamperTypeRepository {
                     ("SELECT * FROM autocamper_type");
             ResultSet rs = getAllTypes.executeQuery();
 
-            while(rs.next()){
-                AutocamperType autoType = new AutocamperType();
-
-                autoType.setBrand(rs.getString(1));
-                autoType.setModel(rs.getString(2));
-                autoType.setPrice(rs.getInt(3));
-                autoType.setProductionYear(rs.getInt(4));
-                autoType.setWeight(rs.getInt(5));
-                autoType.setFuelCapacity(rs.getInt(6));
-                autoType.setHorsePower(rs.getInt(7));
-                autoType.setMaxSpeed(rs.getInt(8));
-                autoType.setStandingHeight(rs.getInt(9));
-                autoType.setArea(rs.getInt(10));
-                autoType.setHeight(rs.getInt(11));
-                autoType.setLength(rs.getInt(12));
-                autoType.setWidth(rs.getInt(13));
-                autoType.setDescription(rs.getString(14));
-
-                autoList.add(autoType);
+            while (rs.next()){
+                autoList.add(load(rs));
             }
         }
         catch (SQLException e){
@@ -212,5 +168,24 @@ public class AutocamperTypeRepository {
             e.printStackTrace();
         }
         return false;
+    }
+
+    private AutocamperType load(ResultSet rs) throws SQLException{
+        AutocamperType aT = new AutocamperType();
+        aT.setBrand(rs.getString(1));
+        aT.setModel(rs.getString(2));
+        aT.setPrice(rs.getInt(3));
+        aT.setProductionYear(rs.getInt(4));
+        aT.setWeight(rs.getInt(5));
+        aT.setFuelCapacity(rs.getInt(6));
+        aT.setHorsePower(rs.getInt(7));
+        aT.setMaxSpeed(rs.getInt(8));
+        aT.setStandingHeight(rs.getInt(9));
+        aT.setArea(rs.getInt(10));
+        aT.setHeight(rs.getInt(11));
+        aT.setLength(rs.getInt(12));
+        aT.setWidth(rs.getInt(13));
+        aT.setDescription(rs.getString(14));
+        return aT;
     }
 }

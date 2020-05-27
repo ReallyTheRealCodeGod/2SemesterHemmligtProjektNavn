@@ -9,15 +9,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerRepository {
+public class CustomerRepository implements IRepository<Customer>{
 
     private Connection conn;
-    @Value("db.user")
-    private String username;
-    @Value("db.password")
-    private String password;
-    @Value("db.url")
-    private String url;
 
     public CustomerRepository(){
         this.conn = JDBCConnection.getDatabaseConnection();
@@ -51,48 +45,53 @@ public class CustomerRepository {
         return customerToReturn;
     }
 
-    public Customer[] getByParameter(String parameter, String... columns) throws SQLException{
-        ArrayList<Customer> list = new ArrayList<>();
+    public Customer[] getByParameter(String parameter, String... columns){
+        try {
+            ArrayList<Customer> list = new ArrayList<>();
 
-        StringBuilder sb = new StringBuilder();
-        int i = 1;
-        for(String s: columns){
-            if(sb.length() != 0){
-                sb.append(", ");
+            StringBuilder sb = new StringBuilder();
+            int i = 1;
+            for (String s : columns) {
+                if (sb.length() != 0) {
+                    sb.append(", ");
+                }
+                sb.append(s);
+                i++;
             }
-            sb.append(s);
-            i++;
+
+            String select = "SELECT * FROM customer" +
+                    "WHERE" + sb + " LIKE %?% ";
+
+            PreparedStatement prep = conn.prepareStatement(select);
+            prep.setString(1, parameter);
+            ResultSet rs = prep.executeQuery();
+
+            while (rs.next()) {
+                Customer sampleCustomer = new Customer();
+                sampleCustomer.setId(rs.getInt(1));
+                sampleCustomer.setLastName(rs.getString(2));
+                sampleCustomer.setFirstName(rs.getString(3));
+                sampleCustomer.setEmail(rs.getString(4));
+                sampleCustomer.setPhoneNr(rs.getString(5));
+                sampleCustomer.setCprNr(rs.getInt(6));
+                sampleCustomer.setPostalCode(rs.getInt(7));
+                sampleCustomer.setStreetName(rs.getString(8));
+                sampleCustomer.setHouseNr(rs.getString(9));
+                sampleCustomer.setFloor(rs.getString(10));
+                sampleCustomer.setCardNr(rs.getInt(1));
+                sampleCustomer.setCardCVV(rs.getInt(12));
+
+                list.add(sampleCustomer);
+            }
+            return list.toArray(new Customer[list.size()]);
+        }catch (SQLException sql){
+            sql.printStackTrace();
+            return null;
         }
-
-        String select = "SELECT * FROM customer" +
-                "WHERE" + sb + " LIKE %?% ";
-
-        PreparedStatement prep = conn.prepareStatement(select);
-        prep.setString(1, parameter);
-        ResultSet rs = prep.executeQuery();
-
-        while (rs.next()) {
-            Customer sampleCustomer = new Customer();
-            sampleCustomer.setId(rs.getInt(1));
-            sampleCustomer.setLastName(rs.getString(2));
-            sampleCustomer.setFirstName(rs.getString(3));
-            sampleCustomer.setEmail(rs.getString(4));
-            sampleCustomer.setPhoneNr(rs.getString(5));
-            sampleCustomer.setCprNr(rs.getInt(6));
-            sampleCustomer.setPostalCode(rs.getInt(7));
-            sampleCustomer.setStreetName(rs.getString(8));
-            sampleCustomer.setHouseNr(rs.getString(9));
-            sampleCustomer.setFloor(rs.getString(10));
-            sampleCustomer.setCardNr(rs.getInt(1));
-            sampleCustomer.setCardCVV(rs.getInt(12));
-
-            list.add(sampleCustomer);
-        }
-        return list.toArray(new Customer[list.size()]);
 
     }
 
-    public List<Customer> getAll(){
+    public Customer[] getAll(){
         List<Customer> allCustomers = new ArrayList<Customer>();
         try {
             PreparedStatement getAllCustomers = conn.prepareStatement
@@ -120,7 +119,7 @@ public class CustomerRepository {
         catch (SQLException e){
             e.printStackTrace();
         }
-        return allCustomers;
+        return allCustomers.toArray(new Customer[allCustomers.size()]);
     }
 
     public Customer create(Customer customer){
@@ -182,12 +181,13 @@ public class CustomerRepository {
         return false;
     }
 
-    public boolean delete(int id){
+    public boolean delete(Customer customer){
         try {
-            //create prepared DELETE statement, which deletes the student with the given id
+            //create prepared DELETE statement, which deletes the customer with the given id
+
             PreparedStatement deleteCustomer = conn.prepareStatement
                     ("DELETE FROM customer WHERE id = ?");
-            deleteCustomer.setInt(1, id);
+            deleteCustomer.setInt(1, customer.getId());
             deleteCustomer.executeUpdate();
             return true;
         }

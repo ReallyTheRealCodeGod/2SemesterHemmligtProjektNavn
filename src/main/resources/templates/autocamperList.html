@@ -18,9 +18,12 @@
         <input type="radio"><label> Under Vedligeholdelse</label>
     </div>
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#mærker" aria-expanded="false" aria-controls="mærke">Mærker</button>
-    <div class="collapse" id="mærker">
-        <tr th:each="auto : ${autos}
-    </div>
+    <table class="collapse" id="mærker">
+        <p th:text="${auto.mileage}"></p>
+        <tr th:each="auto : ${autos}">
+            <td th:text="${auto.id}"></td>
+        </tr>
+    </table>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

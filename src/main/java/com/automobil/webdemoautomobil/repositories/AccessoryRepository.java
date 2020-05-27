@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 
-public class AccessoryRepository {
+public class AccessoryRepository implements IRepository<Accessory>{
     Connection connection;
 
     public AccessoryRepository(){

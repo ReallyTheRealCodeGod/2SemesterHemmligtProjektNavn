@@ -6,7 +6,7 @@ import com.automobil.webdemoautomobil.utility.JDBCConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class BillRepository {
+public class BillRepository implements IRepository<Bill>{
     Connection connection;
     public BillRepository(){
         connection = JDBCConnection.getDatabaseConnection();
@@ -17,23 +17,12 @@ public class BillRepository {
             String select = "SELECT * FROM bill" +
                     " WHERE id = ?";
             PreparedStatement prep = connection.prepareStatement(select);
-            Bill bill = new Bill();
 
             prep.setInt(1,id);
             ResultSet rs = prep.executeQuery();
+            Bill bill = null;
             while(rs.next()) {
-                bill.setId(rs.getInt("id"));
-                bill.setBillingDate(rs.getDate("billing_date").toLocalDate());
-                bill.setCustomerFirstName(rs.getString("cus_first_name"));
-                bill.setCustomerLastName(rs.getString("cus_last_name"));
-
-                bill.setRentalCost(rs.getInt("rental_cost"));
-                bill.setAccessoryCost(rs.getInt("accessory_cost"));
-
-                bill.setPostalCode(rs.getInt("postal_code"));
-                bill.setStreetName(rs.getString("street_name"));
-                bill.setStreetNr(rs.getString("street_nr"));
-                bill.setApartmentFloor(rs.getString("apartment_floor"));
+                bill = load(rs);
             }
             return bill;
         }catch(SQLException sql) {
@@ -64,20 +53,7 @@ public class BillRepository {
             ResultSet rs = prep.executeQuery();
 
             while(rs.next()) {
-                Bill bill = new Bill();
-                bill.setId(rs.getInt("id"));
-                bill.setBillingDate(rs.getDate("billing_date").toLocalDate());
-                bill.setCustomerFirstName(rs.getString("cus_first_name"));
-                bill.setCustomerLastName(rs.getString("cus_last_name"));
-
-                bill.setRentalCost(rs.getInt("rental_cost"));
-                bill.setAccessoryCost(rs.getInt("accessory_cost"));
-
-                bill.setPostalCode(rs.getInt("postal_code"));
-                bill.setStreetName(rs.getString("street_name"));
-                bill.setStreetNr(rs.getString("street_nr"));
-                bill.setApartmentFloor(rs.getString("apartment_floor"));
-                list.add(bill);
+                list.add(load(rs));
             }
             return list.toArray(new Bill[list.size()]);
         }catch(SQLException sql){
@@ -96,20 +72,7 @@ public class BillRepository {
             ResultSet rs = prep.executeQuery();
 
             while(rs.next()) {
-                Bill bill = new Bill();
-                bill.setId(rs.getInt("id"));
-                bill.setBillingDate(rs.getDate("billing_date").toLocalDate());
-                bill.setCustomerFirstName(rs.getString("cus_first_name"));
-                bill.setCustomerLastName(rs.getString("cus_last_name"));
-
-                bill.setRentalCost(rs.getInt("rental_cost"));
-                bill.setAccessoryCost(rs.getInt("accessory_cost"));
-
-                bill.setPostalCode(rs.getInt("postal_code"));
-                bill.setStreetName(rs.getString("street_name"));
-                bill.setStreetNr(rs.getString("street_nr"));
-                bill.setApartmentFloor(rs.getString("apartment_floor"));
-                list.add(bill);
+                list.add(load(rs));
             }
             return list.toArray(new Bill[list.size()]);
         }catch(SQLException sql){
@@ -189,6 +152,23 @@ public class BillRepository {
             sql.printStackTrace();
             return false;
         }
+    }
+
+    private Bill load(ResultSet rs) throws SQLException{
+        Bill bill = new Bill();
+        bill.setId(rs.getInt("id"));
+        bill.setBillingDate(rs.getDate("billing_date").toLocalDate());
+        bill.setCustomerFirstName(rs.getString("cus_first_name"));
+        bill.setCustomerLastName(rs.getString("cus_last_name"));
+
+        bill.setRentalCost(rs.getInt("rental_cost"));
+        bill.setAccessoryCost(rs.getInt("accessory_cost"));
+
+        bill.setPostalCode(rs.getInt("postal_code"));
+        bill.setStreetName(rs.getString("street_name"));
+        bill.setStreetNr(rs.getString("street_nr"));
+        bill.setApartmentFloor(rs.getString("apartment_floor"));
+        return bill;
     }
 }
 

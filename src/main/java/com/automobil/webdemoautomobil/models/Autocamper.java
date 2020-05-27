@@ -59,4 +59,15 @@ public class Autocamper {
     public void setMileage(int mileage) {
         this.mileage = mileage;
     }
+
+    @Override
+    public String toString() {
+        return "Autocamper{" +
+                "id=" + id +
+                ", status=" + status +
+                ", picture='" + picture + '\'' +
+                ", mileage=" + mileage +
+                ", type=" + type +
+                '}';
+    }
 }

@@ -9,14 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
 
 @Controller
-@RequestMapping("/autocampers")
+@RequestMapping("/Autocampers")
 public class AutocamperDetails {
+
+    @Autowired
     AutocamperRepository autoRepo;
 
     @GetMapping("")
     public String list(Model model){
-        autoRepo = new AutocamperRepository();
+        model.addAttribute("auto", autoRepo.getById(1));
         model.addAttribute("autos", autoRepo.getAll());
-        return "autocamperList";
+        return "/autocamperList";
     }
 }

@@ -7,7 +7,7 @@ import com.automobil.webdemoautomobil.utility.JDBCConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class VariablePricesRepository {
+public class VariablePricesRepository{
     Connection conn;
 
     public VariablePricesRepository(){

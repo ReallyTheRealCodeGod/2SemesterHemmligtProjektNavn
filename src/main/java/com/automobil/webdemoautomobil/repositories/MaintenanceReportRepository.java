@@ -4,12 +4,13 @@ import java.util.HashMap;
 
 import com.automobil.webdemoautomobil.models.MaintenanceReport;
 import com.automobil.webdemoautomobil.utility.JDBCConnection;
+import org.springframework.ui.Model;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 
-public class MaintenanceReportRepository {
+public class MaintenanceReportRepository implements IRepository<MaintenanceReport>{
     Connection connection;
 
     public MaintenanceReportRepository() {
