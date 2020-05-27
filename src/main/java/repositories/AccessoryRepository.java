@@ -114,11 +114,16 @@ public class AccessoryRepository {
          ResultSet rs = prep.getGeneratedKeys();
          rs.next();
          accessory.setId(rs.getInt(1));
-         return accessory;
      }catch(SQLException sql){
+         if(sql.getErrorCode() == 1452){
+             addType(accessory);
+             create(accessory);
+         }else {
              sql.printStackTrace();
              return null;
          }
+	 }
+        return accessory;
     }
 
     public Accessory addType(Accessory accessory){

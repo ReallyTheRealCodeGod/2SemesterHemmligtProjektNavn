@@ -83,8 +83,9 @@ public class DatabaseTest {
 
     @Test
     public void addEntity(){
-        Accessory a = new Accessory(100, "name", "description", 0, 1);
+        Accessory a = new Accessory(100, "name", "description", 0, 100);
         a = acc.addType(a);
+        System.out.println(a.getTypeId());
         assertNotNull(acc.create(a), "could not create entity");
         System.out.println(a);
     }
