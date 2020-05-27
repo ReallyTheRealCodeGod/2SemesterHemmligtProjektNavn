@@ -1,6 +1,4 @@
-package models;
-
-import java.util.Arrays;
+package com.automobil.webdemoautomobil.models;
 
 public class Autocamper {
     public final static int AVAILABLE = 1;

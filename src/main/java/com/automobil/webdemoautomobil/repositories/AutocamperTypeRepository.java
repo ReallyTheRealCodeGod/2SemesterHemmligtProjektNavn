@@ -1,9 +1,7 @@
-package repositories;
+package com.automobil.webdemoautomobil.repositories;
 
-import models.AutocamperType;
-import org.hibernate.sql.Select;
-import org.springframework.beans.factory.annotation.Value;
-import utility.JDBCConnection;
+import com.automobil.webdemoautomobil.models.AutocamperType;
+import com.automobil.webdemoautomobil.utility.JDBCConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

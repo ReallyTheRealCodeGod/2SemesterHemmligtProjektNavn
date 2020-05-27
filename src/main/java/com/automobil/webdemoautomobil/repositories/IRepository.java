@@ -1,4 +1,4 @@
-package repositories;
+package com.automobil.webdemoautomobil.repositories;
 
 public interface IRepository<Model>{
     public Model getById(int id);
