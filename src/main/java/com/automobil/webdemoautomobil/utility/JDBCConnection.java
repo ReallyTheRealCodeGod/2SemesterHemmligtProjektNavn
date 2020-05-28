@@ -14,12 +14,13 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class JDBCConnection {
+
     private static Connection conn;
-    @Value("user")
+    @Value("db.user")
     public static String user;
-    @Value("url")
+    @Value("db.url")
     private static String url;
-    @Value("password")
+    @Value("db.password")
     public static String password;
 
     // singleton for getting an instance of the database connection

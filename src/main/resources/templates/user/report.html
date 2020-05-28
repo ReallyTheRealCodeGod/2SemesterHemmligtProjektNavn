@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+<h1>Raporter Status</h1>
+<a href="/user/finishedrentals"><button type="button" class="btn btn-secondary">Tilbage</button></a>
+<br><br>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Kunde Navn</th>
+            <th scope="col">Autocamper id</th>
+            <th scope="col">Start Dato</th>
+            <th scope="col">Slut Dato</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">#</th>
+            <td>#</td>
+            <td>#</td>
+            <td>#</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<br>
+<div>
+    <div>
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Kilometer tilstand</span>
+                </div>
+                <input type="number" class="form-control" placeholder="Indtast her" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Benzin niveau</label>
+                </div>
+                <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Vælg...</option>
+                    <option value="1">Over halv (1/2)</option>
+                    <option value="2">Under halv (1/2)</option>
+                </select>
+            </div>
+
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Ekstra udstyr</th>
+                        <th>Returneret</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">#</th>
+                        <td><input type="checkbox" name="returned"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+    <br>
+    <div>
+        <h5>Kontrol af mekaniske egenskaber:</h5>
+        <form>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Karosseri</label>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Dæk</label>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Batteri</label>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Bremser</label>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Støddæmpere</label>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Lygter</label>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Interiør</label>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Olie</label>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="checkbox" aria-label="Checkbox for following text input">
+                    </div>
+                </div>
+                <label type="text" class="form-control" aria-label="Text input with checkbox">Kølervæske</label>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Kommentar:</span>
+                </div>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+
+        </form><br>
+        <button type="button" class="btn btn-success">Godkend</button>
+    </div>
+</div>
+
+<div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
