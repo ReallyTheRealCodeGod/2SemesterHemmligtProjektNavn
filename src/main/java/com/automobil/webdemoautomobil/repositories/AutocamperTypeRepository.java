@@ -31,7 +31,8 @@ public class AutocamperTypeRepository{
             ResultSet rs = getSingleType.executeQuery();
             AutocamperType aT = new AutocamperType();
             while (rs.next()){
-                load(rs);
+                rs.toString();
+                aT = load(rs);
             }
             return aT;
         }
