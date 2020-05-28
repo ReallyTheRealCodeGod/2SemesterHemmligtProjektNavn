@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -70,7 +71,7 @@ public class DatabaseTest {
 
     @Test
     public void getAllEntities(){
-        Accessory[] model = acc.getAll();
+        ArrayList<Accessory> model = acc.getAll();
         for(Accessory m: model) {
             System.out.println(m);
             assertNotNull(m, "accessory could not be loaded");

@@ -11,10 +11,10 @@ public class Customer {
     private String streetName;
     private String houseNr;
     private String floor;
-    private int cardNr;
+    private long cardNr;
     private int cardCVV;
 
-    public Customer(int id, String firstName, String lastName, String email, String phoneNr, int cprNr, int postalCode, String streetName, String houseNr, String floor, int cardNr, int cardCVV) {
+    public Customer(int id, String firstName, String lastName, String email, String phoneNr, int cprNr, int postalCode, String streetName, String houseNr, String floor, long cardNr, int cardCVV) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -110,11 +110,11 @@ public class Customer {
         this.floor = floor;
     }
 
-    public int getCardNr() {
+    public long getCardNr() {
         return cardNr;
     }
 
-    public void setCardNr(int cardNr) {
+    public void setCardNr(long cardNr) {
         this.cardNr = cardNr;
     }
 

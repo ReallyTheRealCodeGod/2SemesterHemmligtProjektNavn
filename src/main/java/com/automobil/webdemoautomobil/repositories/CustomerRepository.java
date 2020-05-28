@@ -35,7 +35,7 @@ public class CustomerRepository implements IRepository<Customer>{
                 customerToReturn.setStreetName(rs.getString(7));
                 customerToReturn.setHouseNr(rs.getString(8));
                 customerToReturn.setFloor(rs.getString(9));
-                customerToReturn.setCardNr(rs.getInt(10));
+                customerToReturn.setCardNr(rs.getLong(10));
                 customerToReturn.setCardCVV(rs.getInt(11));
             }
         }
@@ -78,7 +78,7 @@ public class CustomerRepository implements IRepository<Customer>{
                 sampleCustomer.setStreetName(rs.getString(8));
                 sampleCustomer.setHouseNr(rs.getString(9));
                 sampleCustomer.setFloor(rs.getString(10));
-                sampleCustomer.setCardNr(rs.getInt(1));
+                sampleCustomer.setCardNr(rs.getLong(11));
                 sampleCustomer.setCardCVV(rs.getInt(12));
 
                 list.add(sampleCustomer);
@@ -110,7 +110,7 @@ public class CustomerRepository implements IRepository<Customer>{
                     sampleCustomer.setStreetName(rs.getString(8));
                     sampleCustomer.setHouseNr(rs.getString(9));
                     sampleCustomer.setFloor(rs.getString(10));
-                    sampleCustomer.setCardNr(rs.getInt(1));
+                    sampleCustomer.setCardNr(rs.getLong(11));
                     sampleCustomer.setCardCVV(rs.getInt(12));
                     allCustomers.add(sampleCustomer);
                 }
@@ -136,7 +136,7 @@ public class CustomerRepository implements IRepository<Customer>{
             createCustomer.setString(7, customer.getStreetName());
             createCustomer.setString(8, customer.getHouseNr());
             createCustomer.setString(9, customer.getFloor());
-            createCustomer.setInt(10, customer.getCardNr());
+            createCustomer.setLong(10, customer.getCardNr());
             createCustomer.setInt(11, customer.getCardCVV());
             createCustomer.executeUpdate();
             ResultSet rs = createCustomer.getGeneratedKeys();
@@ -169,7 +169,7 @@ public class CustomerRepository implements IRepository<Customer>{
             updateCustomer.setString(7, customer.getStreetName());
             updateCustomer.setString(8, customer.getHouseNr());
             updateCustomer.setString(9, customer.getFloor());
-            updateCustomer.setInt(10, customer.getCardNr());
+            updateCustomer.setLong(10, customer.getCardNr());
             updateCustomer.setInt(11, customer.getCardCVV());
             updateCustomer.setInt(12, customer.getId());
             updateCustomer.executeUpdate();

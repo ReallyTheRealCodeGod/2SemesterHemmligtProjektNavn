@@ -39,14 +39,10 @@ public class MaintenanceReportController {
 
     @GetMapping("/user/finishedrentals")
     public String finished(Model model){
-        Autocamper[] autocampers = autocamperRepository.getByParameter(Integer.toString(2), "current_status");
-        Customer[] customers = customerRepository.getAll();
-        ArrayList<Rental> rental = new ArrayList<>();
+        ArrayList<Autocamper> autocampers = autocamperRepository.getByParameter(Integer.toString(Autocamper.UNDER_MAINTENANCE), "current_status");
+        ArrayList<Customer> customers = customerRepository.getAll();
+        ArrayList<Rental> rental = rentalRepository.getAll();
 
-        for(Autocamper a: autocampers){
-            Rental[] rentals = rentalRepository.getByParameter(Integer.toString(a.getId()), "autocamper_id");
-            rental.add(rentals[0]);
-        }
 
         model.addAttribute("autocampers", autocampers);
         model.addAttribute("rentals", rental);

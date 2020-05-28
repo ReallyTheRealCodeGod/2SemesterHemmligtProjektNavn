@@ -1,6 +1,7 @@
 package com.automobil.webdemoautomobil.controllers;
 
 import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
+import com.automobil.webdemoautomobil.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,18 +11,16 @@ import org.springframework.web.bind.annotation.*;
 public class IndexController {
     @Autowired
     AutocamperRepository autoRepo;
+    CustomerRepository custRepo;
 
     @GetMapping("/")
-    public String home(Model model){
-        System.out.println("hello: " + autoRepo.getById(1));
-        model.addAttribute("auto", autoRepo.getById(1));
-        model.addAttribute("autos", autoRepo.getAll());
-        return "/autocamperList";
+    public String home(){
+        return "/index";
     }
 
     @GetMapping("/user")
     public String user(){
-        return "/user";
+        return "redirect:/user/finishedrentals";
     }
 
     @GetMapping("/admin")

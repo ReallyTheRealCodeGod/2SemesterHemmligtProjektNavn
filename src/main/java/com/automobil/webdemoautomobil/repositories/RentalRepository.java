@@ -32,8 +32,8 @@ public class RentalRepository implements IRepository<Rental>{
                 rentalToReturn.setLongDropOffLoc(rs.getLong(7));
                 rentalToReturn.setLatDropOffLoc(rs.getLong(8));
                 rentalToReturn.setAutocamperId(rs.getInt(9));
-                rentalToReturn.setMaintenanceId(rs.getInt(10));
-                rentalToReturn.setCustomerId(rs.getInt(11));
+                rentalToReturn.setCustomerId(rs.getInt(10));
+                rentalToReturn.setMaintenanceId(rs.getInt(11));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,8 +101,8 @@ public class RentalRepository implements IRepository<Rental>{
                 addRentalToList.setLongDropOffLoc(rs.getLong(7));
                 addRentalToList.setLatDropOffLoc(rs.getLong(8));
                 addRentalToList.setAutocamperId(rs.getInt(9));
-                addRentalToList.setMaintenanceId(rs.getInt(10));
-                addRentalToList.setCustomerId(rs.getInt(11));
+                addRentalToList.setCustomerId(rs.getInt(10));
+                addRentalToList.setMaintenanceId(rs.getInt(11));
                 rentalList.add(addRentalToList);
             }
         }
@@ -125,8 +125,8 @@ public class RentalRepository implements IRepository<Rental>{
             createRental.setLong(6, rental.getLongDropOffLoc());
             createRental.setLong(7, rental.getLatDropOffLoc());
             createRental.setInt(8, rental.getAutocamperId());
-            createRental.setInt(9, rental.getMaintenanceId());
-            createRental.setInt(10, rental.getCustomerId());
+            createRental.setInt(9, rental.getCustomerId());
+            createRental.setInt(10, rental.getMaintenanceId());
             createRental.executeUpdate();
             ResultSet rs = createRental.getGeneratedKeys();
             rs.next();
@@ -161,8 +161,8 @@ public class RentalRepository implements IRepository<Rental>{
             updateRental.setLong(6, rental.getLongDropOffLoc());
             updateRental.setLong(7, rental.getLatDropOffLoc());
             updateRental.setInt(8, rental.getAutocamperId());
-            updateRental.setInt(9, rental.getMaintenanceId());
-            updateRental.setInt(10, rental.getCustomerId());
+            updateRental.setInt(9, rental.getCustomerId());
+            updateRental.setInt(10, rental.getMaintenanceId());
             updateRental.setInt(11, rental.getId());
             updateRental.executeUpdate();
         }
