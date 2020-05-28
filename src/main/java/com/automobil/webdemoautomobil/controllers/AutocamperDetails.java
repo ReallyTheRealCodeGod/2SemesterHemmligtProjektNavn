@@ -22,3 +22,4 @@ public class AutocamperDetails {
         return "/autocamperList";
     }
 }
+
