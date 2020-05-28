@@ -21,4 +21,15 @@ public class MaintenanceReportController {
     public String maintenanceReport(){
         return "/user/report";
     }
+
+    @GetMapping("/user/underRepList")
+    public String repList(){
+        return "/user/underRepList";
+    }
+
+    @GetMapping("/user/mechComments")
+    public String comments(){
+        return "/user/mechComments";
+    }
 }
+

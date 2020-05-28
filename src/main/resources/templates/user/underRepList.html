@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <title>Title</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body class="ml-4 mt-4">
 <div>
-    <h1>Afsluttede udlejninger</h1>
+    <h1>Autocampere Under Vedligeholdelse</h1>
     <a href="/user"><button type="button" class="btn btn-secondary">Tilbage</button></a>
 </div>
 <br>
@@ -16,11 +14,11 @@
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">Kunde Navn</th>
-            <th scope="col">Autocamper id</th>
-            <th scope="col">Start Dato</th>
-            <th scope="col">Slut Dato</th>
-            <th scope="col">Vælg udlejning</th>
+            <th scope="col">Autocamper ID</th>
+            <th scope="col">Autocamper Mærke</th>
+            <th scope="col">Autocamper Model</th>
+            <th scope="col">Vedligeholdelses Rapport Dato</th>
+            <th scope="col">Kommentar</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +27,7 @@
             <td>#</td>
             <td>#</td>
             <td>#</td>
-            <td><a href="/user/report"><button type="button" class="btn btn-success">Vælg</button></a></td>
+            <td><a href="/user/mechComments"><button type="button" class="btn btn-success">Se Kommentar</button></a></td>
         </tr>
         </tbody>
     </table>
