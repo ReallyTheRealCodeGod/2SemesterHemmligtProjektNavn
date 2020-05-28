@@ -13,10 +13,12 @@
 </div>
 <br>
 <div>
+    <p th:text="${autocampers[0].getStatus()}"></p>
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">Kunde Navn</th>
+            <th scope="col">Kunde Efternavn</th>
+            <th scope="col">Kunde Fornavn</th>
             <th scope="col">Autocamper id</th>
             <th scope="col">Start Dato</th>
             <th scope="col">Slut Dato</th>
@@ -24,12 +26,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">#</th>
-            <td>#</td>
-            <td>#</td>
-            <td>#</td>
-            <td><a href="/user/report"><button type="button" class="btn btn-success">Vælg</button></a></td>
+        <tr th:each="autocamper : ${autocampers}">
+            <th:block th:each="rental: ${rentals}">
+                <th:block th:if="${rental.getAutocamperId()} == ${autocamper.getId()}">
+                    <th scope="row" th:text="${rental.getStartDate()}"></th>
+                    <td th:text="${autocamper.getStatus()}"></td>
+                    <td th:text="${rental.getAutocamperId()}"></td>
+                    <td th:text="${autocamper.getId()}">#</td>
+                    <td>#</td>
+                    <td><a href="/user/report"><button type="button" class="btn btn-success">Vælg</button></a></td>
+                </th:block>
+            </th:block>
         </tr>
         </tbody>
     </table>

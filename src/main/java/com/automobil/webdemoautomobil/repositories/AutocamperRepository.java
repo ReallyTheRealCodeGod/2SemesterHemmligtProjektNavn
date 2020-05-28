@@ -58,13 +58,10 @@ public class AutocamperRepository implements IRepository<Autocamper> {
             String select = "SELECT * \n" +
                     "FROM autocamper auto\n" +
                     "JOIN autocamper_type autotype\n" +
-                    "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model;" +
-                    "WHERE " + sb + " LIKE %?%";
+                    "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model " +
+                    "WHERE " + sb + " LIKE ?";
             PreparedStatement prep = connection.prepareStatement(select);
-            prep.setString(i, parameter);
-            for (int a = 1; a < i; a++) {
-                prep.setString(a, columns[a]);
-            }
+            prep.setString(1, parameter);
 
             ResultSet rs = prep.executeQuery();
 
