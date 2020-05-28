@@ -2,7 +2,6 @@ package com.automobil.webdemoautomobil.repositories;
 
 import com.automobil.webdemoautomobil.models.Accessory;
 import com.automobil.webdemoautomobil.utility.JDBCConnection;
-import org.springframework.context.annotation.Bean;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class AccessoryRepository implements IRepository<Accessory>{
      }
     }
 
-    public Accessory[] getByParameter(String parameter, String... columns){
+    public ArrayList<Accessory> getByParameter(String parameter, String... columns){
         try{
         ArrayList<Accessory> list = new ArrayList<>();
 
@@ -73,14 +72,14 @@ public class AccessoryRepository implements IRepository<Accessory>{
 
             list.add(accessory);
         }
-        return list.toArray(new Accessory[list.size()]);
+        return list;
         }catch(SQLException sql){
             sql.printStackTrace();
             return null;
         }
     }
 
-    public Accessory[] getAll() {
+    public ArrayList<Accessory> getAll() {
 	 try{
         ArrayList<Accessory> list = new ArrayList<>();
 
@@ -101,7 +100,7 @@ public class AccessoryRepository implements IRepository<Accessory>{
 
             list.add(accessory);
         }
-        return list.toArray(new Accessory[list.size()]);
+        return list;
      }catch(SQLException sql){
          sql.printStackTrace();
          return null;

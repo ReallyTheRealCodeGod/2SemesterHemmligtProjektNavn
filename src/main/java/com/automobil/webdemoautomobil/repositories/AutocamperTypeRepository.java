@@ -41,7 +41,7 @@ public class AutocamperTypeRepository{
         }
         return null;
     }
-    public AutocamperType[] getByParameter(String parameter, String... columns){
+    public ArrayList<AutocamperType> getByParameter(String parameter, String... columns){
         ArrayList<AutocamperType> autoList = new ArrayList<AutocamperType>();
         try {
 
@@ -67,9 +67,9 @@ public class AutocamperTypeRepository{
         }catch (SQLException e){
             e.printStackTrace();
         }
-        return autoList.toArray(new AutocamperType[autoList.size()]);
+        return autoList;
     }
-    public AutocamperType[] getAll() {
+    public ArrayList<AutocamperType> getAll() {
         ArrayList<AutocamperType> autoList = new ArrayList<AutocamperType>();
 
         try {
@@ -84,7 +84,7 @@ public class AutocamperTypeRepository{
         catch (SQLException e){
             e.printStackTrace();
         }
-        return autoList.toArray(new AutocamperType[autoList.size()]);
+        return autoList;
     }
 
     public AutocamperType create(AutocamperType autocamperType){

@@ -54,7 +54,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
         }
     }
 
-    public MaintenanceReport[] getAll() {
+    public  ArrayList<MaintenanceReport> getAll() {
         ArrayList<MaintenanceReport> list = new ArrayList<>();
         try {
             String sql = "SELECT * \n" +
@@ -85,14 +85,14 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
                 maintenance.setAutocamperId(rs.getInt("autocamperID"));
                 list.add(maintenance);
             }
-            return list.toArray(new MaintenanceReport[list.size()]);
+            return list;
         } catch (SQLException sql) {
             sql.printStackTrace();
             return null;
         }
     }
 
-    public MaintenanceReport[] getByParameter(String parameter, String... columns){
+    public  ArrayList<MaintenanceReport> getByParameter(String parameter, String... columns){
         ArrayList<MaintenanceReport> list = new ArrayList<>();
         try{
 
@@ -134,7 +134,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
                 maintenance.setAutocamperId(rs.getInt("autocamperID"));
                 list.add(maintenance);
             }
-            return list.toArray(new MaintenanceReport[list.size()]);
+            return list;
         }catch(SQLException sql){
         sql.printStackTrace();
         return null;}

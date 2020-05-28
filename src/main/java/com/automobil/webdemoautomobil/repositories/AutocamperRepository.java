@@ -41,7 +41,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
         }
     }
 
-    public Autocamper[] getByParameter(String parameter, String... columns) {
+    public ArrayList<Autocamper> getByParameter(String parameter, String... columns) {
         try {
             ArrayList<Autocamper> list = new ArrayList<>();
 
@@ -71,14 +71,14 @@ public class AutocamperRepository implements IRepository<Autocamper> {
             while(rs.next()){
                list.add(load(rs));
             }
-            return list.toArray(new Autocamper[list.size()]);
+            return list;
         } catch (SQLException sql) {
             sql.printStackTrace();
             return null;
         }
     }
 
-    public Autocamper[] getAll() {
+    public ArrayList<Autocamper> getAll() {
         ArrayList<Autocamper> list = new ArrayList<>();
         try {
             String sql = "SELECT * \n" +
@@ -95,7 +95,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
             sql.printStackTrace();
             return null;
         }
-        return list.toArray(new Autocamper[list.size()]);
+        return list;
     }
 
     public Autocamper create(Autocamper autocamper) {

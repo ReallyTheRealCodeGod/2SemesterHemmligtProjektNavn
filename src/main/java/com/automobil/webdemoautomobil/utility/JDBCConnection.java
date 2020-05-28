@@ -28,7 +28,7 @@ public class JDBCConnection {
         if(conn == null) {
             try {
                 Properties prop = new Properties();
-                prop.load(new FileInputStream("C:\\Users\\123al\\Desktop\\Programming-Design\\coding\\Skole\\Mandatory\\2SemesterHemmligtProjektNavn\\src\\main\\resources\\application.properties"));
+                prop.load(new FileInputStream("src/main/resources/application.properties"));
 
                 user = prop.getProperty("db.user");
                 url = prop.getProperty("db.url");

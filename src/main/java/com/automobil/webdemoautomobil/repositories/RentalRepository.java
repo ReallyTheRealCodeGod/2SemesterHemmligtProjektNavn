@@ -41,7 +41,7 @@ public class RentalRepository implements IRepository<Rental>{
         return rentalToReturn;
     }
 
-    public Rental[] getByParameter(String parameter, String... columns){
+    public  ArrayList<Rental> getByParameter(String parameter, String... columns){
         ArrayList<Rental> rentalList = new ArrayList<Rental>();
 
         StringBuilder sb = new StringBuilder();
@@ -80,10 +80,10 @@ public class RentalRepository implements IRepository<Rental>{
         catch (SQLException e){
             e.printStackTrace();
         }
-        return rentalList.toArray(new Rental[rentalList.size()]);
+        return rentalList;
     }
 
-    public Rental[] getAll(){
+    public  ArrayList<Rental> getAll(){
         ArrayList<Rental> rentalList = new ArrayList<Rental>();
         try {
             PreparedStatement getAllRentals = conn.prepareStatement
@@ -109,7 +109,7 @@ public class RentalRepository implements IRepository<Rental>{
         catch (SQLException e){
             e.printStackTrace();
         }
-        return rentalList.toArray(new Rental[rentalList.size()]);
+        return rentalList;
     }
 
     public Rental create(Rental rental){

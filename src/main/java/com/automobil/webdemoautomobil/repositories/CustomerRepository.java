@@ -45,7 +45,7 @@ public class CustomerRepository implements IRepository<Customer>{
         return customerToReturn;
     }
 
-    public Customer[] getByParameter(String parameter, String... columns){
+    public  ArrayList<Customer> getByParameter(String parameter, String... columns){
         try {
             ArrayList<Customer> list = new ArrayList<>();
 
@@ -83,7 +83,7 @@ public class CustomerRepository implements IRepository<Customer>{
 
                 list.add(sampleCustomer);
             }
-            return list.toArray(new Customer[list.size()]);
+            return list;
         }catch (SQLException sql){
             sql.printStackTrace();
             return null;
@@ -91,8 +91,8 @@ public class CustomerRepository implements IRepository<Customer>{
 
     }
 
-    public Customer[] getAll(){
-        List<Customer> allCustomers = new ArrayList<Customer>();
+    public  ArrayList<Customer> getAll(){
+        ArrayList<Customer> allCustomers = new ArrayList<Customer>();
         try {
             PreparedStatement getAllCustomers = conn.prepareStatement
                     ("SELECT * FROM customer");
@@ -119,7 +119,7 @@ public class CustomerRepository implements IRepository<Customer>{
         catch (SQLException e){
             e.printStackTrace();
         }
-        return allCustomers.toArray(new Customer[allCustomers.size()]);
+        return allCustomers;
     }
 
     public Customer create(Customer customer){

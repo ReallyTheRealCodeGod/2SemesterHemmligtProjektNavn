@@ -31,7 +31,7 @@ public class BillRepository implements IRepository<Bill>{
         }
     }
 
-    public Bill[] getByParameter(String parameter, String... columns){
+    public  ArrayList<Bill> getByParameter(String parameter, String... columns){
         try{
             ArrayList<Bill> list = new ArrayList<>();
 
@@ -55,14 +55,14 @@ public class BillRepository implements IRepository<Bill>{
             while(rs.next()) {
                 list.add(load(rs));
             }
-            return list.toArray(new Bill[list.size()]);
+            return list;
         }catch(SQLException sql){
             sql.printStackTrace();
             return null;
         }
     }
 
-    public Bill[] getAll() {
+    public ArrayList<Bill> getAll() {
         try{
             ArrayList<Bill> list = new ArrayList<>();
 
@@ -74,7 +74,7 @@ public class BillRepository implements IRepository<Bill>{
             while(rs.next()) {
                 list.add(load(rs));
             }
-            return list.toArray(new Bill[list.size()]);
+            return list;
         }catch(SQLException sql){
             sql.printStackTrace();
             return null;
