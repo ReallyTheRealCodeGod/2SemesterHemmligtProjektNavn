@@ -32,7 +32,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
             ResultSet rs = prep.executeQuery();
             Autocamper auto = null;
             while(rs.next()){
-               auto  = load(rs);
+                auto = load(rs);
             }
             return auto;
         } catch (SQLException e) {
@@ -197,7 +197,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
 
         type.setModel(rs.getString("model"));
         type.setBrand(rs.getString("brand"));
-        type.setBuiltInFeatures(null);
+        //type.setBuiltInFeatures();
         type.setPrice(rs.getInt("price"));
         type.setHorsePower(rs.getInt("horse_power"));
 
@@ -211,6 +211,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
         type.setArea(rs.getInt("area_sqm"));
         type.setDescription(rs.getString("description"));
         autocamper.setType(type);
+        System.out.println(autocamper);
         return autocamper;
     }
 }

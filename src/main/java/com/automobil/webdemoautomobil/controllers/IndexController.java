@@ -13,7 +13,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String home(Model model){
-        System.out.println(autoRepo.getById(1));
+        System.out.println("hello: " + autoRepo.getById(1));
         model.addAttribute("auto", autoRepo.getById(1));
         model.addAttribute("autos", autoRepo.getAll());
         return "/autocamperList";
