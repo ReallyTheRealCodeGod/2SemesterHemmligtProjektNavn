@@ -7,7 +7,7 @@ CREATE TABLE autocamper_type (
 	brand VARCHAR(25) NOT NULL,
 	model VARCHAR(45) NOT NULL,
 	price INT NOT NULL,
-	production_year DATE NOT NULL,
+	production_year INT NOT NULL,
 	weight INT NOT NULL,
 	fuel_capacity INT NOT NULL,
 	horse_power INT NOT NULL,

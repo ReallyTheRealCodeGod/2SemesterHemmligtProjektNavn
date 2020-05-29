@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 
 
 @Controller
+@RequestMapping("/user")
 public class MaintenanceReportController {
 
 
@@ -32,12 +34,7 @@ public class MaintenanceReportController {
 
     }
 
-    @GetMapping("/autocamperList")
-    public String report(){
-        return "/autocamperList";
-    }
-
-    @GetMapping("/user/finishedrentals")
+    @GetMapping("/finishedrentals")
     public String finished(Model model){
         ArrayList<Autocamper> autocampers = autocamperRepository.getByParameter(Integer.toString(Autocamper.UNDER_MAINTENANCE), "current_status");
         ArrayList<Customer> customers = customerRepository.getAll();
@@ -51,17 +48,17 @@ public class MaintenanceReportController {
         return "/user/finishedrentals";
     }
 
-    @GetMapping("/user/report")
+    @GetMapping("/report")
     public String maintenanceReport(){
         return "/user/report";
     }
 
-    @GetMapping("/user/underRepList")
+    @GetMapping("/underRepList")
     public String repList(){
         return "/user/underRepList";
     }
 
-    @GetMapping("/user/mechComments")
+    @GetMapping("/mechComments")
     public String comments(){
         return "/user/mechComments";
     }
