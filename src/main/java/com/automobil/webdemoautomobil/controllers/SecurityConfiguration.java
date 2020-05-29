@@ -77,6 +77,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // Starting with the most restricted path. In this case /admin can only be accessed by a user with the admin role.
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/salesAssistant").hasAnyRole("ADMIN", "SALES")
                 .antMatchers("/**", "static/css", "static/img").permitAll() // Accessible by all roles, without authentication
                 .and().formLogin();
 

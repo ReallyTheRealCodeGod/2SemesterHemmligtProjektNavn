@@ -20,11 +20,16 @@ public class IndexController {
 
     @GetMapping("/user")
     public String user(){
-        return "redirect:/user/finishedrentals";
+        return "/user";
     }
 
     @GetMapping("/admin")
     public String admin(){
         return "/admin";
+    }
+
+    @GetMapping("/salesAssistant")
+    public String sales(){
+        return "/salesAssistant";
     }
 }

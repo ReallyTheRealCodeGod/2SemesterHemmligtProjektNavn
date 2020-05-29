@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Checkout example · Bootstrap</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/form-validation.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="checkOut.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container">
+    <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+
+
+    </div>
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Kunde oplysninger</h4>
+        <form class="needs-validation" novalidate>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="firstName">Fornavn</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="Hans" value="" required>
+                    <div class="invalid-feedback">
+                        Udfyld venligst fornavn.
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="lastName">Efternavn</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Hansen" value="" required>
+                    <div class="invalid-feedback">
+                        Udfyld venligst efternavn.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="cpr">CPR nummer <span class="text-muted"></span></label>
+                <input type="cpr" class="form-control" id="cpr" placeholder="xxxxxxxxxx">
+                <div class="invalid-feedback">
+                    Indtast korrekt cpr nummer.
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <label for="email">Email <span class="text-muted"></span></label>
+                <input type="email" class="form-control" id="email" placeholder="dig@eksempel.dk">
+                <div class="invalid-feedback">
+                    Email er påkrævet som brugerinformation.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="street">Gadenavn</label>
+                <input type="text" class="form-control" id="street" placeholder="Hovedgade" required>
+                <div class="invalid-feedback">
+                    Udfyld venligst korrekt gadenavn.
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-5 mb-3">
+                    <label for="streetNumber">Nr.</label>
+                    <input type="text" class="form-control" id="streetNumber" placeholder="230B" required>
+                    <div class="invalid-feedback">
+                        Udfyld venligst et korrekt husnummer.
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="floor">Etage</label>
+                    <span class="text-muted">(Valgfrit)</span>
+                    <input type="text" class="form-control" id="floor" placeholder="1TH" required>
+
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="zip">Postnummer</label>
+                    <input type="text" class="form-control" id="zip" placeholder="2300" required>
+                    <div class="invalid-feedback">
+                        Udfyld venligst postnummer.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="telephone">Telefon <span class="text-muted"></span></label>
+                <input type="text" class="form-control" id="telephone" placeholder="+45 31722951">
+            </div>
+
+
+            <h4 class="mb-3">Payment</h4>
+
+            <div class="d-block my-3">
+                <div class="custom-control custom-radio">
+                    <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                    <label class="custom-control-label" for="credit">Kredit kort</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                    <label class="custom-control-label" for="debit">Debit kort</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                    <label class="custom-control-label" for="paypal">PayPal</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="cc-name">Kortholder</label>
+                    <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                    <small class="text-muted">Det fulde navn på dit kreditkort</small>
+                    <div class="invalid-feedback">
+                        Name on card is required
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="cc-number">Kortnummer</label>
+                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Gyldigt kortnummer er påkrævet.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label for="cc-expiration">Udløbsdato</label>
+                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Udløbsdato.
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="cc-cvv">CVV</label>
+                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                    <div class="invalid-feedback">
+                        Security code required
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <hr class="mb-4">
+                    <button class="btn btn-success btn-lg btn-block" type="submit">Godkend</button>
+
+                </div>
+                <div class="col-md-6 mb-3">
+                    <hr class="mb-4">
+                    <button class="btn btn-danger btn-lg btn-block" type="submit">Afbryd</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2020 Bandsejanwo security</p>
+    <ul class="list-inline">
+    </ul>
+</footer>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.js"></script>
+<script src="checkOut.js"></script></body>
+</html>
