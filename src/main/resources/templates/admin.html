@@ -8,8 +8,10 @@
         <title>Freelancer - Start Bootstrap Theme</title>
         <!-- Font Awesome icons (free version)-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet">
+
         <!-- Fonts CSS-->
         <link rel="stylesheet" href="css/heading.css">
         <link rel="stylesheet" href="css/body.css">
@@ -27,7 +29,7 @@
                         </li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">TILBEHØR</a>
                         </li>
-                        <li class="nav-item mx-0 mx-lg-1" ><a class="nav-stonks py-3 px-0 px-lg-3 rounded js-scroll-trigger" id="navbar-logout" href="#contact">LOG UD</a>
+                        <li class="nav-item mx-0 mx-lg-1" ><a class="nav-stonks py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/logout" id="navbar-logout">LOG UD</a>
                         </li>
                     </ul>
                 </div>
@@ -64,34 +66,86 @@
                 <!-- Portfolio Grid Items-->
                 <div class="row justify-content-center">
                     <!-- Portfolio Items-->
+
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal0">
+                        <div class="portfolio-item mx-auto border border-light" data-toggle="modal" data-target="#portfolioModal3">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Alle autocamper's</div>
-                            </div><img class="img-fluid" src="../img/portfolio/allMotorhomes.png" alt="Log Cabin"/>
+                                <div class="portfolio-item-caption-content text-center text-white">OPRET UDLEJNING</div>
+                            </div>
+                            <div class="text-button-menu">
+                                <p class="font-weight-bolder">
+                                    Opret en udlejning
+                                </p>
+                            </div>
+                            <img class="img-fluid" src="../img/portfolio/opretUdlejning.png" alt="Controller"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal0">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white">ALLE AUTOCAMPERE</div>
+                            </div>
+                            <div class="text-button-menu">
+
+                                <p class="font-weight-bolder">
+                                    Alle Autocampere
+                                </p>
+
+                            </div>
+                            <img class="img-fluid" src="img/portfolio/allMotohomesInStock.png" alt="Log Cabin"/>
+                        </div>
+
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal1">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white">AUTOCAMPERE UNDER VEDLIGEHOLDELSE</div>
+                            </div>
+                            <div class="text-button-menu">
+                                <p class="font-weight-bolder">
+                                    Under vedligeholdelse
+                                </p>
+                            </div>
+                            <img class="img-fluid" src="../img/portfolio/repairRV.png" alt="Tasty Cake"/>
+                        </div>
+                    </div>
+
+                    <!-- Icon Divider-->
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"> <img style="    width: 24px !important;
+    height: 24px !important;" src="../img/transportation.png"></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 mb-5">
+                        <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal2">
+                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                                <div class="portfolio-item-caption-content text-center text-white">AKTIVE & UDLEJEDE AUTOCAMPERE I BRUG</div>
+                            </div>
+                            <div class="text-button-menu">
+                                <p class="font-weight-bolder">
+                                    Aktive Autocampere
+                                </p>
+                            </div>
+                            <img class="img-fluid" src="../img/portfolio/AutocamperRentedOut.png" alt="Circus Tent"/>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+                        <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal3">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Under vedligeholdelse</div>
-                            </div><img class="img-fluid" src="../img/portfolio/repairRV.png" alt="Tasty Cake"/>
+                                <div class="portfolio-item-caption-content text-center text-white">AFLEVEREDE AUTOCAMPERE AFVENTER GODKENDELSE AF MEDARBEJDERE</div>
+                            </div>
+                            <div class="text-button-menu">
+                                <p class="font-weight-bolder">
+                                    Afsluttede udlejninger
+                                </p>
+                            </div>
+                            <img class="img-fluid" src="../img/portfolio/CampersAtWork.png" alt="Controller"/>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Aktive camper's</div>
-                            </div><img class="img-fluid" src="../img/portfolio/AutocamperRentedOut.png" alt="Circus Tent"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Afsluttede udlejninger</div>
-                            </div><img class="img-fluid" src="../img/portfolio/CampersAtWork.png" alt="Controller"/>
-                        </div>
-                    </div>
+
 
                     </div>
                 </div>
@@ -126,33 +180,13 @@
                 <div class="row justify-content-center">
                     <!-- Portfolio Items-->
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal0">
+                        <div class="portfolio-item mx-auto  border border-light"  data-toggle="modal" data-target="#portfolioModal0">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Alle autocamper's</div>
-                            </div><img class="img-fluid" src="img/portfolio/AllCampers.png" alt="Log Cabin"/>
+                                <div class="portfolio-item-caption-content text-center text-white">ÆNDRE PRISER</div>
+                            </div><img class="img-fluid" src="../img/portfolio/priceChangeMenu.png" alt="Log Cabin"/>
                         </div>
                     </div>
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Under vedligeholdelse</div>
-                            </div><img class="img-fluid" src="../img/portfolio/repairRV.png" alt="Tasty Cake"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Aktive camper's</div>
-                            </div><img class="img-fluid" src="../img/portfolio/AutocamperRentedOut.png" alt="Circus Tent"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal3">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white">Afsluttede udlejninger</div>
-                            </div><img class="img-fluid" src="../img/portfolio/CampersAtWork.png" alt="Controller"/>
-                        </div>
-                    </div>
+
 
                 </div>
             </div>
@@ -176,9 +210,9 @@
                     <div class="row justify-content-center">
                         <!-- Portfolio Items-->
                         <div class="col-md-6 col-lg-4 mb-5">
-                            <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal0">
+                            <div class="portfolio-item mx-auto  border border-light"  data-toggle="modal" data-target="#portfolioModal0">
                                 <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                    <div class="portfolio-item-caption-content text-center text-white">Rediger tilbehør</div>
+                                    <div class="portfolio-item-caption-content text-center text-white">REDIGER TILBEHØR</div>
                                 </div><img class="img-fluid" src="../img/portfolio/accessoriesImg.png" alt="Log Cabin"/>
                             </div>
                         </div>
@@ -187,24 +221,26 @@
                 </div>
             </div>
             </div>
+
+            <!--footer-->
         </section>
         <footer class="footer text-center">
             <div class="container">
                 <div class="row">
                     <!-- Footer Location-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="mb-4">LOCATION</h4>
-                        <p class="pre-wrap lead mb-0">2215 John Daniel Drive
-Clark, MO 65243</p>
+                        <h4 class="mb-4">LOKATION</h4>
+                        <p class="pre-wrap lead mb-0">2300, Bergthorasgade 35</p>
                     </div>
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="mb-4">AROUND THE WEB</h4><a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/StartBootstrap"><i class="fa fa-phone"></i></a><a class="btn btn-outline-light btn-social mx-1" href="https://www.twitter.com/sbootstrap"><i class="fab fa-fw fa-twitter"></i></a><a class="btn btn-outline-light btn-social mx-1" href="https://www.linkedin.com/in/startbootstrap"><i class="fab fa-fw fa-linkedin-in"></i></a><a class="btn btn-outline-light btn-social mx-1" href="https://www.dribble.com/startbootstrap"><i class="fab fa-fw fa-dribbble"></i></a>
+                        <h4 class="mb-4">SUPPORT</h4>
+                        <p class="pre-wrap lead mb-0">Kontakt BANDSEJANWO, hvis der er problemer med hjemmesiden.</p>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
-                        <h4 class="mb-4">ABOUT FREELANCER</h4>
-                        <p class="pre-wrap lead mb-0">Freelance is a free to use, MIT licensed Bootstrap theme created by Start Bootstrap</p>
+                        <h4 class="mb-4">KONTAKT INFO</h4><a class="btn btn-outline-light btn-social mx-1"><i class="fa fa-phone"></i></a>
+                        <p class="pre-wrap lead mb-0">tlf. nr. +45 30214932</p>
                     </div>
                 </div>
             </div>
