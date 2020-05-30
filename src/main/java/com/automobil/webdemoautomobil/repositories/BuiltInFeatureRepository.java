@@ -19,10 +19,10 @@ public class BuiltInFeatureRepository implements IRepository<BuiltInFeature> {
     public ArrayList<BuiltInFeature> getAllByAutocamperType(AutocamperType type) {
         try {
             ArrayList<BuiltInFeature> list = new ArrayList<>();
-            String select = "SELECT * FROM" +
-                    "FROM built_in_feature bif" +
-                    "JOIN type_features tf" +
-                    "ON bif.id = tf.feature_id" +
+            String select = "SELECT * " +
+                    "FROM built_in_feature bif " +
+                    "JOIN type_features tf " +
+                    "ON bif.id = tf.feature_id " +
                     "WHERE type_brand = ? and type_model = ?";
             PreparedStatement prep = connection.prepareStatement(select);
 
@@ -42,7 +42,7 @@ public class BuiltInFeatureRepository implements IRepository<BuiltInFeature> {
     public ArrayList<BuiltInFeature> getAll() {
         try {
             ArrayList<BuiltInFeature> list = new ArrayList<>();
-            String select = "SELECT * FROM" +
+            String select = "SELECT * " +
                     "FROM built_in_feature";
             PreparedStatement prep = connection.prepareStatement(select);
             ResultSet rs = prep.executeQuery();
