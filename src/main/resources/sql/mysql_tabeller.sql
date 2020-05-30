@@ -102,5 +102,40 @@ INSERT INTO `autocamper_db`.`rental`
 VALUES
 (DEFAULT, 5000, "2019-12-08", "2020-12-08", 55.676097, 12.568337, 55.676097, 12.568337, 1, 1, 1);
 
+INSERT INTO `autocamper_db`.`built_in_feature` (`id`, `name`, `description`) VALUES ('1', 'Køkken', 'Den er fin');
+INSERT INTO `autocamper_db`.`built_in_feature` (`id`, `name`, `description`) VALUES ('2', 'Handicap Lift', 'Nice');
+INSERT INTO `autocamper_db`.`built_in_feature` (`id`, `name`, `description`) VALUES ('3', 'Bad', 'Godt med et bad');
+INSERT INTO `autocamper_db`.`built_in_feature` (`id`, `name`, `description`) VALUES ('4', 'Internet', 'Free Wifi');
+INSERT INTO `autocamper_db`.`built_in_feature` (`id`, `name`, `description`) VALUES ('5', '3 senge', 'Godnat');
+INSERT INTO `autocamper_db`.`built_in_feature` (`id`, `name`, `description`) VALUES ('6','2 senge', 'Sov godt');
+
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Zusuki', 'MidnightBlue', '1');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Zusuki', 'MidnightBlue', '2');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Zusuki', 'MidnightBlue', '3');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Toyota', 'Yellow', '1');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Toyota', 'Yellow', '3');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Toyota', 'Yellow', '4');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Volkswagen', 'Gainsboro', '4');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Volkswagen', 'Gainsboro', '2');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Volkswagen', 'Gainsboro', '6');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Farrari', 'Moccasin', '2');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Farrari', 'Moccasin', '6');
+INSERT INTO `autocamper_db`.`type_features` (`type_brand`, `type_model`, `feature_id`) VALUES ('Farrari', 'Moccasin', '1');
 
 
+insert into users(username, password, enabled)
+values('admin', 'pass', 1);
+
+insert into users(username, password, enabled)
+values('user', 'pass', 1);
+insert into users(username, password, enabled)
+values('sales', 'pass', 1);
+
+INSERT INTO authorities (username, authority)
+values('admin', 'ROLE_ADMIN');
+
+INSERT INTO authorities (username, authority)
+values('user', 'ROLE_USER');
+
+INSERT INTO authorities (username, authority)
+values('sales', 'ROLE_SALES');

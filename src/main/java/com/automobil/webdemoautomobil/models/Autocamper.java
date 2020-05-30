@@ -5,6 +5,7 @@ public class Autocamper {
     public final static int RESERVED = 2;
     public final static int UNDER_MAINTENANCE = 3;
     public final static int RENTED = 4;
+    public final static int NEEDS_FIXING = 5;
 
     private int id;
     private int status;

@@ -6,6 +6,7 @@ import com.automobil.webdemoautomobil.models.MaintenanceReport;
 import com.automobil.webdemoautomobil.models.Rental;
 import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
 import com.automobil.webdemoautomobil.repositories.CustomerRepository;
+import com.automobil.webdemoautomobil.repositories.MaintenanceReportRepository;
 import com.automobil.webdemoautomobil.repositories.RentalRepository;
 import com.automobil.webdemoautomobil.utility.RepoInitConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,15 @@ public class MaintenanceReportController {
     private CustomerRepository customerRepository;
     private AutocamperRepository autocamperRepository;
     private RentalRepository rentalRepository;
+    private MaintenanceReportRepository maintenanceReportRepository;
 
     @Autowired
-    public MaintenanceReportController(CustomerRepository customerRepository, AutocamperRepository autocamperRepository, RentalRepository rentalRepository){
+    public MaintenanceReportController(CustomerRepository customerRepository, AutocamperRepository autocamperRepository, RentalRepository rentalRepository,
+    MaintenanceReportRepository maintenanceReportRepository){
         this.customerRepository = customerRepository;
         this.autocamperRepository = autocamperRepository;
         this.rentalRepository = rentalRepository;
+        this.maintenanceReportRepository = maintenanceReportRepository;
 
     }
 
@@ -59,7 +63,8 @@ public class MaintenanceReportController {
     }
 
     @GetMapping("/mechComments")
-    public String comments(){
+    public String comments(Model model){
+        model.addAttribute("note", maintenanceReportRepository);
         return "/user/mechComments";
     }
 }

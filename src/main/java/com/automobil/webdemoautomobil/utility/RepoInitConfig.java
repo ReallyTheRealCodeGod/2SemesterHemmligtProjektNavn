@@ -1,9 +1,6 @@
 package com.automobil.webdemoautomobil.utility;
 
-import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
-import com.automobil.webdemoautomobil.repositories.AutocamperTypeRepository;
-import com.automobil.webdemoautomobil.repositories.CustomerRepository;
-import com.automobil.webdemoautomobil.repositories.RentalRepository;
+import com.automobil.webdemoautomobil.repositories.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -33,5 +30,10 @@ public class RepoInitConfig {
     @Bean
     public CustomerRepository getCustomer(){
         return new CustomerRepository();
+    }
+
+    @Bean
+    public MaintenanceReportRepository getMaintenanceReport(){
+        return new MaintenanceReportRepository();
     }
 }

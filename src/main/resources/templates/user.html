@@ -1,42 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Salg-menu</title>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- Fonts CSS-->
+    <link rel="stylesheet" href="css/heading.css">
+    <link rel="stylesheet" href="css/body.css">
 </head>
-<body>
-<span>
-    <img src="/img/download jesus(1).png">
-    <h1>Mekaniker Siden</h1>
-  </span>
-<br>
+<body id="page-top">
+<nav class="navbar navbar-expand-lg bg-secondary fixed-top" id="mainNav">
+    <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">MEKANIKER MENU</a>
 
-
-<div class="btn-toolbar d-flex justify-content-around d-flex align-items-center p-5" role="toolbar" aria-label="Toolbar with button groups">
-    <div class="btn-group mr-2" role="group" aria-label="First group">
-        <a href="/autocamperList">
-            <button type="button" class="btn btn-primary">Autocampere</button>
-        </a>
-
+        <button class="navbar-toggler navbar-toggler-right font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">Menu <i class="fas fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">AUTOCAMPER</a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1" ><a class="nav-stonks py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/logout" id="navbar-logout">LOG UD</a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="btn-group mr-2" role="group" aria-label="Second group">
-        <a href="/user/finishedrentals">
-            <button type="button" class="btn btn-primary">Afsluttede Udlejninger</button>
-        </a>
-
+</nav>
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image--><img class="masthead-avatar mb-5" style="border-radius: 50%" src="../img/mechanicOle.png" alt="">
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading mb-0">MEKANIKER</h1>
+        <!-- Icon Divider-->
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><img style="width: 24px !important; height: 24px !important; " src="../img/DividerWhite.png"> </div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Masthead Subheading-->
+        <p class="pre-wrap masthead-subheading font-weight-light mb-0">Ole</p>
     </div>
-    <div class="btn-group" role="group" aria-label="Third group">
-        <a href="/user/underRepList">
-            <button type="button" class="btn btn-primary">Autocampere Under Vedligeholdelse</button>
-        </a>
+</header>
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <div class="text-center">
+            <h2 class="page-section-heading text-secondary mb-0 d-inline-block">AUTOCAMPER VALGMULIGHEDER</h2>
+        </div>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"> <img style="    width: 24px !important;
+    height: 24px !important;" src="../img/transportation.png"></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            <!-- Portfolio Items-->
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal0">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white">ALLE AUTOCAMPERE</div>
+                    </div>
+                    <div class="text-button-menu">
+
+                        <p class="font-weight-bolder">
+                            Alle Autocampere
+                        </p>
+
+                    </div>
+                    <img class="img-fluid" src="../img/portfolio/allMotohomesInStock.png" alt="Log Cabin"/>
+                </div>
+
+            </div>
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal1">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white">ALLE AUTOCAMPERE UNDER VEDLIGEHOLDELSE</div>
+                    </div>
+                    <div class="text-button-menu">
+                        <p class="font-weight-bolder">
+                            Under vedligeholdelse
+                        </p>
+                    </div>
+                    <img class="img-fluid" src="../img/portfolio/repairRV.png" alt="Tasty Cake"/>
+                </div>
+            </div>
+
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"> <img style="    width: 24px !important;
+    height: 24px !important;" src="../img/transportation.png"></div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal2">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white">AKTIVE & UDLEJEDE AUTOCAMPERE I BRUG</div>
+                    </div>
+                    <div class="text-button-menu">
+                        <p class="font-weight-bolder">
+                            Aktive Autocampere
+                        </p>
+                    </div>
+                    <img class="img-fluid" src="../img/portfolio/AutocamperRentedOut.png" alt="Circus Tent"/>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal3">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white">AFLEVEREDE AUTOCAMPERE AFVENTER GODKENDELSE AF MEDARBEJDERE</div>
+                    </div>
+                    <div class="text-button-menu">
+                        <p class="font-weight-bolder">
+                            Afsluttede udlejninger
+                        </p>
+                    </div>
+                    <img class="img-fluid" src="../img/portfolio/CampersAtWork.png" alt="Controller"/>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
+    </div>
+</section>
 
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</section>
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <!-- Footer Location-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="mb-4">LOKATION</h4>
+                <p class="pre-wrap lead mb-0">2300, Bergthorasgade 35</p>
+            </div>
+            <!-- Footer Social Icons-->
+            <div class="col-lg-4 mb-5 mb-lg-0">
+                <h4 class="mb-4">SUPPORT</h4>
+                <p class="pre-wrap lead mb-0">Kontakt BANDSEJANWO, hvis der er problemer med hjemmesiden.</p>
+            </div>
+            <!-- Footer About Text-->
+            <div class="col-lg-4">
+                <h4 class="mb-4">KONTAKT INFO</h4><a class="btn btn-outline-light btn-social mx-1"><i class="fa fa-phone"></i></a>
+                <p class="pre-wrap lead mb-0">tlf. nr. +45 30214932</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Copyright Section-->
+<section class="copyright py-4 text-center text-white">
+    <div class="container"><small class="pre-wrap">Copyright © Your Website 2020</small></div>
+</section>
+<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes)-->
+<div class="scroll-to-top d-lg-none position-fixed"><a class="js-scroll-trigger d-block text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i></a></div>
+<!-- Bootstrap core JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Contact form JS-->
+<script src="assets/mail/jqBootstrapValidation.js"></script>
+<script src="assets/mail/contact_me.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
 </body>
 </html>
