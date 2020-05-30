@@ -28,10 +28,10 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
             ResultSet rs = prep.executeQuery();
             while (rs.next()) {
                 maintenance.setId(rs.getInt("id"));
-                maintenance.setFuelGauge(rs.getInt("fuel"));
+                maintenance.setFuelGauge(rs.getInt("fuel_gauge"));
                 maintenance.setMileage(rs.getInt("mileage"));
-                maintenance.setCleaningPrice(rs.getInt("price"));
-                maintenance.setMaintenanceNote(rs.getString("note"));
+                maintenance.setCleaningPrice(rs.getInt("cleaning_price"));
+                maintenance.setMaintenanceNote(rs.getString("maintenance_notes"));
                 HashMap<String, Integer> parts = new HashMap<>();
                 parts.put("frame", rs.getInt("frame"));
                 parts.put("wheels", rs.getInt("wheels"));
@@ -45,7 +45,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
                 maintenance.setPartStatus(parts);
                 maintenance.setRepairCost(rs.getInt("repair_cost"));
                 maintenance.setDate(rs.getDate("maintenance_date").toLocalDate());
-                maintenance.setAutocamperId(rs.getInt("autocamperID"));
+                maintenance.setAutocamperId(rs.getInt("fk_autocamper_id"));
             }
             return maintenance;
         } catch (SQLException sql) {
@@ -65,10 +65,10 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
             while (rs.next()) {
                 MaintenanceReport maintenance = new MaintenanceReport();
                 maintenance.setId(rs.getInt("id"));
-                maintenance.setFuelGauge(rs.getInt("fuel"));
+                maintenance.setFuelGauge(rs.getInt("fuel_gauge"));
                 maintenance.setMileage(rs.getInt("mileage"));
-                maintenance.setCleaningPrice(rs.getInt("price"));
-                maintenance.setMaintenanceNote(rs.getString("note"));
+                maintenance.setCleaningPrice(rs.getInt("cleaning_price"));
+                maintenance.setMaintenanceNote(rs.getString("maintenance_notes"));
                 HashMap<String, Integer> parts = new HashMap<>();
                 parts.put("frame", rs.getInt("frame"));
                 parts.put("wheels", rs.getInt("wheels"));
@@ -82,7 +82,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
                 maintenance.setPartStatus(parts);
                 maintenance.setRepairCost(rs.getInt("repair_cost"));
                 maintenance.setDate(rs.getDate("maintenance_date").toLocalDate());
-                maintenance.setAutocamperId(rs.getInt("autocamperID"));
+                maintenance.setAutocamperId(rs.getInt("fk_autocamper_id"));
                 list.add(maintenance);
             }
             return list;

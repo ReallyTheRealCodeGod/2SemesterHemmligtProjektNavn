@@ -88,6 +88,7 @@ CREATE TABLE maintenance (
   brakes TINYINT NOT NULL,
   suspention TINYINT NOT NULL,
   maintenance_date DATE NULL DEFAULT NULL,
+  repair_cost INT NOT NULL,
   fk_autocamper_id INT NOT NULL,
   CONSTRAINT fk_autocamper
     FOREIGN KEY (fk_autocamper_id)
