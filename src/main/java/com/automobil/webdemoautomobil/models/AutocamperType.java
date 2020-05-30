@@ -1,9 +1,11 @@
 package com.automobil.webdemoautomobil.models;
 
+import java.util.ArrayList;
+
 public class AutocamperType {
     private String brand;
     private String model;
-    private BuiltInFeature[] builtInFeatures;
+    private ArrayList<BuiltInFeature> builtInFeatures;
     private int price;
     private int productionYear;
     private int weight;
@@ -20,7 +22,7 @@ public class AutocamperType {
     public AutocamperType() {
     }
 
-    public AutocamperType(String brand, String model, BuiltInFeature[] builtInFeatures, int price, int productionYear, int weight, int fuelCapacity, int horsePower, int maxSpeed, int standingHeight, int area, int height, int length, int width, String description) {
+    public AutocamperType(String brand, String model, ArrayList<BuiltInFeature> builtInFeatures, int price, int productionYear, int weight, int fuelCapacity, int horsePower, int maxSpeed, int standingHeight, int area, int height, int length, int width, String description) {
         this.brand = brand;
         this.model = model;
         this.builtInFeatures = builtInFeatures;
@@ -54,11 +56,11 @@ public class AutocamperType {
         this.model = model;
     }
 
-    public BuiltInFeature[] getBuiltInFeatures() {
+    public ArrayList<BuiltInFeature> getBuiltInFeatures() {
         return builtInFeatures;
     }
 
-    public void setBuiltInFeatures(BuiltInFeature[] builtInFeatures) {
+    public void setBuiltInFeatures(ArrayList<BuiltInFeature> builtInFeatures) {
         this.builtInFeatures = builtInFeatures;
     }
 

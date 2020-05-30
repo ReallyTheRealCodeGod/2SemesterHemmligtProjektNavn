@@ -36,4 +36,9 @@ public class RepoInitConfig {
     public MaintenanceReportRepository getMaintenanceReport(){
         return new MaintenanceReportRepository();
     }
+
+    @Bean
+    public BuiltInFeatureRepository getBuiltInFeatures(){
+        return new BuiltInFeatureRepository();
+    }
 }

@@ -16,6 +16,9 @@ public class AutocamperRepository implements IRepository<Autocamper> {
 
     private Connection connection;
 
+    @Autowired
+    private AutocamperTypeRepository typeRepository;
+
     public AutocamperRepository() {
         connection = JDBCConnection.getDatabaseConnection();
     }
@@ -23,9 +26,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
     public Autocamper getById(int id) {
         try {
             String select = "SELECT * \n" +
-                    "FROM autocamper auto\n" +
-                    "JOIN autocamper_type autotype\n" +
-                    "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model " +
+                    "FROM autocamper " +
                     "WHERE id = ?";
             PreparedStatement prep = connection.prepareStatement(select);
             prep.setInt(1, id);
@@ -56,9 +57,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
             }
 
             String select = "SELECT * \n" +
-                    "FROM autocamper auto\n" +
-                    "JOIN autocamper_type autotype\n" +
-                    "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model " +
+                    "FROM autocamper " +
                     "WHERE " + sb + " LIKE ?";
             PreparedStatement prep = connection.prepareStatement(select);
             prep.setString(1, parameter);
@@ -78,10 +77,8 @@ public class AutocamperRepository implements IRepository<Autocamper> {
     public ArrayList<Autocamper> getAll() {
         ArrayList<Autocamper> list = new ArrayList<>();
         try {
-            String sql = "SELECT * \n" +
-                    "FROM autocamper auto\n" +
-                    "JOIN autocamper_type autotype\n" +
-                    "ON auto.fk_brand = autotype.brand AND auto.fk_model = autotype.model;";
+            String sql = "SELECT * " +
+                    "FROM autocamper";
             PreparedStatement prep = connection.prepareStatement(sql);
             ResultSet rs = prep.executeQuery();
 
@@ -152,62 +149,12 @@ public class AutocamperRepository implements IRepository<Autocamper> {
         }
     }
 
-    private BuiltInFeature[] getBuiltInFeatures(AutocamperType autoType) {
-        try {
-            ArrayList<BuiltInFeature> list = new ArrayList<>();
-
-            String select = "SELECT * FROM" +
-                    "FROM built_in_feature bif" +
-                    "JOIN type_features tf" +
-                    "ON bif.id = tf.feature_id" +
-                    "WHERE type_brand = ? and type_model = ?";
-            PreparedStatement prep = connection.prepareStatement(select);
-
-            prep.setString(1, autoType.getBrand());
-            prep.setString(2, autoType.getModel());
-            ResultSet rs = prep.executeQuery();
-
-            while (rs.next()) {
-                BuiltInFeature bif = new BuiltInFeature();
-                bif.setId(rs.getInt("id"));
-                bif.setName(rs.getString("name"));
-                bif.setDescription(rs.getString("description"));
-                bif.setIcon(rs.getString("picture"));
-                list.add(bif);
-            }
-            return list.toArray(new BuiltInFeature[list.size()]);
-        } catch (SQLException sql) {
-            sql.printStackTrace();
-            return null;
-        }
-    }
-
     private Autocamper load(ResultSet rs) throws SQLException{
         Autocamper autocamper = new Autocamper();
         autocamper.setId(rs.getInt("id"));
         autocamper.setStatus(rs.getInt("current_status"));
-        AutocamperType type = new AutocamperType();
-
-        autocamper.setId(rs.getInt("id"));
-        autocamper.setStatus(rs.getInt("current_status"));
         autocamper.setPicture(rs.getString("picture"));
-
-        type.setModel(rs.getString("model"));
-        type.setBrand(rs.getString("brand"));
-        //type.setBuiltInFeatures();
-        type.setPrice(rs.getInt("price"));
-        type.setHorsePower(rs.getInt("horse_power"));
-
-            //type.setFuelEfficiency(rs.getInt("fuelEfficiency"));
-            //type.setFuelType("fuelType");
-        type.setStandingHeight(rs.getInt("standing_height"));
-        type.setMaxSpeed(rs.getInt("max_speed"));
-        type.setHeight(rs.getInt("height"));
-        type.setLength(rs.getInt("length"));
-        type.setWidth(rs.getInt("width"));
-        type.setArea(rs.getInt("area_sqm"));
-        type.setDescription(rs.getString("description"));
-        autocamper.setType(type);
+        autocamper.setType(typeRepository.getByBrandAndModel(rs.getString("fk_brand"),rs.getString("fk_model")));
         return autocamper;
     }
 }

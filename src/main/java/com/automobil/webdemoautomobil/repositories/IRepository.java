@@ -7,5 +7,6 @@ public interface IRepository<T>{
     public ArrayList<T> getAll();
     public ArrayList<T> getByParameter(String parameter, String... columns);
     public T create(T model);
+    public boolean update(T model);
     public boolean delete(T model);
 }

@@ -1,6 +1,7 @@
 package com.automobil.webdemoautomobil.repositories;
 
 import com.automobil.webdemoautomobil.models.AutocamperType;
+import com.automobil.webdemoautomobil.models.BuiltInFeature;
 import org.hibernate.sql.Select;
 import com.automobil.webdemoautomobil.utility.JDBCConnection;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,9 @@ import java.util.ArrayList;
 public class AutocamperTypeRepository{
 
     private Connection conn;
+
+    @Autowired
+    private BuiltInFeatureRepository features;
 
     public AutocamperTypeRepository(){
         this.conn = JDBCConnection.getDatabaseConnection();
@@ -177,6 +181,7 @@ public class AutocamperTypeRepository{
         aT.setModel(rs.getString(2));
         aT.setPrice(rs.getInt(3));
         aT.setProductionYear(rs.getInt(4));
+        aT.setBuiltInFeatures(features.getAllByAutocamperType(aT));
         aT.setWeight(rs.getInt(5));
         aT.setFuelCapacity(rs.getInt(6));
         aT.setHorsePower(rs.getInt(7));

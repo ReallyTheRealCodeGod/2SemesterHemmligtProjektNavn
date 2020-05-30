@@ -45,4 +45,14 @@ public class BuiltInFeature {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "BuiltInFeature{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", icon='" + icon + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

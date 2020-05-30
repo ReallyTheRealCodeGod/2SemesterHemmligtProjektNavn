@@ -22,7 +22,7 @@
                     <table class="card-body collapse" id="mærker">
                         <tr th:each="autoType : ${autoTypes}" class="card-body">
                             <td><span th:text="${autoType.getBrand()}"> </span></td>
-                            <td><input type="checkbox" class="right-align" th:id="${autoType.getBrand()}" onclick="brandUpdate(this.id)"/></td>
+                            <td><input type="checkbox" class="autotypes right-align" name="brand" th:value="${autoType.getBrand()}" onclick="brandUpdate()"/></td>
                         </tr>
                     </table>
 
@@ -37,10 +37,10 @@
                 <button data-target="#features" class="btn btn-primary  card-body" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="priceSlider">Indbygget Tilbehør</button>
                     <table class="card-body collapse" id="features">
                         <tr th:each="auto : ${autoTypes}">
-                            <td><td th:text="${auto.builtInFeatures}"><input type="checkbox" class="right-align"></td></td>
+                            <td><td th:text="${auto.builtInFeatures}"><input type="checkbox" class=" right-align" name="features" th:value="${autoType.getBuiltInFeatures()}" onclick="featureUpdate()"/></td></td>
                         </tr>
                     </table>
-                <button id="search" data-target="#features" class="btn btn-primary  card-body" type="button">Søg autocampers</button>
+                <button id="search" data-target="#features" class="btn btn-primary  card-body" type="button">Søg</button>
                 </div>
         </div>
 
