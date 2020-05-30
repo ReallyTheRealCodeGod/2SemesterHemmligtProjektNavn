@@ -11,13 +11,13 @@ import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
 
 @Controller
 @RequestMapping("/autocampers")
-public class AutocamperDetails {
+public class AutocamperDetailsController{
 
     AutocamperRepository autoRepo;
     AutocamperTypeRepository autoTypes;
 
     @Autowired
-    AutocamperDetails(AutocamperRepository autoRepo, AutocamperTypeRepository autoTypes){
+    AutocamperDetailsController(AutocamperRepository autoRepo, AutocamperTypeRepository autoTypes){
         this.autoRepo = autoRepo;
         this.autoTypes = autoTypes;
 

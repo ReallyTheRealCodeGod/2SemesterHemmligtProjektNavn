@@ -208,7 +208,6 @@ public class AutocamperRepository implements IRepository<Autocamper> {
         type.setArea(rs.getInt("area_sqm"));
         type.setDescription(rs.getString("description"));
         autocamper.setType(type);
-        System.out.println(autocamper);
         return autocamper;
     }
 }
