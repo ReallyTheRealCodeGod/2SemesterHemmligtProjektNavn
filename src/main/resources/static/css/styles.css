@@ -8425,7 +8425,8 @@ a.text-dark:focus,a.text-dark:hover {
     display: block;
     max-width: 25rem;
     border-radius: .5rem;
-    overflow: hidden
+    overflow: hidden;
+    padding: 2rem;
 }
 
 
@@ -8501,3 +8502,8 @@ a.text-dark:focus,a.text-dark:hover {
     margin-bottom: .5rem
 }
 
+.text-button-menu {
+
+    text-align: center;
+
+}
