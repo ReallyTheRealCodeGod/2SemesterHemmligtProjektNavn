@@ -32,12 +32,9 @@ public class AutocamperDetailsController{
 
     @GetMapping("")
     public String list(Model model){
-        ArrayList<BuiltInFeature> features = featureRepo.getAll();
-        for(BuiltInFeature feature: features) {
-            System.out.println(feature.getName());
-        }
         model.addAttribute("autos", autoRepo.getAll());
         model.addAttribute("autoTypes", autoTypes.getAll());
+        model.addAttribute("features", featureRepo.getAll());
         return "/autocamperList";
     }
 }
