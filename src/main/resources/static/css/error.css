@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet');
+
+#demoObject {
+    -webkit-box-shadow: 0px 0px 0px 8px #000000, 0px 0px 0px 16px #4B4C4B, 0px 0px 0px 24px #828482, 0px 0px 0px 31px #B2B5B2, 0px 0px 0px 39px #DADDDA, 5px 5px 0px 4px rgba(0,0,0,0);
+    box-shadow: 0px 0px 0px 8px #000000, 0px 0px 0px 16px #4B4C4B, 0px 0px 0px 24px #828482, 0px 0px 0px 31px #B2B5B2, 0px 0px 0px 39px #DADDDA, 5px 5px 0px 4px rgba(0,0,0,0);
+    background: #000000;
+}
+html, body {
+    cursor: url('https://upload.wikimedia.org/wikipedia/commons/9/97/Dialog-error-round.svg'), auto;
+    /* just change the cursor.ico path to your location */
+}
+
+
+body{
+    padding: 40px;
+    background-color: #121212;
+}
+
+p {
+    border-right: solid 3px rgba(0,255,0,.75);
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: 'VT323', monospace;
+    font-size: 28px;
+    color: rgba(0, 255, 94, 0.7);
+}
+
+
+/* Animation */
+p {
+    animation: animated-text 4s steps(29,end) 1s 1 normal both,
+    animated-cursor 600ms steps(29,end) infinite;
+}
+
+/* text animation */
+
+@keyframes animated-text{
+    from{width: 0;}
+    to{width: 400px;}
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor{
+    from{border-right-color: rgba(0,255,0,.75);}
+    to{border-right-color: transparent;}
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
+.center1 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 5%;
+}
+
+#error {
+    font-family: 'VT323', monospace;
+    text-align: center;
+    color: white;
+    font-size: 10rem;
+}
+
+
+h1:after {
+
+    animation: abomination1 7.5s linear 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes abomination1 {
+    0% {
+        content: "E";
+    }
+    12.5% {
+        content: "ER";
+    }
+    25% {
+        content: "ERR";
+    }
+    40% {
+        content: "ERRR";
+    }
+    50% {
+        content: "ERR";
+    }
+    62.5% {
+        content: "ERRO";
+    }
+    75% {
+        content: "ERROR";
+    }
+    100% {
+        content: "ERROR";
+    }
+}
