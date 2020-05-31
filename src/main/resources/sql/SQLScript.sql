@@ -77,7 +77,7 @@ CREATE TABLE maintenance (
   fuel_gauge INT NOT NULL,
   mileage INT NOT NULL,
   cleaning_price INT NOT NULL,
-  maintenance_notes VARCHAR(500) NOT NULL,
+  maintenance_notes VARCHAR(500) DEFAULT NULL,
   frame TINYINT NOT NULL,
   wheels TINYINT NOT NULL,
   lights TINYINT NOT NULL,

@@ -18,10 +18,11 @@
 </div>
 <br>
 <div >
-    <form action="/user/changeStatus" method="post">
-        <input type="submit" value="Button" name="current_status" th:value="${status.setStatus(1)}"
-               class="btn btn-success"
-        >
+    <form action="/user/changeStatus" method="POST">
+        <input type="hidden" th:attr="name=${_csrf.parameterName}, value=${_csrf.token}"/>
+        <input type="submit" value="Button" name="current_status"
+               class="btn btn-success">
+
     </form>
 </div>
 

@@ -1,5 +1,6 @@
 package com.automobil.webdemoautomobil.repositories;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import com.automobil.webdemoautomobil.models.MaintenanceReport;
@@ -143,7 +144,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
     public MaintenanceReport create(MaintenanceReport maintenance){
         try {
             String create = "INSERT INTO maintenance(" +
-                    "maintenance_id," +
+                    "id," +
                     " fuel_gauge ," +
                     " mileage," +
                     "cleaning_price," +
@@ -176,7 +177,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
             prep.setInt(12, maintenance.getPartStatus().get("brakes"));
             prep.setInt(13, maintenance.getPartStatus().get("suspention"));
             prep.setInt(14, maintenance.getRepairCost());
-            prep.setDate(15, Date.valueOf(maintenance.getDate()));
+            prep.setDate(15, Date.valueOf(LocalDate.now()));
             prep.setInt(16, maintenance.getAutocamperId());
             prep.executeUpdate();
             ResultSet rs = prep.getGeneratedKeys();
@@ -192,7 +193,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
     public boolean update(MaintenanceReport maintenance){
         try{
         String update = "UPDATE maintenance " +
-                "SET maintenance_id = ?," +
+                "SET id = ?," +
                 " fuel_gauge = ?," +
                 " mileage = ?," +
                 "cleaning_price = ?," +

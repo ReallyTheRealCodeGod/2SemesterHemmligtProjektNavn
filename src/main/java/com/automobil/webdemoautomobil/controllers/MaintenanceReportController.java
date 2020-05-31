@@ -74,13 +74,15 @@ public class MaintenanceReportController {
     @GetMapping("/mechComments")
     public String comments(Model model, @RequestParam int id){
         model.addAttribute("note", maintenanceReportRepository.getById(id));
-        model.addAttribute("status", autocamperRepository.getById(id));
+
         return "/user/mechComments";
     }
 
     @PostMapping("/fillMaintenanceReport")
     public String makeReport(@ModelAttribute MaintenanceReport reportFromPost){
-        maintenanceReportRepository.create(reportFromPost);
+        System.out.println(reportFromPost.getPartStatus());
+                maintenanceReportRepository.create(reportFromPost);
+
         return "redirect:/user/finishedrentals";
     }
 
