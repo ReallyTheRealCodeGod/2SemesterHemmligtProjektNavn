@@ -23,17 +23,7 @@ public class RentalRepository implements IRepository<Rental>{
             ResultSet rs = getSingleRental.executeQuery();
 
             while (rs.next()) {
-                rentalToReturn.setId(rs.getInt(1));
-                rentalToReturn.setAccumulatedPrice(rs.getInt(2));
-                rentalToReturn.setStartDate(rs.getDate(3).toLocalDate());
-                rentalToReturn.setEndDate(rs.getDate(4).toLocalDate());
-                rentalToReturn.setLongPickUpLoc(rs.getLong(5));
-                rentalToReturn.setLatPickUpLoc(rs.getLong(6));
-                rentalToReturn.setLongDropOffLoc(rs.getLong(7));
-                rentalToReturn.setLatDropOffLoc(rs.getLong(8));
-                rentalToReturn.setAutocamperId(rs.getInt(9));
-                rentalToReturn.setCustomerId(rs.getInt(10));
-                rentalToReturn.setMaintenanceId(rs.getInt(11));
+                rentalToReturn = load(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,19 +52,7 @@ public class RentalRepository implements IRepository<Rental>{
             ResultSet rs = getAllRentals.executeQuery();
 
             while (rs.next()) {
-                Rental addRentalToList = new Rental();
-                addRentalToList.setId(rs.getInt(1));
-                addRentalToList.setAccumulatedPrice(rs.getInt(2));
-                addRentalToList.setStartDate(rs.getDate(3).toLocalDate());
-                addRentalToList.setEndDate(rs.getDate(4).toLocalDate());
-                addRentalToList.setLongPickUpLoc(rs.getLong(5));
-                addRentalToList.setLatPickUpLoc(rs.getLong(6));
-                addRentalToList.setLongDropOffLoc(rs.getLong(7));
-                addRentalToList.setLatDropOffLoc(rs.getLong(8));
-                addRentalToList.setAutocamperId(rs.getInt(9));
-                addRentalToList.setMaintenanceId(rs.getInt(10));
-                addRentalToList.setCustomerId(rs.getInt(11));
-                rentalList.add(addRentalToList);
+                rentalList.add(load(rs));
             }
         }
         catch (SQLException e){
@@ -91,19 +69,7 @@ public class RentalRepository implements IRepository<Rental>{
             ResultSet rs = getAllRentals.executeQuery();
 
             while (rs.next()) {
-                Rental addRentalToList = new Rental();
-                addRentalToList.setId(rs.getInt(1));
-                addRentalToList.setAccumulatedPrice(rs.getInt(2));
-                addRentalToList.setStartDate(rs.getDate(3).toLocalDate());
-                addRentalToList.setEndDate(rs.getDate(4).toLocalDate());
-                addRentalToList.setLongPickUpLoc(rs.getLong(5));
-                addRentalToList.setLatPickUpLoc(rs.getLong(6));
-                addRentalToList.setLongDropOffLoc(rs.getLong(7));
-                addRentalToList.setLatDropOffLoc(rs.getLong(8));
-                addRentalToList.setAutocamperId(rs.getInt(9));
-                addRentalToList.setCustomerId(rs.getInt(10));
-                addRentalToList.setMaintenanceId(rs.getInt(11));
-                rentalList.add(addRentalToList);
+                rentalList.add(load(rs));
             }
         }
         catch (SQLException e){
@@ -152,6 +118,7 @@ public class RentalRepository implements IRepository<Rental>{
                             "fk_autocamper_id = ?, " +
                             "fk_customer_id = ?, " +
                             "fk_maintenance_id = ?" +
+
                             "WHERE rental_id = ?");
             updateRental.setInt(1, rental.getAccumulatedPrice());
             updateRental.setDate(2, Date.valueOf(rental.getStartDate()));
@@ -184,6 +151,22 @@ public class RentalRepository implements IRepository<Rental>{
             sql.printStackTrace();
         }
         return false;
+    }
+
+    private Rental load(ResultSet rs) throws SQLException{
+        Rental rental = new Rental();
+        rental.setId(rs.getInt(1));
+        rental.setAccumulatedPrice(rs.getInt(2));
+        rental.setStartDate(rs.getDate(3).toLocalDate());
+        rental.setEndDate(rs.getDate(4).toLocalDate());
+        rental.setLongPickUpLoc(rs.getLong(5));
+        rental.setLatPickUpLoc(rs.getLong(6));
+        rental.setLongDropOffLoc(rs.getLong(7));
+        rental.setLatDropOffLoc(rs.getLong(8));
+        rental.setAutocamperId(rs.getInt(9));
+        rental.setMaintenanceId(rs.getInt(10));
+        rental.setCustomerId(rs.getInt(11));
+        return rental;
     }
 
 }

@@ -1,7 +1,8 @@
 package com.automobil.webdemoautomobil.models;
 
+import java.util.Arrays;
+
 public class VariablePrices {
-    private int variablePricesId;
     private int excessKilometerPrice;
     private int fuelPrice;
     private int dropOffKilometerPrice;
@@ -20,14 +21,6 @@ public class VariablePrices {
         this.cleaningMinPrice = cleaningMinPrice;
         this.cleaningMaxPrice = cleaningMaxPrice;
         this.seasons = seasons;
-    }
-
-    public int getVariablePricesId() {
-        return variablePricesId;
-    }
-
-    public void setVariablePricesId(int variablePricesId) {
-        this.variablePricesId = variablePricesId;
     }
 
     public int getExcessKilometerPrice() {
@@ -84,5 +77,18 @@ public class VariablePrices {
 
     public void setSeasons(Season[] seasons) {
         this.seasons = seasons;
+    }
+
+    @Override
+    public String toString() {
+        return "VariablePrices{" +
+                "excessKilometerPrice=" + excessKilometerPrice +
+                ", fuelPrice=" + fuelPrice +
+                ", dropOffKilometerPrice=" + dropOffKilometerPrice +
+                ", pickUpKilometerPrice=" + pickUpKilometerPrice +
+                ", cleaningMinPrice=" + cleaningMinPrice +
+                ", cleaningMaxPrice=" + cleaningMaxPrice +
+                ", seasons=" + Arrays.toString(seasons) +
+                '}';
     }
 }

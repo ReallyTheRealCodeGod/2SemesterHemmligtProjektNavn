@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/autocamperlist.css"/>
+
+    <title>Autocampers</title>
+</head>
+<body>
+<h1 class="masthead-heading mb-0" id="title">Priser</h1>
+<div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"> <img style="    width: 24px !important;
+            height: 24px !important;" src="../img/transportation.png"></div>
+    <div class="divider-custom-line"></div>
+</div>
+    <div class="container">
+        <form action="/admin/changePrices" method="POST">
+            <div class="row">
+                <div class="card w-100">
+                    <h5 class="card-header card-title">Kunde gebyr</h5>
+                    <div class="input-group mt-2 w-100">
+                        <div class="input-group-prepend"><span class="input-group-text" >Overskudt Kilometer Pris</span></div>
+                        <input type="number" class="form-control" name="excessKilometerPrice" th:value="${prices.getExcessKilometerPrice()}">
+                        <div class="input-group-append"><span class="input-group-text" >Kr per Kilometer</span></div>
+                    </div>
+                    <div class="input-group  w-100">
+                        <div class="input-group-prepend"><span class="input-group-text" >Optanknings pris</span></div>
+                        <input type="number" class="form-control" name="fuelPrice" th:value="${prices.getFuelPrice()}">
+                        <div class="input-group-append"><span class="input-group-text" >Kr</span></div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="card w-50">
+                    <h5 class="card-header card-title">Lokations priser</h5>
+                    <div class="input-group mt-2 w-100">
+                        <div class="input-group-prepend"><span class="input-group-text" >Pick-Up pris</span></div>
+                        <input type="number" class="form-control" name="pickUpKilometerPrice" th:value="${prices.getPickUpKilometerPrice()}">
+                        <div class="input-group-append"><span class="input-group-text" >Kr per Kilometer</span></div>
+                    </div>
+                    <div class="input-group  w-100">
+                        <div class="input-group-prepend"><span class="input-group-text" >Drop-Off pris</span></div>
+                        <input type="number" class="form-control"  name="dropOffKilometerPrice" th:value="${prices.getDropOffKilometerPrice()}">
+                        <div class="input-group-append"><span class="input-group-text" >Kr per Kilometer</span></div>
+                    </div>
+                </div>
+                <br>
+                <div class="card w-50">
+                    <h5 class="card-header card-title">Rengøring priser</h5>
+                    <div class="input-group mt-2 w-100">
+                        <div class="input-group-prepend"><span class="input-group-text" >Minimum beløb</span></div>
+                        <input type="number" class="form-control"  name="cleaningMinPrice" th:value="${prices.getCleaningMinPrice()}">
+                        <div class="input-group-append"><span class="input-group-text" >Kr</span></div>
+                    </div>
+                    <div class="input-group  w-100">
+                        <div class="input-group-prepend"><span class="input-group-text" >Maximum beløb</span></div>
+                        <input type="number" class="form-control" name="cleaningMaxPrice" th:value="${prices.getCleaningMaxPrice()}">
+                        <div class="input-group-append"><span class="input-group-text" >Kr</span></div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="card row">
+                <h5 class="card-header card-title">Sæson priser</h5>
+                <div class="input-group mt-2 w-100">
+                    <div class="input-group-prepend"><span class="input-group-text" >Sæson</span></div>
+                    <input type="number" class="form-control" name="Season"  th:value="${prices.getCleaningMinPrice()}">
+                    <div class="input-group-append"><span class="input-group-text" >Procent</span></div>
+                </div>
+            </div>
+
+            <br>
+            <input type="submit" class="btn btn-primary mb-5"/>
+        </form>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

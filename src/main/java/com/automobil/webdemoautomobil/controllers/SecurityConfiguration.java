@@ -2,6 +2,7 @@ package com.automobil.webdemoautomobil.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -73,13 +74,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //Defining restrictions for different user roles
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.authorizeRequests()
                 // Starting with the most restricted path. In this case /admin can only be accessed by a user with the admin role.
                 .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/admin/**").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/salesAssistant").hasAnyRole("ADMIN", "SALES")
                 .antMatchers("/**", "static/css", "static/img").permitAll() // Accessible by all roles, without authentication
                 .and().formLogin();
+        http.csrf().disable();
 
     }
 }

@@ -118,7 +118,7 @@ public class AccessoryRepository implements IRepository<Accessory>{
          accessory.setId(rs.getInt(1));
      }catch(SQLException sql){
          if(sql.getErrorCode() == 1452){
-             addType(accessory);
+             accessory = addType(accessory);
              create(accessory);
          }else {
              sql.printStackTrace();
@@ -137,7 +137,7 @@ public class AccessoryRepository implements IRepository<Accessory>{
             prep.executeUpdate();
             ResultSet rs = prep.getGeneratedKeys();
             rs.next();
-            accessory.setId(rs.getInt(1));
+            accessory.setTypeId(rs.getInt(1));
             return accessory;
         }catch(SQLException sql){
             sql.printStackTrace();

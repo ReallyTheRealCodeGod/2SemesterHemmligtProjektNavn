@@ -18,16 +18,16 @@ public class VariablePricesRepository{
         VariablePrices varPriceToReturn = new VariablePrices();
         try {
             PreparedStatement getSingleVarPrice = conn.prepareStatement
-                    ("SELECT * FROM variable_prices WHERE variable_prices_id = 1");
+                    ("SELECT * FROM variable_prices WHERE id = 1");
             ResultSet rs = getSingleVarPrice.executeQuery();
 
             while (rs.next()) {
-                varPriceToReturn.setExcessKilometerPrice(rs.getInt(1));
-                varPriceToReturn.setFuelPrice(rs.getInt(2));
-                varPriceToReturn.setDropOffKilometerPrice(rs.getInt(3));
-                varPriceToReturn.setPickUpKilometerPrice(rs.getInt(4));
-                varPriceToReturn.setCleaningMaxPrice(rs.getInt(5));
-                varPriceToReturn.setCleaningMinPrice(rs.getInt(6));
+                varPriceToReturn.setExcessKilometerPrice(rs.getInt("excessKilometer_price"));
+                varPriceToReturn.setFuelPrice(rs.getInt("fuel_price"));
+                varPriceToReturn.setDropOffKilometerPrice(rs.getInt("dropOffKilometer_price"));
+                varPriceToReturn.setPickUpKilometerPrice(rs.getInt("pickUpKilometer_price"));
+                varPriceToReturn.setCleaningMaxPrice(rs.getInt("cleaning_max_price"));
+                varPriceToReturn.setCleaningMinPrice(rs.getInt("cleaning_min_price"));
                 varPriceToReturn.setSeasons(getSeasons());
             }
         }
@@ -38,14 +38,9 @@ public class VariablePricesRepository{
     }
     public boolean editPrices(VariablePrices variablePrices){
         try {
-            PreparedStatement updateVarPrice = conn.prepareStatement
-                    ("UPDATE variable_prices SET  " +
-                            "excessKilometer_price = ?, " +
-                            "fuel_price = ?, " +
-                            "dropOffKilometer_price = ?, " +
-                            "pickUpKilometer_price = ?, " +
-                            "cleaning_max_price = ?, " +
-                            "cleaning_min_price = ?");
+            String sql = "UPDATE variable_prices SET  excessKilometer_price = ?, fuel_price = ?, dropOffKilometer_price = ?," +
+                    " pickUpKilometer_price = ?, cleaning_max_price = ?, cleaning_min_price = ? WHERE id=1";
+            PreparedStatement updateVarPrice = conn.prepareStatement(sql);
 
             updateVarPrice.setInt(1, variablePrices.getExcessKilometerPrice());
             updateVarPrice.setInt(2, variablePrices.getFuelPrice());
@@ -53,7 +48,6 @@ public class VariablePricesRepository{
             updateVarPrice.setInt(4, variablePrices.getPickUpKilometerPrice());
             updateVarPrice.setInt(5, variablePrices.getCleaningMaxPrice());
             updateVarPrice.setInt(6, variablePrices.getCleaningMinPrice());
-            updateVarPrice.setInt(7, variablePrices.getVariablePricesId());
 
             updateVarPrice.executeUpdate();
             return true;
@@ -67,7 +61,7 @@ public class VariablePricesRepository{
     private Season[] getSeasons(){
         ArrayList<Season> list = new ArrayList<>();
         try {
-            PreparedStatement prep = conn.prepareStatement("SELECT * FROM seasons");
+            PreparedStatement prep = conn.prepareStatement("SELECT * FROM season");
             ResultSet rs = prep.executeQuery();
             while(rs.next()){
                 Season s = new Season();

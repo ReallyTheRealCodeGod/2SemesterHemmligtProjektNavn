@@ -23,11 +23,6 @@ public class IndexController {
         return "/user";
     }
 
-    @GetMapping("/admin")
-    public String admin(){
-        return "/admin";
-    }
-
     @GetMapping("/salesAssistant")
     public String sales(){
         return "/salesAssistant";

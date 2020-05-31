@@ -28,6 +28,9 @@ public class RepoInitConfig {
     }
 
     @Bean
+    public VariablePricesRepository getPrices(){ return new VariablePricesRepository();}
+
+    @Bean
     public CustomerRepository getCustomer(){
         return new CustomerRepository();
     }
