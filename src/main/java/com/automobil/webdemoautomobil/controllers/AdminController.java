@@ -34,6 +34,7 @@ public class AdminController {
         model.addAttribute("prices", vp);
         return "/variablePricesView";
     }
+
     @PostMapping("/changePrices")
     public String changePrices(@ModelAttribute VariablePrices prices){
         System.out.println(prices);
