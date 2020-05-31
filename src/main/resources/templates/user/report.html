@@ -15,17 +15,28 @@
         <tr>
             <th scope="col">Kunde Navn</th>
             <th scope="col">Autocamper id</th>
+            <th scope="col">Mærke</th>
+            <th scope="col">model</th>
             <th scope="col">Start Dato</th>
             <th scope="col">Slut Dato</th>
         </tr>
         </thead>
         <tbody>
         <tr>
-
-            <th scope="row" >#</th>
-            <td>#</td>
-            <td>#</td>
-            <td>#</td>
+            <th:block th:each="rental : ${rentals}">
+                <th:block th:if="${rental.getAutocamperId()} == ${ids.getId()}">
+                    <th:block th:each="customer : ${customers}">
+                        <th:block th:if="${rental.getCustomerId()} == ${customer.getId()}">
+                            <td scope="row" th:text="${customer.getFirstName()+ ' ' + customer.getLastName()}"></td>
+                            <td th:text="${ids.getId()}"></td>
+                            <td th:text="${ids.getType().getBrand()}"></td>
+                            <td th:text="${ids.getType().getModel()}"></td>
+                            <td th:text="${rental.getStartDate()}"></td>
+                            <td th:text="${rental.getEndDate()}"></td>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </th:block>
         </tr>
         </tbody>
     </table>

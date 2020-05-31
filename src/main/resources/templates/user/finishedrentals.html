@@ -28,7 +28,7 @@
         </thead>
         <tbody>
         <tr th:each="autocamper : ${autocampers}">
-            <th:block th:each="rental: ${rentals}">
+            <th:block th:each="rental : ${rentals}">
                 <th:block th:if="${rental.getAutocamperId()} == ${autocamper.getId()}">
                     <th:block th:each="customer : ${customers}">
                         <th:block th:if="${rental.getCustomerId()} == ${customer.getId()}">
@@ -39,7 +39,11 @@
                             <td th:text="${autocamper.getType().getModel()}"></td>
                             <td th:text="${rental.getStartDate()}"></td>
                             <td th:text="${rental.getEndDate()}"></td>
-                            <td><a href="/user/report"><button type="button" class="btn btn-success">Vælg</button></a></td>
+                            <td>
+                                <a th:href="@{/user/report(id=${autocamper.getId()})}">
+                                    <button type="button" class="btn btn-success">Vælg</button>
+                                </a>
+                            </td>
                         </th:block>
                     </th:block>
                 </th:block>

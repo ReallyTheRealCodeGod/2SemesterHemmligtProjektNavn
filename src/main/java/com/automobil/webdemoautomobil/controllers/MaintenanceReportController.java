@@ -49,7 +49,14 @@ public class MaintenanceReportController {
     }
 
     @GetMapping("/report")
-    public String maintenanceReport(){
+    public String maintenanceReport(Model model, @RequestParam int id){
+        ArrayList<Customer> customer = customerRepository.getAll();
+        ArrayList<Rental> rental = rentalRepository.getAll();
+
+        model.addAttribute("ids", autocamperRepository.getById(id));
+        model.addAttribute("customers", customer);
+        model.addAttribute("rentals", rental);
+
         return "/user/report";
     }
 
@@ -67,12 +74,19 @@ public class MaintenanceReportController {
     @GetMapping("/mechComments")
     public String comments(Model model, @RequestParam int id){
         model.addAttribute("note", maintenanceReportRepository.getById(id));
+        model.addAttribute("status", autocamperRepository.getById(id));
         return "/user/mechComments";
     }
 
     @PostMapping("/fillMaintenanceReport")
     public String makeReport(@ModelAttribute MaintenanceReport reportFromPost){
         maintenanceReportRepository.create(reportFromPost);
+        return "redirect:/user/finishedrentals";
+    }
+
+    @PostMapping("/changeStatus")
+    public String changeStatus(@ModelAttribute Autocamper autocamperFromPost){
+        autocamperRepository.update(autocamperFromPost);
         return "redirect:/user";
     }
 
