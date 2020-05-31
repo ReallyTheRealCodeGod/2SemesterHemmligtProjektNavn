@@ -157,8 +157,9 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
                     "coolingflued," +
                     "brakes," +
                     "suspention," +
+                    "repair_cost," +
                     "maintenance_date," +
-                    "fk_autocamper_id))" +
+                    "fk_autocamper_id)" +
                     " Values (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement prep = connection.prepareStatement(create, Statement.RETURN_GENERATED_KEYS);
             prep.setInt(1, maintenance.getFuelGauge());

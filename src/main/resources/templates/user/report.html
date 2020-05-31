@@ -22,7 +22,7 @@
         <tbody>
         <tr>
 
-            <th scope="row" ></th>
+            <th scope="row" >#</th>
             <td>#</td>
             <td>#</td>
             <td>#</td>
@@ -33,143 +33,129 @@
 
 <br>
 <div>
-    <div>
-        <form>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">Kilometer tilstand</span>
-                </div>
-                <input type="number" class="form-control" placeholder="Indtast her" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
 
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Benzin niveau</label>
-                </div>
-                <select class="custom-select" id="inputGroupSelect01">
-                    <option selected>Vælg...</option>
-                    <option value="1">Over halv (1/2)</option>
-                    <option value="2">Under halv (1/2)</option>
-                </select>
+    <form action="/user/fillMaintenanceReport" method="post">
+        <h5>Kundens forbrug:</h5>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-add">Kilometer tilstand</span>
             </div>
+            <input type="number" name="fuel_gauge" class="form-control" placeholder="Indtast her" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
 
-            <div>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Ekstra udstyr</th>
-                        <th>Returneret</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">#</th>
-                        <td><input type="checkbox" name="returned"></td>
-                    </tr>
-                    </tbody>
-                </table>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon2">Benzin mængde ved aflevering (0-100%)</span>
             </div>
-        </form>
-    </div>
-    <br>
-    <div>
+            <input type="number" name="mileage" class="form-control" placeholder="Indtast her" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+
         <h5>Kontrol af mekaniske egenskaber:</h5>
-        <form>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="frame" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Karosseri</label>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Karosseri</label>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="wheels" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Dæk</label>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Dæk</label>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="battery" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Batteri</label>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Batteri</label>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="breaks" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Bremser</label>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Bremser</label>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="suspenstion" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Støddæmpere</label>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Støddæmpere</label>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="lights" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Lygter</label>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Lygter</label>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="interior" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Interiør</label>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Interiør</label>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="oil" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Olie</label>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Olie</label>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" name="coolingflued" aria-label="Checkbox for following text input">
                 </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Kølervæske</label>
             </div>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Kommentar:</span>
-                </div>
-                <textarea rows="8" class="form-control" aria-label="With textarea"></textarea>
-            </div>
-            <br>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" aria-label="Checkbox for following text input">
-                    </div>
-                </div>
-                <label type="text" class="form-control" aria-label="Text input with checkbox">Check denne boks af hvis autocamper skal til reperation</label>
-            </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Kølervæske</label>
+        </div>
 
-        </form><br>
-        <a href="/user"><button type="button" class="btn btn-success">Godkend</button></a>
-    </div>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Kommentar:</span>
+            </div>
+            <textarea name="maintenance_notes" rows="5" class="form-control" aria-label="With textarea"></textarea>
+        </div>
+        <br>
+        <h5>Indtast den samlede reperationspris</h5>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Reperationspris</span>
+            </div>
+            <input type="number" name="repair_cost" class="form-control" placeholder="Indtast pris her" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <input type="checkbox" aria-label="Checkbox for following text input">
+                </div>
+            </div>
+            <label type="text" class="form-control" aria-label="Text input with checkbox">Check denne boks af hvis autocamper skal til reperation</label>
+        </div>
+
+        <button type="submit" class="btn btn-success">Godkend</button>
+    </form><br>
+
+
+
 </div>
 
-<div>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

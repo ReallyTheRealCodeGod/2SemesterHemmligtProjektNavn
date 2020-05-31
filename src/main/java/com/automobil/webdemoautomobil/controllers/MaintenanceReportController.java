@@ -6,10 +6,7 @@ import com.automobil.webdemoautomobil.utility.RepoInitConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -73,9 +70,10 @@ public class MaintenanceReportController {
         return "/user/mechComments";
     }
 
-    @PostMapping("/123")
-    public String test(){
-        return "";
+    @PostMapping("/fillMaintenanceReport")
+    public String makeReport(@ModelAttribute MaintenanceReport reportFromPost){
+        maintenanceReportRepository.create(reportFromPost);
+        return "redirect:/user";
     }
 
 }
