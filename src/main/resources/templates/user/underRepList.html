@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -22,13 +22,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">#</th>
-            <td>#</td>
-            <td>#</td>
-            <td>#</td>
-            <td><a href="/user/mechComments"><button type="button" class="btn btn-success">Se Kommentar</button></a></td>
-        </tr>
+        <tr th:each="autocamper : ${autocampers}">
+            <th:block th:each="maintenance : ${maintenances}">
+                <th:block th:if="${autocamper.getId()} == ${maintenance.getAutocamperId()}">
+                            <th scope="row" th:text="${autocamper.getId()}"></th>
+                            <td th:text="${autocamper.getType().getBrand()}"></td>
+                            <td th:text="${autocamper.getType().getModel()}"></td>
+                            <td th:text="${maintenance.getDate()}"></td>
+                            <td>
+                                <a th:href="@{/user/mechComments(id=${maintenance.getId()})}">
+                                    <button type="button" class="btn btn-success">Se Kommentar</button>
+                                </a>
+                            </td>
+                        </th:block>
+                    </th:block>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -1,20 +1,14 @@
 package com.automobil.webdemoautomobil.controllers;
 
-import com.automobil.webdemoautomobil.models.Autocamper;
-import com.automobil.webdemoautomobil.models.Customer;
-import com.automobil.webdemoautomobil.models.MaintenanceReport;
-import com.automobil.webdemoautomobil.models.Rental;
-import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
-import com.automobil.webdemoautomobil.repositories.CustomerRepository;
-import com.automobil.webdemoautomobil.repositories.MaintenanceReportRepository;
-import com.automobil.webdemoautomobil.repositories.RentalRepository;
+import com.automobil.webdemoautomobil.models.*;
+import com.automobil.webdemoautomobil.repositories.*;
 import com.automobil.webdemoautomobil.utility.RepoInitConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -27,14 +21,16 @@ public class MaintenanceReportController {
     private AutocamperRepository autocamperRepository;
     private RentalRepository rentalRepository;
     private MaintenanceReportRepository maintenanceReportRepository;
+    private AutocamperTypeRepository autocamperTypeRepository;
 
     @Autowired
     public MaintenanceReportController(CustomerRepository customerRepository, AutocamperRepository autocamperRepository, RentalRepository rentalRepository,
-    MaintenanceReportRepository maintenanceReportRepository){
+    MaintenanceReportRepository maintenanceReportRepository, AutocamperTypeRepository autocamperTypeRepository){
         this.customerRepository = customerRepository;
         this.autocamperRepository = autocamperRepository;
         this.rentalRepository = rentalRepository;
         this.maintenanceReportRepository = maintenanceReportRepository;
+        this.autocamperTypeRepository = autocamperTypeRepository;
 
     }
 
@@ -53,20 +49,49 @@ public class MaintenanceReportController {
     }
 
     @GetMapping("/report")
-    public String maintenanceReport(){
+    public String maintenanceReport(Model model, @RequestParam int id){
+        ArrayList<Customer> customer = customerRepository.getAll();
+        ArrayList<Rental> rental = rentalRepository.getAll();
+
+        model.addAttribute("ids", autocamperRepository.getById(id));
+        model.addAttribute("customers", customer);
+        model.addAttribute("rentals", rental);
+
         return "/user/report";
     }
 
     @GetMapping("/underRepList")
-    public String repList(){
+    public String repList(Model model){
+
+        ArrayList<Autocamper> autocamper = autocamperRepository.getByParameter(Integer.toString(Autocamper.NEEDS_FIXING), "current_status");
+        ArrayList<MaintenanceReport> maintenance = maintenanceReportRepository.getAll();
+
+        model.addAttribute("autocampers", autocamper);
+        model.addAttribute("maintenances", maintenance);
         return "/user/underRepList";
     }
 
     @GetMapping("/mechComments")
-    public String comments(Model model){
-        model.addAttribute("note", maintenanceReportRepository);
+    public String comments(Model model, @RequestParam int id){
+        model.addAttribute("note", maintenanceReportRepository.getById(id));
+
         return "/user/mechComments";
     }
+
+    @PostMapping("/fillMaintenanceReport")
+    public String makeReport(@ModelAttribute MaintenanceReport reportFromPost){
+        System.out.println(reportFromPost.getPartStatus());
+                maintenanceReportRepository.create(reportFromPost);
+
+        return "redirect:/user/finishedrentals";
+    }
+
+    @PostMapping("/changeStatus")
+    public String changeStatus(@ModelAttribute Autocamper autocamperFromPost){
+        autocamperRepository.update(autocamperFromPost);
+        return "redirect:/user";
+    }
+
 }
 
 

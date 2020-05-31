@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -14,11 +14,16 @@
     <div class="input-group-prepend">
         <span class="input-group-text">Kommentar:</span>
     </div>
-    <textarea rows="10" class="form-control" aria-label="With textarea"></textarea>
+    <textarea th:text="${note.getMaintenanceNote()}" rows="8" class="form-control" aria-label="With textarea"></textarea>
 </div>
 <br>
-<div>
-    <a href="/user"><button type="button" class="btn btn-success">Skade udbedret - Tilføj til ledige autocampere</button></a>
+<div >
+    <form action="/user/changeStatus" method="POST">
+        <input type="hidden" th:attr="name=${_csrf.parameterName}, value=${_csrf.token}"/>
+        <input type="submit" value="Button" name="current_status"
+               class="btn btn-success">
+
+    </form>
 </div>
 
 <br><br>

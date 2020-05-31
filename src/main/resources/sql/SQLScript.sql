@@ -77,7 +77,7 @@ CREATE TABLE maintenance (
   fuel_gauge INT NOT NULL,
   mileage INT NOT NULL,
   cleaning_price INT NOT NULL,
-  maintenance_notes VARCHAR(500) NOT NULL,
+  maintenance_notes VARCHAR(500) DEFAULT NULL,
   frame TINYINT NOT NULL,
   wheels TINYINT NOT NULL,
   lights TINYINT NOT NULL,
@@ -88,6 +88,7 @@ CREATE TABLE maintenance (
   brakes TINYINT NOT NULL,
   suspention TINYINT NOT NULL,
   maintenance_date DATE NULL DEFAULT NULL,
+  repair_cost INT NOT NULL,
   fk_autocamper_id INT NOT NULL,
   CONSTRAINT fk_autocamper
     FOREIGN KEY (fk_autocamper_id)
