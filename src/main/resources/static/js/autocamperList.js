@@ -2,6 +2,7 @@ var slider;
 var output;
 
 window.onload = function(){
+	console.log("hello");
 	slider =  document.getElementById("slide");
 	output = document.getElementById("price");
 	slider.max = 0;
