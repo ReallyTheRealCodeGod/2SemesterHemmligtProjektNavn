@@ -6,6 +6,6 @@ function show(name){
         a[i].disabled = !a[i].disabled;
     }
     if(button.innerHTML === "Gem"){
-        button.type = "submit";
+        document.getElementById("form").submit();
     } else{button.innerHTML = "Gem";}
 }

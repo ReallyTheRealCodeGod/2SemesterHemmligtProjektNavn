@@ -114,7 +114,7 @@ CREATE TABLE rental (
   CONSTRAINT fk_cus
     FOREIGN KEY (fk_customer_id)
     REFERENCES customer (id),
-  CONSTRAINT fk_rental_maintenance1
+  CONSTRAINT fk_rental_maintenance
     FOREIGN KEY (fk_maintenance_id)
     REFERENCES maintenance (id)
     );
