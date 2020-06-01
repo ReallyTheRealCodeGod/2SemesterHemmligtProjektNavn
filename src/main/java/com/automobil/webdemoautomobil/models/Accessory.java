@@ -68,6 +68,7 @@ public class Accessory {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", rentalId=" + rentalId +
+                ", typeId=" + typeId +
                 '}';
     }
 }

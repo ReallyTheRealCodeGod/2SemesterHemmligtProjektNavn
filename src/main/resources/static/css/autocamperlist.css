@@ -140,3 +140,7 @@ body{
         color: #2c3e50!important;
         font-size: 2rem;
     }
+
+.no-pad{
+    padding:0px!important;
+}

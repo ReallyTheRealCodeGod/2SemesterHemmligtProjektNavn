@@ -16,8 +16,8 @@ public class AccessoryRepository implements IRepository<Accessory>{
 
     public Accessory getById(int id){
 	 try{
-        String select = "SELECT * FROM accessory_type acctype " +
-                "JOIN Accessory access " +
+        String select = "SELECT * FROM Accessory access" +
+                "JOIN accessory_type acctype " +
                 "ON acctype.id = access.fk_accessory_type_id " +
                 "WHERE acctype.id = ?";
         PreparedStatement prep = connection.prepareStatement(select);
@@ -26,11 +26,7 @@ public class AccessoryRepository implements IRepository<Accessory>{
         prep.setInt(1,id);
         ResultSet rs = prep.executeQuery();
         while(rs.next()) {
-            accessory.setId(rs.getInt("id"));
-            accessory.setName(rs.getString("name"));
-            accessory.setPrice(rs.getInt("price"));
-            accessory.setDescription(rs.getString("description"));
-            accessory.setRentalId(rs.getInt("fk_rental_id"));
+            accessory = load(rs);
         }
         return accessory;
      }catch(SQLException sql) {
@@ -53,24 +49,17 @@ public class AccessoryRepository implements IRepository<Accessory>{
             i++;
         }
 
-        String select = "SELECT * FROM accessory_type acctype\n" +
-                "JOIN Accessory access\n" +
-                "ON acctype.id = access.fk_accessory_type_id;" +
-                "WHERE" + sb + " LIKE %?% ";
+        String select = "SELECT * FROM accessory access\n" +
+                "JOIN Accessory_type acctype\n" +
+                "ON acctype.id = access.fk_accessory_type_id " +
+                "WHERE " + sb + " LIKE ?";
 
         PreparedStatement prep = connection.prepareStatement(select);
         prep.setString(1, parameter);
         ResultSet rs = prep.executeQuery();
 
         while(rs.next()) {
-            Accessory accessory = new Accessory();
-            accessory.setId(rs.getInt("id"));
-            accessory.setName(rs.getString("name"));
-            accessory.setPrice(rs.getInt("price"));
-            accessory.setDescription(rs.getString("description"));
-            accessory.setRentalId(rs.getInt("fk_rental_id"));
-
-            list.add(accessory);
+            list.add(load(rs));
         }
         return list;
         }catch(SQLException sql){
@@ -91,14 +80,7 @@ public class AccessoryRepository implements IRepository<Accessory>{
         ResultSet rs = prep.executeQuery();
 
         while(rs.next()) {
-            Accessory accessory = new Accessory();
-            accessory.setId(rs.getInt("id"));
-            accessory.setName(rs.getString("name"));
-            accessory.setPrice(rs.getInt("price"));
-            accessory.setDescription(rs.getString("description"));
-            accessory.setRentalId(rs.getInt("fk_rental_id"));
-
-            list.add(accessory);
+            list.add(load(rs));
         }
         return list;
      }catch(SQLException sql){
@@ -147,18 +129,7 @@ public class AccessoryRepository implements IRepository<Accessory>{
 
     public boolean update(Accessory accessory) {
 	 try {
-	     String update = "UPDATE accessory_type " +
-                 "SET name = ?," +
-                 "price = ?, " +
-                 "description = ? " +
-                 "WHERE id = ?";
-         PreparedStatement prepAccType = connection.prepareStatement(update);
-         prepAccType.setString(1, accessory.getName());
-         prepAccType.setInt(2, accessory.getPrice());
-         prepAccType.setString(3, accessory.getDescription());
-         prepAccType.setInt(4, accessory.getTypeId());
-
-         update = "UPDATE accessory " +
+         String update = "UPDATE accessory " +
                  " SET fk_accessory_type_id = ?," +
                  "fk_rental_id = ? " +
                  "WHERE id = ?";
@@ -167,7 +138,6 @@ public class AccessoryRepository implements IRepository<Accessory>{
          prepAcc.setInt(2, accessory.getRentalId());
          prepAcc.setInt(3, accessory.getId());
          prepAcc.executeUpdate();
-         prepAccType.executeUpdate();
          return true;
      }catch(SQLException sql){
              sql.printStackTrace();
@@ -175,11 +145,26 @@ public class AccessoryRepository implements IRepository<Accessory>{
          }
     }
 
+    public boolean updateType(Accessory accessory)throws SQLException{
+        String update = "UPDATE accessory_type " +
+                "SET name = ?," +
+                "price = ?, " +
+                "description = ? " +
+                "WHERE id = ?";
+        PreparedStatement prepAccType = connection.prepareStatement(update);
+        prepAccType.setString(1, accessory.getName());
+        prepAccType.setInt(2, accessory.getPrice());
+        prepAccType.setString(3, accessory.getDescription());
+        prepAccType.setInt(4, accessory.getTypeId());
+        prepAccType.executeUpdate();
+        return true;
+    }
+
     public boolean delete(Accessory accessory) {
 	 try{
         String delete = "DELETE FROM accessory WHERE id = ?";
         PreparedStatement prep = connection.prepareStatement(delete);
-        prep.setInt(1, accessory.getRentalId());
+        prep.setInt(1, accessory.getId());
         prep.executeUpdate();
         return true;
 	 }catch(SQLException sql){
@@ -187,4 +172,15 @@ public class AccessoryRepository implements IRepository<Accessory>{
 	     return false;
 	 }
 	 }
+
+	 private Accessory load(ResultSet rs) throws SQLException{
+         Accessory accessory = new Accessory();
+         accessory.setId(rs.getInt("id"));
+         accessory.setName(rs.getString("name"));
+         accessory.setPrice(rs.getInt("price"));
+         accessory.setDescription(rs.getString("description"));
+         accessory.setTypeId(rs.getInt("fk_accessory_type_id"));
+         accessory.setRentalId(rs.getInt("fk_rental_id"));
+         return accessory;
+     }
 }

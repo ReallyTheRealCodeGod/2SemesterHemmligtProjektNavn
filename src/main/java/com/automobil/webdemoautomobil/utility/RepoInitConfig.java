@@ -44,4 +44,9 @@ public class RepoInitConfig {
     public BuiltInFeatureRepository getBuiltInFeatures(){
         return new BuiltInFeatureRepository();
     }
+
+    @Bean
+    public AccessoryRepository getAccessory(){
+        return new AccessoryRepository();
+    }
 }
