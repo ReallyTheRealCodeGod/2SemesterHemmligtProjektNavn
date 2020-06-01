@@ -62,9 +62,9 @@ public class accessoryCrudController {
         }
         return "redirect:/admin/accessories";
     }
+
     @PostMapping("/edit")
-    public String edit(@ModelAttribute Accessory accessory, @RequestParam String name){
-        System.out.println(name);
+    public String edit(@ModelAttribute Accessory accessory){
         System.out.println(accessory);
         return "redirect:/admin/accessories";
     }

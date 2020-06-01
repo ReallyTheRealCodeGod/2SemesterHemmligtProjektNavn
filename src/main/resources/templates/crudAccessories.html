@@ -36,15 +36,20 @@
     </thead>
     <tbody>
     <tr class="table-bordered" th:each="accessory: ${accessories.keySet()}">
-        <form id="form" action="/admin/accessories/edit" method="POST">
-            <td scope="col"><input disabled type="text" name="name" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessory.getName()}"/></td>
-            <td scope="col"><input disabled type="number" name="price" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessory.getPrice()}"/></td>
-            <td scope="col"><textarea disabled name="description" th:class="${accessory.getName()} + ' ' + form-control" th:text="${accessory.getDescription()}"></textarea></td>
-            <th scope="col"><input disabled type="number" name="amount" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessories.get(accessory)}"/></th>
-            <input type="hidden" name="id" th:value="${accessory.getId()}">
-            <td scope="row" class="row">
-                <button th:name="${accessory.getName()}" th:id="${accessory.getName()}"  type="button" class="btn btn-info col" onclick="show(name)">Rediger</button>
-                <button formaction="/admin/accessories/delete" name="delete" type="submit" th:value="${accessory.getTypeId()}" class="btn btn-danger col">Delete</button></td>
+        <form method="post">
+            <div>
+                <td><input disabled type="text" name="name" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessory.getName()}"/></td>
+                <td scope="col"><input disabled type="number" name="price" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessory.getPrice()}"/></td>
+                <td scope="col"><textarea disabled name="description" th:class="${accessory.getName()} + ' ' + form-control" th:text="${accessory.getDescription()}"></textarea></td>
+                <th><input disabled type="number" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessories.get(accessory)}"/></th>
+                <td>
+                    <input type="hidden" name="typeId" th:value="${accessory.getTypeId()}">
+                    <input type="button" th:id="${accessory.getName()}" class="btn btn-info" onclick="show(id)">
+                    <input formaction="/admin/accessories/edit" type="submit" class="btn btn-info" th:id="${accessory.getName()} + Save" style="display: none">
+                    <input formaction="/admin/accessories/delete" type="submit" class="btn btn-danger" th:value="${accessory.getTypeId()}">
+                </td>
+            </div>
+
         </form>
     </tr>
     </tbody>
