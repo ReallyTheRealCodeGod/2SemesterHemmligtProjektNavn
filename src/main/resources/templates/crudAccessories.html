@@ -42,9 +42,9 @@
             <td scope="col"><textarea disabled name="description" th:class="${accessory.getName()} + ' ' + form-control" th:text="${accessory.getDescription()}"></textarea></td>
             <th scope="col"><input disabled type="number" name="amount" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessories.get(accessory)}"/></th>
             <input type="hidden" name="id" th:value="${accessory.getId()}">
-            <td scope="col">
-                <button th:name="${accessory.getName()}" th:id="${accessory.getName()}"  type="button" class="btn btn-info col w-50" onclick="show(name)">Rediger</button>
-                <button formaction="/admin/accessories/delete" name="delete" type="submit" th:value="${accessory.getTypeId()}" class="btn btn-danger col w-50">Delete</button></td>
+            <td scope="row">
+                <button th:name="${accessory.getName()}" th:id="${accessory.getName()}"  type="button" class="btn btn-info col" onclick="show(name)">Rediger</button>
+                <button formaction="/admin/accessories/delete" name="delete" type="submit" th:value="${accessory.getTypeId()}" class="btn btn-danger col">Delete</button></td>
         </form>
     </tr>
     </tbody>
@@ -57,7 +57,7 @@
     </button>
 </div>
 <div class="card w-100 collapse container" id="add">
-    <form action="/admin/addAccessory" method="POST">
+    <form action="/admin/accessories/addAccessory" method="POST">
     <table class="table container-fluid m-0">
         <thead class="table-bordered thead-dark">
         <tr>
