@@ -1,6 +1,7 @@
 package com.automobil.webdemoautomobil.controllers;
 
 import com.automobil.webdemoautomobil.models.Autocamper;
+import com.automobil.webdemoautomobil.models.AutocamperType;
 import com.automobil.webdemoautomobil.models.BuiltInFeature;
 import com.automobil.webdemoautomobil.repositories.AutocamperTypeRepository;
 import com.automobil.webdemoautomobil.repositories.BuiltInFeatureRepository;
@@ -13,6 +14,7 @@ import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -32,7 +34,17 @@ public class AutocamperDetailsController{
     }
 
     @GetMapping("")
-    public String list(Model model){
+    public String getAvailiable(Model model){
+        ArrayList<Autocamper> autos = autoRepo.getByParameter(Integer.toString(Autocamper.AVAILABLE), "current_status");
+        for(int a = 0; a < autos.size(); a++){
+            for(int b = a+1; b < autos.size(); b++){
+                if(autos.get(a).getType().equals(autos.get(b).getType())){
+                    autos.remove(b);
+                }
+            }
+        }
+        System.out.println(autos);
+
         model.addAttribute("autos", autoRepo.getAll());
         model.addAttribute("autoTypes", autoTypes.getAll());
         model.addAttribute("features", featureRepo.getAll());
@@ -41,7 +53,9 @@ public class AutocamperDetailsController{
 
     @GetMapping("/details")
     public String details(@RequestParam int id, Model model){
-        model.addAttribute("auto", autoRepo.getById(id));
+        Autocamper auto = autoRepo.getById(id);
+        System.out.println(auto);
+        model.addAttribute("auto", auto);
         return "/salesAssistant/autocamperDetails";
     }
 }

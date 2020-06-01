@@ -54,27 +54,22 @@
         </div>
         <div class="container">
             <div class="row">
-                <script>
-                    var autocamperPrices = [];
-                    var autocamperBrand = [];
-                </script>
-                <th:block th:each = "autoType, loop : ${autoTypes}">
-                    <div class="col-md-4" th:id="${'autocamper_'+loop.index}">
-                        <script>
-                            var count = [[${loop.index}]];
-                            autocamperPrices.push([[${autoType.getPrice()}]]);
-                            autocamperBrand.push("[[${autoType.getBrand()}]]");
-                        </script>
+                <th:block th:each = "auto : ${autos}">
+                    <div class="col-md-4" th:value="${auto.getType().getBrand() + ' ' + auto.getType().getModel()}">
                         <div class="card mb-4 shadow-sm camperElement">
                             <img src="/img/autocamperPictures/autocamper.png" class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"/>
                             <div class="card-body">
-                                <p class="badge badge-primary"><span th:text="${autoType.getBrand()}"></span> : <span th:text="${autoType.getModel()}"></span></p>
-                                <p class="card-text" th:text="${autoType.getDescription()}"></p>
+                                <h3 th:if="${auto.getStatus()} == 4" class="badge badge-danger">Udlejet</h3>
+                                <h3 th:if="${auto.getStatus()} == 1" class="badge badge-success">Ledig</h3>
+                                <h3 th:if="${auto.getStatus()} == 3" class="badge badge-info">Under Vedligeholdelse</h3>
+
+                                <p class="badge badge-primary"><span th:text="${auto.getType().getBrand()}"></span> : <span th:text="${auto.getType().getModel()}"></span></p>
+                                <p class="card-text" th:text="${auto.getType().getDescription()}"></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <a th:href="@{/autocampers/details(id=${autos[0].getId()})}"><button type="button" class="btn  btn-outline-secondary">View</button></a>
+                                        <a th:href="@{/autocampers/details(id=${auto.getId()})}"><button type="button" class="btn  btn-outline-secondary">View</button></a>
                                     </div>
-                                    <small class="text-muted"> <span th:text="${autoType.getPrice()}"></span> <span> Kr/dag</span></small>
+                                    <small class="text-muted"> <span th:text="${auto.getType().getPrice()}"></span> <span> Kr/dag</span></small>
                                 </div>
                             </div>
                         </div>

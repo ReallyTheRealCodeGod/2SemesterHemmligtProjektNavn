@@ -45,7 +45,7 @@ CREATE TABLE type_features (
 CREATE TABLE autocamper(
   id INT PRIMARY KEY AUTO_INCREMENT,
   mileage INT NOT NULL,
-  current_status TINYINT NOT NULL,
+  current_status TINYINT NOT NULL DEFAULT 1,
   picture VARCHAR(20) DEFAULT NULL,
   fk_brand VARCHAR(25) NOT NULL,
   fk_model VARCHAR(45) NOT NULL,

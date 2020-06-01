@@ -60,6 +60,8 @@ public class Accessory {
         this.typeId = typeId;
     }
 
+
+
     @Override
     public String toString() {
         return "Accessory{" +

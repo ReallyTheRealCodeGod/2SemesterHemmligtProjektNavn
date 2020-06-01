@@ -1,8 +1,9 @@
 package com.automobil.webdemoautomobil.models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class AutocamperType {
+public class AutocamperType{
     private String brand;
     private String model;
     private ArrayList<BuiltInFeature> builtInFeatures;
@@ -158,5 +159,18 @@ public class AutocamperType {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){ return true;}
+        if (o == null || this.getClass() != o.getClass()){return false;}
+        AutocamperType other = (AutocamperType) o;
+        return brand.equals(other.brand) && model.equals(other.model);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brand, model);
     }
 }
