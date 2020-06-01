@@ -11,7 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="../css/autocamperlist.css"/>
 
-    <script src="js/autocamperList.js" type="text/javascript"></script>
+    <script src="../js/autocamperList.js" type="text/javascript"></script>
     <title>Autocampers</title>
 </head>
 <body>
@@ -47,10 +47,11 @@
                             <td th:text="${feature.getName()}"></td><td><input type="checkbox" class=" right-align" name="features" th:value="${feature.getName()}" onclick="featureUpdate()"/></td>
                         </tr>
                     </table>
-                <button id="search" data-target="#features" class="btn btn-primary  card-body" type="button">Søg</button>
+                    <button id="search" data-target="#features" style="color: white" onmouseover="this.style.backgroundColor='#ffc107';" onmouseout="this.style.backgroundColor='#87ceea';" class="btn btn-primary  card-body" type="button">Ryd</button>
+
+                    <button onclick="location.href='/admin';" style="color: white" onmouseover="this.style.backgroundColor='#dc3545';" onmouseout="this.style.backgroundColor='#87ceea';" class="btn  card-body" type="button">Tilbage</button>
                 </div>
         </div>
-
         <div class="container">
             <div class="row">
                 <script>
