@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -36,6 +37,12 @@ public class AutocamperDetailsController{
         model.addAttribute("autoTypes", autoTypes.getAll());
         model.addAttribute("features", featureRepo.getAll());
         return "/autocamperList";
+    }
+
+    @GetMapping("/details")
+    public String details(@RequestParam int id, Model model){
+        model.addAttribute("auto", autoRepo.getById(id));
+        return "/salesAssistant/autocamperDetails";
     }
 }
 

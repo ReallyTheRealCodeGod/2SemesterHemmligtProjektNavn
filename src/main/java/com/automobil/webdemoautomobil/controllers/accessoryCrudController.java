@@ -54,6 +54,7 @@ public class accessoryCrudController {
         acc.setName(name);
         acc.setDescription(description);
         acc.setPrice(price);
+        System.out.println(acc + " " + amount);
         try {
             accRep.updateType(acc);
         }catch(SQLException sql){
@@ -71,6 +72,13 @@ public class accessoryCrudController {
                     ArrayList<Accessory> a = accRep.getByParameter(Integer.toString(typeId), "fk_accessory_type_id");
                     for(int i = 0; i < difference; i++) {
                         accRep.delete(a.get(i));
+                    }
+                }
+                // If new amount is more than old amount accessories have been added and should be created in the system
+                if(amount > types.get(key)){
+                    int difference = amount - types.get(key);
+                    for(int i = 0; i < difference; i++){
+                        accRep.create(acc);
                     }
                 }
             }

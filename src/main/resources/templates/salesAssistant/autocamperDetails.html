@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -19,55 +19,55 @@
                 <h5>Specificationer</h5>
                 <tr >
                     <td>Mærke:</td>
-                    <td>THYMELEAF HERE</td>
+                    <td th:text="${auto.getType().getBrand()}">THYMELEAF HERE</td>
                 </tr>
                 <tr >
                     <td>Model:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getModel()}">#</td>
                 </tr>
                 <tr >
                     <td>Kr/dag:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getPrice()}">#</td>
                 </tr>
                 <tr >
                     <td>Hestekrafter:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getHorsePower()}">#</td>
                 </tr>
                 <tr >
                     <td>Max fart:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getMaxSpeed()}">#</td>
                 </tr>
                 <tr >
                     <td>Produktions år:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getProductionYear()}">#</td>
                 </tr>
                 <tr >
                     <td>Tank størrelse:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getFuelCapacity()}">#</td>
                 </tr>
                 <tr >
                     <td>Højde:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getHeight()}">#</td>
                 </tr>
                 <tr >
                     <td>Længde:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getLength()}">#</td>
                 </tr>
                 <tr >
                     <td>Bredte:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getWidth()}">#</td>
                 </tr>
                 <tr >
                     <td>Kvadrat meter:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getArea()}">#</td>
                 </tr>
                 <tr >
                     <td>Indendørs højde:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getStandingHeight()}">#</td>
                 </tr>
                 <tr >
                     <td>Vægt:</td>
-                    <td>#</td>
+                    <td th:text="${auto.getType().getWeight()}">#</td>
                 </tr>
             </table>
         </div>
