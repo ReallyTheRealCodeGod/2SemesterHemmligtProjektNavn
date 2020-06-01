@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -25,24 +26,7 @@ public class accessoryCrudController {
 
     @GetMapping("")
     public String accessories(Model model){
-        ArrayList<Accessory> acc = accRep.getAll();
-        HashMap<Integer, Integer> amounts = new HashMap();
-        HashMap<Accessory, Integer> list = new HashMap<>();
-
-        //counts occurrences of any given accessory
-        for(Accessory a: acc){
-            amounts.putIfAbsent(a.getTypeId(), 0);
-            amounts.put(a.getTypeId(), amounts.get(a.getTypeId()) + 1);
-        }
-        //creates a unique list of accessories mapped to their respective amounts
-        Set<Integer> keys = amounts.keySet();
-        for(Accessory a: acc){
-            if(keys.contains(a.getTypeId())) {
-                list.put(a, amounts.get(a.getTypeId()));
-                keys.remove(a.getTypeId());
-            }
-        }
-        model.addAttribute("accessories", list);
+        model.addAttribute("accessories", accRep.getAllTypes());
         return "/crudAccessories";
     }
 
@@ -64,8 +48,34 @@ public class accessoryCrudController {
     }
 
     @PostMapping("/edit")
-    public String edit(@ModelAttribute Accessory accessory){
-        System.out.println(accessory);
+    public String edit(@RequestParam int amount, @RequestParam int typeId, @RequestParam String name, @RequestParam  String description, @RequestParam int price){
+        Accessory acc = new Accessory();
+        acc.setTypeId(typeId);
+        acc.setName(name);
+        acc.setDescription(description);
+        acc.setPrice(price);
+        try {
+            accRep.updateType(acc);
+        }catch(SQLException sql){
+            sql.printStackTrace();
+        }
+
+        //compare input amount with database amount.
+        HashMap<Accessory, Integer> types = accRep.getAllTypes();
+        Set<Accessory> keys = types.keySet();
+        for(Accessory key: keys){
+            if(key.getTypeId() == typeId){
+                //if new amount is less than old amount accessories have been lost and should be deleted from the system
+                if(amount < types.get(key)){
+                    int difference = types.get(key) - amount;
+                    ArrayList<Accessory> a = accRep.getByParameter(Integer.toString(typeId), "fk_accessory_type_id");
+                    for(int i = 0; i < difference; i++) {
+                        accRep.delete(a.get(i));
+                    }
+                }
+            }
+        }
+
         return "redirect:/admin/accessories";
     }
 }

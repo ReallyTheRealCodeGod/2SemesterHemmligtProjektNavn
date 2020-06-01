@@ -5,6 +5,8 @@ import com.automobil.webdemoautomobil.utility.JDBCConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 
 public class AccessoryRepository implements IRepository<Accessory>{
@@ -126,6 +128,28 @@ public class AccessoryRepository implements IRepository<Accessory>{
             return null;
         }
         }
+
+        //returns a list of all types as well as the amount of occurences in the database
+    public HashMap<Accessory, Integer> getAllTypes(){
+        ArrayList<Accessory> acc = getAll();
+        HashMap<Integer, Integer> amounts = new HashMap();
+        HashMap<Accessory, Integer> map = new HashMap<>();
+
+        //counts occurrences of any given accessory
+        for(Accessory a: acc){
+            amounts.putIfAbsent(a.getTypeId(), 0);
+            amounts.put(a.getTypeId(), amounts.get(a.getTypeId()) + 1);
+        }
+        //creates a unique list of accessories mapped to their respective amounts
+        Set<Integer> keys = amounts.keySet();
+        for(Accessory a: acc){
+            if(keys.contains(a.getTypeId())) {
+                map.put(a, amounts.get(a.getTypeId()));
+                keys.remove(a.getTypeId());
+            }
+        }
+        return map;
+    }
 
     public boolean update(Accessory accessory) {
 	 try {

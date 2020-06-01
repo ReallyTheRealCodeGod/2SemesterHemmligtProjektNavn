@@ -41,7 +41,7 @@
                 <td><input disabled type="text" name="name" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessory.getName()}"/></td>
                 <td scope="col"><input disabled type="number" name="price" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessory.getPrice()}"/></td>
                 <td scope="col"><textarea disabled name="description" th:class="${accessory.getName()} + ' ' + form-control" th:text="${accessory.getDescription()}"></textarea></td>
-                <th><input disabled type="number" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessories.get(accessory)}"/></th>
+                <th><input disabled type="number" name="amount" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessories.get(accessory)}"/></th>
                 <td>
                     <input type="hidden" name="typeId" th:value="${accessory.getTypeId()}">
                     <input type="button" th:id="${accessory.getName()}" class="btn btn-info" onclick="show(id)">
