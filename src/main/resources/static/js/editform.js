@@ -1,15 +1,11 @@
-window.onload = function(){
-    console.log("hello");
-};
-
-function show(name, button){
+function show(name){
     var a = document.getElementsByClassName(name);
-    console.log(a);
-    console.log(" and ");
-    console.log(button);
+    var button = document.getElementById(name);
+
     for(var i = 0; i < a.length; i++){
-        a[i].disabled = false;
+        a[i].disabled = !a[i].disabled;
     }
-    button.text = "Gem";
-    //button.type = "submit";
+    if(button.innerHTML === "Gem"){
+        button.type = "submit";
+    } else{button.innerHTML = "Gem";}
 }

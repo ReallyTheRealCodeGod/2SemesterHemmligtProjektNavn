@@ -24,7 +24,7 @@
     <div class="divider-custom-line"></div>
 </div>
 
-<table class="table container-fluid">
+<table class="table container">
     <thead class="thead-dark">
     <tr>
         <th scope="col">Navn</th>
@@ -36,14 +36,14 @@
     </thead>
     <tbody>
     <tr class="table-bordered" th:each="accessory: ${accessories.keySet()}">
-        <form method="post">
+        <form id="form" action="/admin/accessories/edit" method="post">
             <td scope="col"><input disabled type="text" name="name" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessory.getName()}"/></td>
             <td scope="col"><input disabled type="number" name="price" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessory.getPrice()}"/></td>
             <td scope="col"><textarea disabled name="description" th:class="${accessory.getName()} + ' ' + form-control" th:text="${accessory.getDescription()}"></textarea></td>
             <th scope="col"><input disabled type="number" name="amount" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessories.get(accessory)}"/></th>
-            <input type="hidden">
+            <input type="hidden" name="id" th:value="${accessory.getId()}">
             <td scope="col">
-                <button th:name="${accessory.getName()}"  type="button" class="btn btn-info col w-50" onclick="show(name, this)">Rediger</button>
+                <button th:name="${accessory.getName()}" th:id="${accessory.getName()}"  type="button" class="btn btn-info col w-50" onclick="show(name)">Rediger</button>
                 <button formaction="/admin/accessories/delete" name="delete" type="submit" th:value="${accessory.getTypeId()}" class="btn btn-danger col w-50">Delete</button></td>
         </form>
     </tr>
@@ -51,12 +51,12 @@
 </table>
 
 
-<div class="container-fluid">
+<div class="container">
     <button class="btn btn-primary my-2 mx-auto" type="button" data-toggle="collapse" data-target="#add" aria-expanded="false" aria-controls="add">
         Tilføj
     </button>
 </div>
-<div class="card w-100 collapse" id="add">
+<div class="card w-100 collapse container" id="add">
     <form action="/admin/addAccessory" method="POST">
     <table class="table container-fluid m-0">
         <thead class="table-bordered thead-dark">

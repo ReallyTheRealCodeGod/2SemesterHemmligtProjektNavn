@@ -62,13 +62,10 @@ public class accessoryCrudController {
         }
         return "redirect:/admin/accessories";
     }
-
-    /*@PostMapping("/delete")
-    public String delete(@RequestParam String delete){
-        ArrayList<Accessory> accessories = accRep.getByParameter(delete, "fk_accessory_type_id");
-        for(Accessory a: accessories){
-            accRep.delete(a);
-        }
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute Accessory accessory, @RequestParam String name){
+        System.out.println(name);
+        System.out.println(accessory);
         return "redirect:/admin/accessories";
-    }*/
+    }
 }
