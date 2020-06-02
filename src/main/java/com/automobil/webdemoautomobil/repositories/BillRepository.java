@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 public class BillRepository implements IRepository<Bill>{
     Connection connection;
-    public BillRepository(){
-        connection = JDBCConnection.getDatabaseConnection();
+    public BillRepository() throws SQLException {
+        connection = JDBCConnection.getInstance().getConnection();
     }
 
     public Bill getById(int id){

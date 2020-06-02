@@ -44,7 +44,7 @@ public class DatabaseTest {
     }
 
     @BeforeEach
-    public void initilizeRepos(){
+    public void initilizeRepos() throws SQLException {
         acc = new AccessoryRepository();
         auto = new AutocamperRepository();
         bill = new BillRepository();
@@ -88,7 +88,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void updateEntity(){
+    public void updateEntity() throws SQLException {
         acc = new AccessoryRepository();
         Accessory a = new Accessory(12, "hello", "this is a test accessory", 1,1);
         assertTrue(acc.update(a), "could not create entity");

@@ -13,8 +13,8 @@ public class CustomerRepository implements IRepository<Customer>{
 
     private Connection conn;
 
-    public CustomerRepository(){
-        this.conn = JDBCConnection.getDatabaseConnection();
+    public CustomerRepository() throws SQLException {
+        this.conn = JDBCConnection.getInstance().getConnection();
     }
 
     public Customer getById(int id){
