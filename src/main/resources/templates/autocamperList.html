@@ -57,7 +57,7 @@
                 <th:block th:each = "auto : ${autos}">
                     <div class="col-md-4" th:value="${auto.getType().getBrand() + ' ' + auto.getType().getModel()}">
                         <div class="card mb-4 shadow-sm camperElement">
-                            <img src="/img/autocamperPictures/autocamper.png" class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"/>
+                            <img th:src="${auto.getPicture() != null}? ${auto.getPicture()}: '/img/transportation.png'" class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"/>
                             <div class="card-body">
                                 <h3 th:if="${auto.getStatus()} == 4" class="badge badge-danger">Udlejet</h3>
                                 <h3 th:if="${auto.getStatus()} == 1" class="badge badge-success">Ledig</h3>

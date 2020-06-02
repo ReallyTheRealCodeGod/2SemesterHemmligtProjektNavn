@@ -1,97 +1,94 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title th:text="${auto.getType().getBrand() + ' ' + auto.getType().getModel()}"></title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body class="m-4">
-<div>
-    <h1>Autocamper detaljer</h1>
+<div class="masthead">
+    <h1 class="masthead-heading">Autocamper detaljer</h1>
     <button type="button" class="btn btn-secondary">Tilbage</button>
 </div>
 
 <br>
-<form>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <table class="table table-sm table-bordered">
-                <h5>Specificationer</h5>
-                <tr >
-                    <td>Mærke:</td>
-                    <td th:text="${auto.getType().getBrand()}">THYMELEAF HERE</td>
-                </tr>
-                <tr >
-                    <td>Model:</td>
-                    <td th:text="${auto.getType().getModel()}">#</td>
-                </tr>
-                <tr >
-                    <td>Kr/dag:</td>
-                    <td th:text="${auto.getType().getPrice()}">#</td>
-                </tr>
-                <tr >
-                    <td>Hestekrafter:</td>
-                    <td th:text="${auto.getType().getHorsePower()}">#</td>
-                </tr>
-                <tr >
-                    <td>Max fart:</td>
-                    <td th:text="${auto.getType().getMaxSpeed()}">#</td>
-                </tr>
-                <tr >
-                    <td>Produktions år:</td>
-                    <td th:text="${auto.getType().getProductionYear()}">#</td>
-                </tr>
-                <tr >
-                    <td>Tank størrelse:</td>
-                    <td th:text="${auto.getType().getFuelCapacity()}">#</td>
-                </tr>
-                <tr >
-                    <td>Højde:</td>
-                    <td th:text="${auto.getType().getHeight()}">#</td>
-                </tr>
-                <tr >
-                    <td>Længde:</td>
-                    <td th:text="${auto.getType().getLength()}">#</td>
-                </tr>
-                <tr >
-                    <td>Bredte:</td>
-                    <td th:text="${auto.getType().getWidth()}">#</td>
-                </tr>
-                <tr >
-                    <td>Kvadrat meter:</td>
-                    <td th:text="${auto.getType().getArea()}">#</td>
-                </tr>
-                <tr >
-                    <td>Indendørs højde:</td>
-                    <td th:text="${auto.getType().getStandingHeight()}">#</td>
-                </tr>
-                <tr >
-                    <td>Vægt:</td>
-                    <td th:text="${auto.getType().getWeight()}">#</td>
-                </tr>
-            </table>
-        </div>
-        <div class="form-group col-md-5 ml-auto">
-            <table class="table-sm table-bordered">
-                <thead class="card-title">Standardudstyr</thead>
-                <tr>
-                    <th>name this col</th>
-                    <th>Picture icon this col</th>
-                </tr>
-                <tr>
-                    <td>THYMELEAFE</td>
-                    <td>THRYMELEAF</td>
-                </tr>
-            </table>
-        </div>
+<div class="row ">
+    <div class="form-group col ml-auto card">
+        <h1 class="card-header">Standart Udstyr</h1>
+        <ul class="list-group list-group-flush">
+            <li th:each="feature : ${auto.getType().getBuiltInFeatures()}">
+                <div style="white-space:nowrap">
+                    <img  th:src="${feature.getIcon() != null}? ${feature.getIcon()} : '/img/symbols/noSymbol.png'" style="display:inline" height="20" width="20" src="img/transportation.png" class="bd-placeholder-img img-fluid" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"/>
+                    <p th:text="${feature.getName()}" style="display:inline; text-align: center">#</p>
+                </div>
+            </li>
+        </ul>
     </div>
-</form>
+
+    <div class="col ml-auto card">
+        <h1 class="card-header">Detaljer</h1>
+        <ul>
+            <li>
+                <th>Mærke:</th>
+                <td th:text="${auto.getType().getBrand()}">#</td>
+            </li>
+            <li>
+                <th>Model:</th>
+                <td th:text="${auto.getType().getModel()}">#</td>
+            </li>
+            <li>
+                <th>Kr/dag:</th>
+                <td th:text="${auto.getType().getPrice()}">#</td>
+            </li>
+            <li>
+                <th>Hestekrafter:</th>
+                <td th:text="${auto.getType().getHorsePower()}">#</td>
+            </li>
+            <li>
+                <th>Max fart:</th>
+                <td th:text="${auto.getType().getMaxSpeed()}">#</td>
+            </li>
+            <li>
+                <th>Produktions år:</th>
+                <td th:text="${auto.getType().getProductionYear()}">#</td>
+            </li>
+            <li>
+                <th>Tank størrelse:</th>
+                <td th:text="${auto.getType().getFuelCapacity()}">#</td>
+            </li>
+            <li>
+                <th>Højde:</th>
+                <td th:text="${auto.getType().getHeight()}">#</td>
+            </li>
+            <li>
+                <th>Længde:</th>
+                <td th:text="${auto.getType().getLength()}">#</td>
+            </li>
+            <li>
+                <th>Bredte:</th>
+                <td th:text="${auto.getType().getWidth()}">#</td>
+            </li>
+            <li>
+                <th>Kvadrat meter:</th>
+                <td th:text="${auto.getType().getArea()}">#</td>
+            </li>
+            <li>
+                <th>Indendørs højde:</th>
+                <td th:text="${auto.getType().getStandingHeight()}">#</td>
+            </li>
+            <li>
+                <th>Vægt:</th>
+                <td th:text="${auto.getType().getWeight()}">#</td>
+            </li>
+        </ul>
+    </div>
+</div>
 
 <div class="input-group">
     <div class="input-group-prepend">
         <span class="input-group-text">Beskrivelse:</span>
     </div>
-    <textarea rows="8" class="form-control" aria-label="With textarea"></textarea>
+    <textarea disabled rows="8" class="form-control" aria-label="With textarea" th:text="${auto.getType().getDescription()}"></textarea>
 </div>
 <br>
 <div>
