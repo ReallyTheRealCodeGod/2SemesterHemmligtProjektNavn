@@ -89,7 +89,6 @@ VALUES
 
 INSERT INTO `autocamper_db`.`rental`
 (`id`,
-`acc_price`,
 `start_date`,
 `end_date`,
 `lon_pickUp_loc`,
@@ -100,7 +99,7 @@ INSERT INTO `autocamper_db`.`rental`
 `fk_customer_id`,
 `fk_maintenance_id`)
 VALUES
-(DEFAULT, 5000, "2019-12-08", "2020-12-08", 55.676097, 12.568337, 55.676097, 12.568337, 1, 1, 1);
+(DEFAULT, "2019-12-08", "2020-12-08", 55.676097, 12.568337, 55.676097, 12.568337, 1, 1, 1);
 
 INSERT INTO `autocamper_db`.`built_in_feature` (`id`, `name`, `description`) VALUES ('1', 'Køkken', 'Den er fin');
 INSERT INTO `autocamper_db`.`built_in_feature` (`id`, `name`, `description`) VALUES ('2', 'Handicap Lift', 'Nice');

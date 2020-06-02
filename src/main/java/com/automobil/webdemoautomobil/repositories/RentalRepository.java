@@ -80,19 +80,29 @@ public class RentalRepository implements IRepository<Rental>{
 
     public Rental create(Rental rental){
         try {
-            PreparedStatement createRental = conn.prepareStatement
-                    ("INSERT INTO rental VALUES(DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                            + Statement.RETURN_GENERATED_KEYS);
-            createRental.setInt(1, rental.getAccumulatedPrice());
-            createRental.setDate(2, Date.valueOf(rental.getStartDate()));
-            createRental.setDate(3,Date.valueOf(rental.getEndDate()));
-            createRental.setLong(4,rental.getLongPickUpLoc());
-            createRental.setLong(5,rental.getLatPickUpLoc());
-            createRental.setLong(6, rental.getLongDropOffLoc());
-            createRental.setLong(7, rental.getLatDropOffLoc());
-            createRental.setInt(8, rental.getAutocamperId());
-            createRental.setInt(9, rental.getCustomerId());
-            createRental.setInt(10, rental.getMaintenanceId());
+            String sql ="INSERT INTO rental " +
+                    "(id, " +
+                    "start_date, " +
+                    "end_date, " +
+                    "lon_pickUp_loc, " +
+                    "lat_pickUp_loc, " +
+                    "lon_dropOff_loc, " +
+                    "lat_dropOff_loc, " +
+                    "fk_autocamper_id, " +
+                    "fk_customer_id, " +
+                    "fk_maintenance_id) " +
+                    " VALUES " +
+                    " (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement createRental = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            createRental.setDate(1, Date.valueOf(rental.getStartDate()));
+            createRental.setDate(2,Date.valueOf(rental.getEndDate()));
+            createRental.setLong(3,rental.getLongPickUpLoc());
+            createRental.setLong(4,rental.getLatPickUpLoc());
+            createRental.setLong(5, rental.getLongDropOffLoc());
+            createRental.setLong(6, rental.getLatDropOffLoc());
+            createRental.setInt(7, rental.getAutocamperId());
+            createRental.setInt(8, rental.getCustomerId());
+            createRental.setInt(9, rental.getMaintenanceId());
             createRental.executeUpdate();
             ResultSet rs = createRental.getGeneratedKeys();
             rs.next();
@@ -108,7 +118,6 @@ public class RentalRepository implements IRepository<Rental>{
         try {
             PreparedStatement updateRental = conn.prepareStatement
                     ("UPDATE rental SET " +
-                            "acc_price = ?, " +
                             "start_date = ?, " +
                             "end_date = ?, " +
                             "lon_pickUp_loc = ?, " +
@@ -120,17 +129,16 @@ public class RentalRepository implements IRepository<Rental>{
                             "fk_maintenance_id = ?" +
 
                             "WHERE rental_id = ?");
-            updateRental.setInt(1, rental.getAccumulatedPrice());
-            updateRental.setDate(2, Date.valueOf(rental.getStartDate()));
-            updateRental.setDate(3,Date.valueOf(rental.getEndDate()));
-            updateRental.setLong(4,rental.getLongPickUpLoc());
-            updateRental.setLong(5,rental.getLatPickUpLoc());
-            updateRental.setLong(6, rental.getLongDropOffLoc());
-            updateRental.setLong(7, rental.getLatDropOffLoc());
-            updateRental.setInt(8, rental.getAutocamperId());
-            updateRental.setInt(9, rental.getCustomerId());
-            updateRental.setInt(10, rental.getMaintenanceId());
-            updateRental.setInt(11, rental.getId());
+            updateRental.setDate(1, Date.valueOf(rental.getStartDate()));
+            updateRental.setDate(2,Date.valueOf(rental.getEndDate()));
+            updateRental.setLong(3,rental.getLongPickUpLoc());
+            updateRental.setLong(4,rental.getLatPickUpLoc());
+            updateRental.setLong(5, rental.getLongDropOffLoc());
+            updateRental.setLong(6, rental.getLatDropOffLoc());
+            updateRental.setInt(7, rental.getAutocamperId());
+            updateRental.setInt(8, rental.getCustomerId());
+            updateRental.setInt(9, rental.getMaintenanceId());
+            updateRental.setInt(10, rental.getId());
             updateRental.executeUpdate();
         }
         catch (SQLException e){
@@ -156,16 +164,15 @@ public class RentalRepository implements IRepository<Rental>{
     private Rental load(ResultSet rs) throws SQLException{
         Rental rental = new Rental();
         rental.setId(rs.getInt(1));
-        rental.setAccumulatedPrice(rs.getInt(2));
-        rental.setStartDate(rs.getDate(3).toLocalDate());
-        rental.setEndDate(rs.getDate(4).toLocalDate());
-        rental.setLongPickUpLoc(rs.getLong(5));
-        rental.setLatPickUpLoc(rs.getLong(6));
-        rental.setLongDropOffLoc(rs.getLong(7));
-        rental.setLatDropOffLoc(rs.getLong(8));
-        rental.setAutocamperId(rs.getInt(9));
-        rental.setMaintenanceId(rs.getInt(10));
-        rental.setCustomerId(rs.getInt(11));
+        rental.setStartDate(rs.getDate(2).toLocalDate());
+        rental.setEndDate(rs.getDate(3).toLocalDate());
+        rental.setLongPickUpLoc(rs.getLong(4));
+        rental.setLatPickUpLoc(rs.getLong(5));
+        rental.setLongDropOffLoc(rs.getLong(6));
+        rental.setLatDropOffLoc(rs.getLong(7));
+        rental.setAutocamperId(rs.getInt(8));
+        rental.setMaintenanceId(rs.getInt(9));
+        rental.setCustomerId(rs.getInt(10));
         return rental;
     }
 

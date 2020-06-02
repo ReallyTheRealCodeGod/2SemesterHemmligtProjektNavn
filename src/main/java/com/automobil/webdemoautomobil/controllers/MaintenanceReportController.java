@@ -36,6 +36,9 @@ public class MaintenanceReportController {
 
     @GetMapping("/finishedrentals")
     public String finished(Model model){
+
+
+
         ArrayList<Autocamper> autocampers = autocamperRepository.getByParameter(Integer.toString(Autocamper.UNDER_MAINTENANCE), "current_status");
         ArrayList<Customer> customers = customerRepository.getAll();
         ArrayList<Rental> rental = rentalRepository.getAll();

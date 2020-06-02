@@ -88,7 +88,7 @@ CREATE TABLE maintenance (
   brakes TINYINT NOT NULL,
   suspention TINYINT NOT NULL,
   maintenance_date DATE NULL DEFAULT NULL,
-  repair_cost INT NOT NULL,
+  repair_cost INT DEFAULT NULL,
   fk_autocamper_id INT NOT NULL,
   CONSTRAINT fk_autocamper
     FOREIGN KEY (fk_autocamper_id)
@@ -97,7 +97,6 @@ CREATE TABLE maintenance (
 
 CREATE TABLE rental (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  acc_price INT NULL DEFAULT NULL,
   start_date DATE NULL DEFAULT NULL,
   end_date DATE NULL DEFAULT NULL,
   lon_pickUp_loc FLOAT(10,6) NULL DEFAULT NULL,
@@ -105,8 +104,8 @@ CREATE TABLE rental (
   lon_dropOff_loc FLOAT(10,6) NULL DEFAULT NULL,
   lat_dropOff_loc FLOAT(10,6) NULL DEFAULT NULL,
   fk_autocamper_id INT NOT NULL,
-  fk_customer_id INT NULL DEFAULT NULL,
-  fk_maintenance_id INT NOT NULL,
+  fk_customer_id INT DEFAULT NULL,
+  fk_maintenance_id INT DEFAULT NULL,
 
   CONSTRAINT fk_camper
     FOREIGN KEY (fk_autocamper_id)
