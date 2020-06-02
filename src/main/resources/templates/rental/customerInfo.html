@@ -41,18 +41,18 @@
     </div>
     <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Kunde oplysninger</h4>
-        <form class="needs-validation" novalidate>
+        <form action="/rental/addCustomer" method="post" class="needs-validation" novalidate>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName">Fornavn</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="Hans" value="" required>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Fornavn" value="" required>
                     <div class="invalid-feedback">
                         Udfyld venligst fornavn.
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Efternavn</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Hansen" value="" required>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Efternavn" value="" required>
                     <div class="invalid-feedback">
                         Udfyld venligst efternavn.
                     </div>
@@ -61,7 +61,7 @@
 
             <div class="mb-3">
                 <label for="cpr">CPR nummer <span class="text-muted"></span></label>
-                <input type="cpr" class="form-control" id="cpr" placeholder="xxxxxxxxxx">
+                <input type="cpr" class="form-control" id="cpr" name="cprNr" placeholder="xxxxxxxxxx">
                 <div class="invalid-feedback">
                     Indtast korrekt cpr nummer.
                 </div>
@@ -70,7 +70,7 @@
 
             <div class="mb-3">
                 <label for="email">Email <span class="text-muted"></span></label>
-                <input type="email" class="form-control" id="email" placeholder="dig@eksempel.dk">
+                <input type="email" class="form-control" id="email" name="email" placeholder="dig@eksempel.dk">
                 <div class="invalid-feedback">
                     Email er påkrævet som brugerinformation.
                 </div>
@@ -78,7 +78,7 @@
 
             <div class="mb-3">
                 <label for="street">Gadenavn</label>
-                <input type="text" class="form-control" id="street" placeholder="Hovedgade" required>
+                <input type="text" class="form-control" id="street" name="streetName" placeholder="Hovedgade" required>
                 <div class="invalid-feedback">
                     Udfyld venligst korrekt gadenavn.
                 </div>
@@ -87,7 +87,7 @@
             <div class="row">
                 <div class="col-md-5 mb-3">
                     <label for="streetNumber">Nr.</label>
-                    <input type="text" class="form-control" id="streetNumber" placeholder="230B" required>
+                    <input type="text" class="form-control" id="streetNumber" name="houseNr" placeholder="230B" required>
                     <div class="invalid-feedback">
                         Udfyld venligst et korrekt husnummer.
                     </div>
@@ -95,12 +95,12 @@
                 <div class="col-md-4 mb-3">
                     <label for="floor">Etage</label>
                     <span class="text-muted">(Valgfrit)</span>
-                    <input type="text" class="form-control" id="floor" placeholder="1TH" required>
+                    <input type="text" class="form-control" id="floor" name="floor" placeholder="1TH" required>
 
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="zip">Postnummer</label>
-                    <input type="text" class="form-control" id="zip" placeholder="2300" required>
+                    <input type="text" class="form-control" id="zip" name="postalCode" placeholder="2300" required>
                     <div class="invalid-feedback">
                         Udfyld venligst postnummer.
                     </div>
@@ -109,7 +109,7 @@
 
             <div class="mb-3">
                 <label for="telephone">Telefon <span class="text-muted"></span></label>
-                <input type="text" class="form-control" id="telephone" placeholder="+45 31722951">
+                <input type="text" class="form-control" name="phoneNr" id="telephone" placeholder="+45 31722951">
             </div>
 
 
@@ -140,7 +140,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="cc-number">Kortnummer</label>
-                    <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                    <input type="text" class="form-control" id="cc-number" name="cardNr" placeholder="" required>
                     <div class="invalid-feedback">
                         Gyldigt kortnummer er påkrævet.
                     </div>
@@ -156,7 +156,7 @@
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="cc-cvv">CVV</label>
-                    <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                    <input type="text" class="form-control" id="cc-cvv" name="cardCVV" placeholder="" required>
                     <div class="invalid-feedback">
                         Security code required
                     </div>
@@ -171,7 +171,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <hr class="mb-4">
-                    <button class="btn btn-danger btn-lg btn-block" type="submit">Afbryd</button>
+                    <button class="btn btn-danger btn-lg btn-block" type="button">Afbryd</button>
                 </div>
             </div>
         </form>

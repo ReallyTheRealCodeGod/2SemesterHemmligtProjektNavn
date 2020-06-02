@@ -20,14 +20,14 @@ import java.util.Set;
 
 @Controller
 @RequestMapping("/autocampers")
-public class AutocamperDetailsController{
+public class AutocamperController {
 
     AutocamperRepository autoRepo;
     AutocamperTypeRepository autoTypes;
     BuiltInFeatureRepository featureRepo;
 
     @Autowired
-    AutocamperDetailsController(AutocamperRepository autoRepo, AutocamperTypeRepository autoTypes, BuiltInFeatureRepository featureRepo){
+    AutocamperController(AutocamperRepository autoRepo, AutocamperTypeRepository autoTypes, BuiltInFeatureRepository featureRepo){
         this.featureRepo = featureRepo;
         this.autoRepo = autoRepo;
         this.autoTypes = autoTypes;
@@ -49,7 +49,7 @@ public class AutocamperDetailsController{
         model.addAttribute("autos", autoRepo.getAll());
         model.addAttribute("autoTypes", autoTypes.getAll());
         model.addAttribute("features", featureRepo.getAll());
-        return "/autocamperList";
+        return "/autocampers/autocamperList";
     }
 
     @GetMapping("/details")
@@ -57,7 +57,7 @@ public class AutocamperDetailsController{
         RentalSession rs = new RentalSession();
         Autocamper auto = autoRepo.getById(id);
         model.addAttribute("auto", auto);
-        return "/salesAssistant/autocamperDetails";
+        return "/autocampers/autocamperDetails";
 
     }
 }

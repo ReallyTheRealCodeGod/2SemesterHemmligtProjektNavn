@@ -29,7 +29,7 @@ public class AdminController {
 
     @GetMapping("")
     public String admin(){
-        return "/admin";
+        return "/admin/admin";
     }
 
     @GetMapping("/prices")
@@ -37,7 +37,7 @@ public class AdminController {
         VariablePrices vp = vpr.getPrices();
         System.out.println(vp);
         model.addAttribute("prices", vp);
-        return "/variablePricesView";
+        return "/admin/variablePricesView";
     }
 
 

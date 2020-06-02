@@ -92,7 +92,7 @@ public class RentalRepository implements IRepository<Rental>{
                     "fk_customer_id, " +
                     "fk_maintenance_id) " +
                     " VALUES " +
-                    " (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    " (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, NULL)";
             PreparedStatement createRental = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             createRental.setDate(1, Date.valueOf(rental.getStartDate()));
             createRental.setDate(2,Date.valueOf(rental.getEndDate()));
@@ -102,7 +102,6 @@ public class RentalRepository implements IRepository<Rental>{
             createRental.setLong(6, rental.getLatDropOffLoc());
             createRental.setInt(7, rental.getAutocamperId());
             createRental.setInt(8, rental.getCustomerId());
-            createRental.setInt(9, rental.getMaintenanceId());
             createRental.executeUpdate();
             ResultSet rs = createRental.getGeneratedKeys();
             rs.next();

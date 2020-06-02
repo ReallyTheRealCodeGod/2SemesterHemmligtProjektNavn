@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Succes</title>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="display-3">Bekræftelse</h1>
+</div>
+
+<div class="container">
+    <div class="row mb-5">
+        <!-- heighest column to the left-->
+        <div class="col mr-2">
+            <p class="card-header lead">Autocamper</p>
+            <table class="table-sm w-100 card-body">
+                <thead class="alert alert-primary">
+                    <tr>
+                        <th scope="col">Mærke</th>
+                        <th scope="col">Model</th>
+                        <th scope="col">Størrelse</th>
+                        <th scope="col">Pris</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${rentalSession.getAutocamper()?.getType()?.getBrand()}">#</td>
+                        <td th:text="${rentalSession.getAutocamper()?.getType()?.getModel()}">#</td>
+                        <td th:text="${rentalSession.getAutocamper()?.getType()?.getArea()}">#<span> M/2</span></td>
+                        <td th:text="${rentalSession.getAutocamper()?.getType()?.getPrice()}">#<span> Kr/per. dag</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- heighest column to the right -->
+        <div class="col ml-2">
+            <p class="lead card-header">Kunde</p>
+            <table class="table-sm w-100 card-body">
+                <thead class="alert alert-primary">
+                    <tr>
+                        <th scope="col">Navn</th>
+                        <th scope="col">CPR</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Telefon</th>
+                        <th scope="col">Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span th:text="${rentalSession.getCustomer()?.getFirstName()}"></span>
+                            <span> </span>
+                            <span th:text="${rentalSession.getCustomer()?.getLastName()}"></span>
+                        </td>
+                        <td th:text="${rentalSession.getCustomer()?.getCprNr()}">#</td>
+                        <td>
+                            <span th:text="${rentalSession.getCustomer()?.getStreetName()}"></span>
+                            <span> </span>
+                            <span th:text="${rentalSession.getCustomer()?.getHouseNr()}"></span>
+                            <span> </span>
+                            <span th:text="${rentalSession.getCustomer()?.getFloor()}"></span>
+                        </td>
+                        <td th:text="${rentalSession.getCustomer()?.getPhoneNr()}">#</td>
+                        <td th:text="${rentalSession.getCustomer()?.getEmail()}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container card">
+        <p class="card-header lead">Udlejning</p>
+        <div class="row">
+            <div class="col">
+                <table class="table card-body">
+                    <tr class="row">
+                        <th class="col m-0 alert alert-primary">Udlejnings Periode</th>
+                        <td class="col">
+                            <span th:text="${rentalSession.getRental()?.getStartDate()}">#</span>
+                            <span> - </span>
+                            <span th:text="${rentalSession.getRental()?.getEndDate()}">#</span>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <th class="col m-0 alert alert-primary">Pick-Up Lokation</th>
+                        <td class="col" th:text="${rentalSession.getRental()?.getLongPickUpLoc()}">#</td>
+                    </tr>
+                    <tr class="row">
+                        <th class="col m-0 alert alert-primary">Drop-Off Lokation</th>
+                        <td class="col" th:text="${rentalSession.getRental()?.getLongDropOffLoc()}">#</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col">
+                <p class="lead card-header">Tilbehør</p>
+                <table class="table card-body">
+                    <thead class="alert alert-primary">
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Pris</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="accessory: ${rentalSession.getAccessories()}" >
+                        <td th:text="${accessory.getName()}">#</td>
+                        <td th:text="${accessory.getPrice()}">#</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Nederste række -->
+
+<div class="container">
+    <a class="btn btn-success" href="/rental/save">BEKRÆFT</a>
+    <a class="btn btn-danger" href="/logud">FORTRYD</a>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

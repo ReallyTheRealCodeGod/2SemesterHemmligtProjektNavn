@@ -27,7 +27,7 @@ public class accessoryCrudController {
     @GetMapping("")
     public String accessories(Model model){
         model.addAttribute("accessories", accRep.getAllTypes());
-        return "/crudAccessories";
+        return "/admin/crudAccessories";
     }
 
     @PostMapping("/addAccessory")
@@ -83,7 +83,6 @@ public class accessoryCrudController {
                 }
             }
         }
-
         return "redirect:/admin/accessories";
     }
 }

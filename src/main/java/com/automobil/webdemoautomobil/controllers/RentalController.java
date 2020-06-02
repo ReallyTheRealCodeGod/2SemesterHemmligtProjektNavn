@@ -21,8 +21,6 @@ import java.util.ArrayList;
 public class RentalController {
 
     AutocamperRepository autoRepo;
-    AutocamperTypeRepository autoTypes;
-    BuiltInFeatureRepository featureRepo;
     AccessoryRepository accessoriesList;
     RentalRepository rentalRepo;
     CustomerRepository customerRepo;
@@ -35,55 +33,67 @@ public class RentalController {
         this.customerRepo = customerRepo;
     }
 
-    @GetMapping("/")
-    public String variablePrices(Model model){
-        return "/variablePricesView";
+    @PostMapping("")
+    public String addAutocamper(@RequestParam int id, HttpServletRequest request){
+        getSession(request).setAutocamper(autoRepo.getById(id));
+        return "redirect:/rental/customer";
     }
 
     @GetMapping("/rentalDetails")
-    public String rentalDetails(Model model,HttpServletRequest request, @RequestParam int id) {
-        RentalSession rs = new RentalSession();
-        rs.setAutocamper(autoRepo.getById(id));
-        request.getSession().setAttribute("session", (RentalSession) rs);
-        
+    public String rentalDetails(Model model) {
         model.addAttribute("accessories", accessoriesList.getAllTypes());
-        return "/udlejningsinfo";
+        return "/rental/rentalInfo";
     }
-    
     @PostMapping("/addRental")
     public String addRental(HttpServletRequest request, @RequestParam(name="accessoryCheck", required = false) int[] accessoryCheck, @ModelAttribute Rental rental){
-        RentalSession rs = (RentalSession) request.getSession().getAttribute("session");
-        rental.setAutocamperId(rs.getAutocamper().getId());
-        rental = rentalRepo.create(rental);
+        RentalSession rs = getSession(request);
+        rs.setRental(rental);
         if(accessoryCheck != null) {
             for (int i : accessoryCheck) {
                 ArrayList<Accessory> all = accessoriesList.getByParameter(Integer.toString(i), "fk_accessory_type_id");
                 for (Accessory a : all) {
-                    if (a.getRentalId() == 0) {
-                        a.setRentalId(rental.getId());
-                        System.out.println(a);
-                        accessoriesList.update(a);
+                    if (a != null && a.getRentalId() == 0) {
+                        rs.getAccessories().add(a);
                         continue;
                     }
                 }
             }
         }
-        return "redirect:/";
+        return "redirect:/rental/confirmation";
     }
 
-    @PostMapping("/customer")
-    public String customerInfo(Model model, HttpServletRequest request) {
-       
-        return "/salesAssistant/checkOut";
+    @GetMapping("/customer")
+    public String customerInfo(){
+        return "/rental/customerInfo";
     }
 
     @PostMapping("/addCustomer")
     public String addCustomer(@ModelAttribute Customer customer, HttpServletRequest request){
-        customer = customerRepo.create(customer);
-        RentalSession rs = (RentalSession) request.getSession().getAttribute("session");
-        rs.setCustomer(customer);
-        return "redirect:/rentalDetails";
+        getSession(request).setCustomer(customer);
+        return "redirect:/rental/rentalDetails";
     }
 
+    @GetMapping("/confirmation")
+    public String rentalConfirmation(HttpServletRequest request, Model model){
+        model.addAttribute("rentalSession", getSession(request));
+        return "/rental/rentalConfirmation";
+    }
 
+    @GetMapping("/save")
+    public String save(HttpServletRequest request){
+        if(getSession(request).save()){
+            System.out.println("success");
+        };
+        return "/admin/admin";
+    }
+
+    private RentalSession getSession(HttpServletRequest request){
+        RentalSession rs = (RentalSession) request.getSession().getAttribute("session");
+        if(rs == null){
+            rs = new RentalSession();
+            request.getSession().setAttribute("session", rs);
+        }
+        System.out.println(rs);
+        return rs;
+    }
 }

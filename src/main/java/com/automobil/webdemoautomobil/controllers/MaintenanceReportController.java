@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/mechanic")
 public class MaintenanceReportController {
 
 
@@ -36,19 +36,15 @@ public class MaintenanceReportController {
 
     @GetMapping("/finishedrentals")
     public String finished(Model model){
-
-
-
         ArrayList<Autocamper> autocampers = autocamperRepository.getByParameter(Integer.toString(Autocamper.UNDER_MAINTENANCE), "current_status");
         ArrayList<Customer> customers = customerRepository.getAll();
         ArrayList<Rental> rental = rentalRepository.getAll();
-
 
         model.addAttribute("autocampers", autocampers);
         model.addAttribute("rentals", rental);
         model.addAttribute("customers", customers);
 
-        return "/user/finishedrentals";
+        return "/autocampers/finishedrentals";
     }
 
     @GetMapping("/report")
@@ -60,7 +56,7 @@ public class MaintenanceReportController {
         model.addAttribute("customers", customer);
         model.addAttribute("rentals", rental);
 
-        return "/user/report";
+        return "/mechanic/report";
     }
 
     @GetMapping("/underRepList")
@@ -71,14 +67,14 @@ public class MaintenanceReportController {
 
         model.addAttribute("autocampers", autocamper);
         model.addAttribute("maintenances", maintenance);
-        return "/user/underRepList";
+        return "/mechaninic/underRepList";
     }
 
     @GetMapping("/mechComments")
     public String comments(Model model, @RequestParam int id){
         model.addAttribute("note", maintenanceReportRepository.getById(id));
 
-        return "/user/mechComments";
+        return "/mechanic/mechComments";
     }
 
     @PostMapping("/fillMaintenanceReport")
@@ -86,13 +82,13 @@ public class MaintenanceReportController {
         System.out.println(reportFromPost.getPartStatus());
                 maintenanceReportRepository.create(reportFromPost);
 
-        return "redirect:/user/finishedrentals";
+        return "redirect:/mechanic/finishedrentals";
     }
 
     @PostMapping("/changeStatus")
     public String changeStatus(@ModelAttribute Autocamper autocamperFromPost){
         autocamperRepository.update(autocamperFromPost);
-        return "redirect:/user";
+        return "redirect:/mechanic/finishedrentals";
     }
 
 }

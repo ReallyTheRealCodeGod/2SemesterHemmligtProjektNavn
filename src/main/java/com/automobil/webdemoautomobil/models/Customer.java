@@ -125,4 +125,22 @@ public class Customer {
     public void setCardCVV(int cardCVV) {
         this.cardCVV = cardCVV;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNr='" + phoneNr + '\'' +
+                ", cprNr=" + cprNr +
+                ", postalCode=" + postalCode +
+                ", streetName='" + streetName + '\'' +
+                ", houseNr='" + houseNr + '\'' +
+                ", floor='" + floor + '\'' +
+                ", cardNr=" + cardNr +
+                ", cardCVV=" + cardCVV +
+                '}';
+    }
 }

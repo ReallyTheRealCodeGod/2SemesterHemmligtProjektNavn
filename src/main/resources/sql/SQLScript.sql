@@ -105,7 +105,7 @@ CREATE TABLE rental (
   lat_dropOff_loc FLOAT(10,6) NULL DEFAULT NULL,
   fk_autocamper_id INT NOT NULL,
   fk_customer_id INT DEFAULT NULL,
-  fk_maintenance_id INT DEFAULT NULL,
+  fk_maintenance_id INT NULL,
 
   CONSTRAINT fk_camper
     FOREIGN KEY (fk_autocamper_id)

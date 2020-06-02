@@ -126,7 +126,7 @@ public class CustomerRepository implements IRepository<Customer>{
         try {
             PreparedStatement createCustomer = conn.prepareStatement
                     ("INSERT INTO customer " +
-                    "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" + Statement.RETURN_GENERATED_KEYS);
+                    "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             createCustomer.setString(1, customer.getLastName());
             createCustomer.setString(2,customer.getFirstName());
             createCustomer.setString(3, customer.getEmail());

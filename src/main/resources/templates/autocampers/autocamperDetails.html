@@ -45,14 +45,13 @@
                 <textarea disabled rows="8" class="form-control" aria-label="With textarea"
                           th:text="${auto.getType().getDescription()}"></textarea>
             </div>
-            <div class="row">
-
+            <div class="w-100 my-2">
                 <form action="/rental" method="post">
-                    <button type="submit" class="btn btn-success" name="id" th:value="${auto.getId()}">Udlej</button>
+                    <button type="submit" class="btn w-100 btn-success" name="id" th:value="${auto.getId()}">Udlej</button>
                 </form>
             </div>
-            <div class="row">
-                <button type="button" class="btn btn-secondary">Tilbage</button>
+            <div class="w-100 my-2">
+                <button type="button" class="btn w-100 btn-secondary">Tilbage</button>
             </div>
         </div>
         <div class="col ml-2 card">
