@@ -11,22 +11,38 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 public class JDBCConnection {
 
-    @Value("db.user")
-    public static String user;
-    @Value("db.url")
-    private static String url;
-    @Value("db.password")
-    public static String password;
+    @Value("${db.user}")
+    private String user;
+    @Value("${db.url}")
+    private String url;
+    @Value("${db.password}")
+    private String password;
 
     private static JDBCConnection instance;
+   // private static Connection conn;
     private Connection conn;
 
-    private JDBCConnection() throws SQLException{
-        this.conn = DriverManager.getConnection(url,user,password);
+    private JDBCConnection(){
+        try{
+            Properties prop = new Properties();
+            prop.load(new FileInputStream("src/main/resources/application.properties"));
+            user = prop.getProperty("db.user");
+            password = prop.getProperty("db.password");
+            url = prop.getProperty("db.url");
+            System.out.println(url);
+            this.conn = DriverManager.getConnection(url,user,password);
+        }
+        catch (SQLException | FileNotFoundException e){
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public Connection getConnection(){
@@ -42,7 +58,13 @@ public class JDBCConnection {
         }
         return instance;
     }
+
+
 /*
+    public JDBCConnection(){
+        conn = JDBCConnection.getDatabaseConnection();
+    }
+
     public static Connection getDatabaseConnection(){
         if(conn == null) {
             try {
@@ -64,4 +86,7 @@ public class JDBCConnection {
     }
 
  */
+
+
+
 }
