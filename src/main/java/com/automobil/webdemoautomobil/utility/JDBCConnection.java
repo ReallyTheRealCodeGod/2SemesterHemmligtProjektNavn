@@ -15,7 +15,6 @@ import java.util.Properties;
 
 public class JDBCConnection {
 
-    private static Connection conn;
     @Value("db.user")
     public static String user;
     @Value("db.url")
@@ -23,13 +22,32 @@ public class JDBCConnection {
     @Value("db.password")
     public static String password;
 
+    private static JDBCConnection instance;
+    private Connection conn;
+
+    private JDBCConnection() throws SQLException{
+        this.conn = DriverManager.getConnection(url,user,password);
+    }
+
+    public Connection getConnection(){
+        return conn;
+    }
+
     // singleton for getting an instance of the database connection
+    public static JDBCConnection getInstance() throws SQLException{
+        if(instance == null){
+            instance = new JDBCConnection();
+        } else if (instance.getConnection().isClosed()){
+            instance = new JDBCConnection();
+        }
+        return instance;
+    }
+/*
     public static Connection getDatabaseConnection(){
         if(conn == null) {
             try {
                 Properties prop = new Properties();
                 prop.load(new FileInputStream("src/main/resources/application.properties"));
-
                 user = prop.getProperty("db.user");
                 url = prop.getProperty("db.url");
                 password = prop.getProperty("db.password");
@@ -44,4 +62,6 @@ public class JDBCConnection {
         }
         return conn;
     }
+
+ */
 }

@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class MaintenanceReportRepository implements IRepository<MaintenanceReport>{
     Connection connection;
 
-    public MaintenanceReportRepository() {
-        connection = JDBCConnection.getDatabaseConnection();
+    public MaintenanceReportRepository() throws SQLException {
+        connection = JDBCConnection.getInstance().getConnection();
     }
 
     public MaintenanceReport getById(int id) {

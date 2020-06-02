@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class BuiltInFeatureRepository implements IRepository<BuiltInFeature> {
 
     private Connection connection;
-    public BuiltInFeatureRepository() {
-        connection = JDBCConnection.getDatabaseConnection();
+    public BuiltInFeatureRepository() throws SQLException {
+        connection = JDBCConnection.getInstance().getConnection();
     }
 
 

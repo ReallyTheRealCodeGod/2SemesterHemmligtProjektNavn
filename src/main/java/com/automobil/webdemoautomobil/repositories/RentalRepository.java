@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class RentalRepository implements IRepository<Rental>{
     Connection conn;
 
-    public RentalRepository(){
-        this.conn = JDBCConnection.getDatabaseConnection();
+    public RentalRepository() throws SQLException {
+        this.conn = JDBCConnection.getInstance().getConnection();
     }
 
     public Rental getById(int id) {

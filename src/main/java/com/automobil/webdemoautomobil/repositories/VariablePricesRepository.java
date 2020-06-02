@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class VariablePricesRepository{
     Connection conn;
 
-    public VariablePricesRepository(){
-        this.conn = JDBCConnection.getDatabaseConnection();
+    public VariablePricesRepository() throws SQLException {
+        this.conn = JDBCConnection.getInstance().getConnection();
     }
 
     public VariablePrices getPrices(){

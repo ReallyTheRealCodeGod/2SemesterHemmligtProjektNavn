@@ -19,9 +19,15 @@ public class AutocamperRepository implements IRepository<Autocamper> {
     @Autowired
     private AutocamperTypeRepository typeRepository;
 
-    public AutocamperRepository() {
+    public AutocamperRepository() throws SQLException {
+        connection = JDBCConnection.getInstance().getConnection();
+    }
+/*
+    public AutocamperRepository() throws SQLException {
         connection = JDBCConnection.getDatabaseConnection();
     }
+
+ */
 
     public Autocamper getById(int id) {
         try {

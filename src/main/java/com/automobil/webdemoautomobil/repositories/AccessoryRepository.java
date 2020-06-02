@@ -10,11 +10,16 @@ import java.util.Set;
 
 
 public class AccessoryRepository implements IRepository<Accessory>{
-    Connection connection;
 
-    public AccessoryRepository(){
-        connection = JDBCConnection.getDatabaseConnection();
+    private Connection connection;
+
+    public AccessoryRepository() throws SQLException {
+        connection = JDBCConnection.getInstance().getConnection();
     }
+
+
+
+
 
     public Accessory getById(int id){
 	 try{

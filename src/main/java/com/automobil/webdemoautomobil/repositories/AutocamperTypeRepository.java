@@ -19,8 +19,8 @@ public class AutocamperTypeRepository{
     @Autowired
     private BuiltInFeatureRepository features;
 
-    public AutocamperTypeRepository(){
-        this.conn = JDBCConnection.getDatabaseConnection();
+    public AutocamperTypeRepository() throws SQLException {
+        this.conn = JDBCConnection.getInstance().getConnection();
     }
 
     //finder ikke med id men med autocamperType
