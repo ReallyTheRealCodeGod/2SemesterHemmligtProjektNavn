@@ -46,6 +46,7 @@
                           th:text="${auto.getType().getDescription()}"></textarea>
             </div>
             <div class="row">
+
                 <form action="/rental/accessoriesloc" method="post">
                     <button type="submit" class="btn btn-success" name="id" th:value="${auto.getId()}">Udlej</button>
                 </form>

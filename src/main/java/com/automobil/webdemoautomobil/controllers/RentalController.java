@@ -48,6 +48,7 @@ public class RentalController {
     public String accessoriesloc(Model model, @RequestParam int id) {
         RentalSession rs = new RentalSession();
         rs.setAutocamper(autoRepo.getById(id));
+        System.out.println(rs.getAutocamper());
         model.addAttribute("session", rs);
         model.addAttribute("accessories", accessoriesList.getAllTypes());
         return "/udlejningsinfo";
