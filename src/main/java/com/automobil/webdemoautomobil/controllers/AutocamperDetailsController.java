@@ -55,9 +55,7 @@ public class AutocamperDetailsController{
     @GetMapping("/details")
     public String details(@RequestParam int id, Model model){
         RentalSession rs = new RentalSession();
-        rs.timeOut();
         Autocamper auto = autoRepo.getById(id);
-        System.out.println(auto);
         model.addAttribute("auto", auto);
         return "/salesAssistant/autocamperDetails";
 

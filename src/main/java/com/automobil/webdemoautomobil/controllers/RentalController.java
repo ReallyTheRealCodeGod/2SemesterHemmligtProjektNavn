@@ -69,6 +69,7 @@ public class RentalController {
                 for (Accessory a : all) {
                     if (a.getRentalId() == 0) {
                         a.setRentalId(newRental.getId());
+                        System.out.println(a);
                         //accessoriesList.update(a);
                         continue;
                     }

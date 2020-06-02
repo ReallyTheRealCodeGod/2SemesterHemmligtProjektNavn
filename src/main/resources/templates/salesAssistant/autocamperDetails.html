@@ -9,7 +9,7 @@
 
 <body class="m-4">
 <div class="card">
-    <div>
+    <div id="image">
         <img th:src="${auto.getPicture() != null}? ${auto.getPicture()}: '/img/autocamperPictures/autocamper.png'" class="card-img-top img-fluid">
     </div>
     <div class="card align-items-center">
@@ -46,9 +46,9 @@
                           th:text="${auto.getType().getDescription()}"></textarea>
             </div>
             <div class="row">
-                <a href="">
-                    <button type="button" class="btn btn-success">Udlej</button>
-                </a>
+                <form action="/rental/accessoriesloc" method="post">
+                    <button type="submit" class="btn btn-success" name="id" th:value="${auto.getId()}">Udlej</button>
+                </form>
             </div>
             <div class="row">
                 <button type="button" class="btn btn-secondary">Tilbage</button>
@@ -150,8 +150,6 @@
         </div>
     </div>
 </div>
-
-<br><br>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

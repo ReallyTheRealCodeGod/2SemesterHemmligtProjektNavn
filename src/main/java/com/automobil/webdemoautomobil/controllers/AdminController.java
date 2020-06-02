@@ -43,7 +43,6 @@ public class AdminController {
 
     @PostMapping("/changePrices")
     public String changePrices(@ModelAttribute VariablePrices prices){
-        System.out.println(prices);
         vpr.editPrices(prices);
         return "redirect:/admin/prices";
     }
