@@ -5,6 +5,7 @@ import com.automobil.webdemoautomobil.models.AutocamperType;
 import com.automobil.webdemoautomobil.models.BuiltInFeature;
 import com.automobil.webdemoautomobil.repositories.AutocamperTypeRepository;
 import com.automobil.webdemoautomobil.repositories.BuiltInFeatureRepository;
+import com.automobil.webdemoautomobil.utility.RentalSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,6 +54,8 @@ public class AutocamperDetailsController{
 
     @GetMapping("/details")
     public String details(@RequestParam int id, Model model){
+        RentalSession rs = new RentalSession();
+        rs.timeOut();
         Autocamper auto = autoRepo.getById(id);
         System.out.println(auto);
         model.addAttribute("auto", auto);
