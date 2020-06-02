@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -19,10 +19,7 @@
 </head>
 <body>
 
-
-
-
-
+<form action="/rental/checkout" method="post">
 <div class="container">
 
     <div class="row justify-content-start m-4">
@@ -43,28 +40,28 @@
                 <p class="lead my-2">Start dato og tid</p>
                 <div class="my-3">
                     <label for="default-picker" class="text-muted my-0">Tid for afhentning</label>
-                    <input type="time" id="default-picker" class="form-control" placeholder="Select time">
+                    <input name="startTime" type="time" id="default-picker" class="form-control" placeholder="Select time">
 
 
                 </div>
-                <form action="/action_page.php" class="md-form md-outline">
+
                     <label for="birthday" class="text-muted my-0">Start udlejning dato:</label>
-                    <input type="date" id="birthday" class="form-control" name="birthday">
-                </form>
+                    <input name="startDate" type="date" id="birthday" class="form-control" >
+
             </div>
 
             <div class="border border-light rounded p-5 my-3">
                 <p class="lead my-2">Slut dato og tid</p>
                 <div class="my-3">
                     <label for="default-picker" class="text-muted my-0">Tid for afhentning</label>
-                    <input type="time" id="default-picker" class="form-control" placeholder="Select time">
+                    <input name="endTime" type="time" id="default-picker" class="form-control" placeholder="Select time">
 
 
                 </div>
-                <form action="/action_page.php">
+
                     <label for="birthday" class="text-muted my-0">Slut udlejning dato:</label>
-                    <input type="date" id="birthday" class="form-control" name="birthday" >
-                </form>
+                    <input name="endDate" type="date" id="birthday" class="form-control" >
+
             </div>
 
 
@@ -76,11 +73,11 @@
 
             <div class="row"  >
 
-                <!-- heighest column to the left-->
+                <!-- heighest column to the right-->
 
                 <div class="col-sm  border border-light rounded table-responsive-xl p-5">
                     <p class="lead">Tilbehør</p>
-                    <div >
+                    <div>
           <span>
             <table class="table">
             <thead class="alert alert-primary">
@@ -90,28 +87,11 @@
                  <th scope="col">Pris</th>
                   </tr>
                 </thead>
-              <tbody>
-                <tr>
-                  <td scope="col" class="form-group form-check">
-                    <input type="checkbox" class="form-check-input mx-3" id="exampleCheck1">
-
-                  </td>
-                  <td>Børnesæde</td>
-                  <td>200 kr.-</td>
-                </tr>
-                <tr>
-                  <td scope="col" class="form-group form-check">
-                    <input type="checkbox" class="form-check-input mx-3" id="exampleCheck1">
-                  </td>
-                  <td>Cykelanhænger</td>
-                  <td>200 kr.-</td>
-                </tr>
-                <tr>
-                  <td scope="col" class="form-group form-check">
-                    <input type="checkbox" class="form-check-input mx-3" id="exampleCheck1">
-                  </td>
-                  <td>Klapsammen Cykel</td>
-                  <td>200 kr.-</td>
+              <tbody >
+                <tr th:each="accessory: ${accessories.keySet()}" >
+                  <td scope="col" class="form-group form-check"><input type="checkbox" name="accessoryCheck" class="form-check-input mx-3" th:value="${accessory.getTypeId()}"></td>
+                  <td th:text="${accessory.getName()}">#</td>
+                  <td th:text="${accessory.getPrice()}">#</td>
                 </tr>
 
 
@@ -126,37 +106,27 @@
 
 
     <!-- Bottom content -->
-    <div class="row align-items-end">
-        <div class="col">
+<div class="row align-items-end">
+    <div class="col">
 
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                <label class="form-check-label" for="defaultCheck1">
-                    Pick-up
-                </label>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+                Pick-up
+            </label>
+        </div>
+
+
+            <div class="form-group">
+                <input type="adress" class="form-control" id="exampleInput" placeholder="Adresse" required>
             </div>
 
-            <form>
-                <div class="form-group">
-                    <input type="adress" class="form-control" id="exampleInput" placeholder="Adresse" required>
-                </div>
-                <div class="p-3">
-            </form>
+            <div class="p-3">
 
-            <div id='map' style='width: 400px; height: 300px;'></div>
-            <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiZWdvaXN0aWNwZXRlIiwiYSI6ImNrYXdqOWo0YTFiZ28ycnB0djhvMTBjeWMifQ.iKdTroB0xMRw5qxqPV8kyQ';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [12.568337, 55.676098],
-                    zoom: 11
+    </div>
 
-
-                });
-            </script>
-
-        </div>
+    </div>
+</div>
     </div>
 
 
@@ -169,76 +139,28 @@
                 Drop-off
             </label>
         </div>
-        <form>
             <div class="form-group">
                 <input type="adress" class="form-control" id="exampleInput" placeholder="Adresse" required>
 
             </div>
 
-        </form>
         <div class="p-3">
-            <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js"></script>
-            <link
-                    rel="stylesheet"
-                    href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css"
-                    type="text/css"
-            />
-            <!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
-            <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
-            <style>
-                .geocoder {
-                    position: absolute;
-                    z-index: 1;
-                    width: 50%;
-                    left: 50%;
-                    margin-left: -25%;
-                    top: 10px;
-                }
-                .mapboxgl-ctrl-geocoder {
-                    min-width: 100%;
-                }
-                #map {
-                    margin-top: 75px;
-                }
-            </style>
-            <div id="map"></div>
-            <div id="geocoder" class="geocoder"></div>
-
-            <script>
-                mapboxgl.accessToken = 'pk.eyJ1IjoiZWdvaXN0aWNwZXRlIiwiYSI6ImNrYXdqOWo0YTFiZ28ycnB0djhvMTBjeWMifQ.iKdTroB0xMRw5qxqPV8kyQ';
-                var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [-79.4512, 43.6568],
-                    zoom: 13
-                });
-
-                var geocoder = new MapboxGeocoder({
-                    accessToken: mapboxgl.accessToken,
-
-                    mapboxgl: mapboxgl,
-
-
-                });
-                function fun(){
-                    console.log(map.valueOf())
-                }
-                document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-            </script>
-
         </div>
 
     </div>
 
-</div>
-<div class="row align-items-middle">
-    <div class="col">
 
+</div>
+
+<div class="container">
+    <div class="row m-5">
+        <div class="col-sm p-5">
+            <input type="hidden" th:value="${session}">
+            <button class="btn btn-lg btn-primary m-5" type="submit" >Submit</button>
+        </div>
     </div>
 </div>
-
-
+</form>
 
 
 <!-- Optional JavaScript -->

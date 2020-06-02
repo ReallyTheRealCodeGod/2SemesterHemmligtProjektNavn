@@ -1,11 +1,15 @@
 package com.automobil.webdemoautomobil.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Rental {
     private int id;
     private int accumulatedPrice;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate startDate;
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate endDate;
     private long longPickUpLoc;
     private long latPickUpLoc;
@@ -117,5 +121,22 @@ public class Rental {
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "id=" + id +
+                ", accumulatedPrice=" + accumulatedPrice +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", longPickUpLoc=" + longPickUpLoc +
+                ", latPickUpLoc=" + latPickUpLoc +
+                ", longDropOffLoc=" + longDropOffLoc +
+                ", latDropOffLoc=" + latDropOffLoc +
+                ", autocamperId=" + autocamperId +
+                ", maintenanceId=" + maintenanceId +
+                ", customerId=" + customerId +
+                '}';
     }
 }

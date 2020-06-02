@@ -1,29 +1,33 @@
 package com.automobil.webdemoautomobil.controllers;
 
+import com.automobil.webdemoautomobil.models.Accessory;
+import com.automobil.webdemoautomobil.models.Rental;
 import com.automobil.webdemoautomobil.models.VariablePrices;
-import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
-import com.automobil.webdemoautomobil.repositories.AutocamperTypeRepository;
-import com.automobil.webdemoautomobil.repositories.BuiltInFeatureRepository;
-import com.automobil.webdemoautomobil.repositories.VariablePricesRepository;
+import com.automobil.webdemoautomobil.repositories.*;
+import com.automobil.webdemoautomobil.utility.RentalSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.Access;
+import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/autocampers")
+@RequestMapping("/rental")
 public class RentalController {
 
     AutocamperRepository autoRepo;
     AutocamperTypeRepository autoTypes;
     BuiltInFeatureRepository featureRepo;
+    AccessoryRepository accessoriesList;
 
     @Autowired
-    RentalController(AutocamperRepository autoRepo, AutocamperTypeRepository autoTypes, BuiltInFeatureRepository featureRepo){
+    RentalController(AutocamperRepository autoRepo, AutocamperTypeRepository autoTypes, BuiltInFeatureRepository featureRepo,AccessoryRepository accessoriesList){
         this.featureRepo = featureRepo;
         this.autoRepo = autoRepo;
         this.autoTypes = autoTypes;
+        this.accessoriesList = accessoriesList;
     }
 
     @GetMapping("/")
@@ -31,7 +35,7 @@ public class RentalController {
         return "/variablePricesView";
     }
 
-    @GetMapping("/rental")
+    @GetMapping("/listauto")
     public String rental(Model model){
         model.addAttribute("autos", autoRepo.getAll());
         model.addAttribute("autoTypes", autoTypes.getAll());
@@ -39,8 +43,44 @@ public class RentalController {
         return "/autocamperList";
     }
 
-    @GetMapping("/rental/checkoutpage")
-    public String checkoutpage(Model model) { return "/udlejningsinfo"; }
+
+    @PostMapping("/accessoriesloc")
+    public String accessoriesloc(Model model, @RequestParam int id) {
+        RentalSession rs = new RentalSession();
+        rs.setAutocamper(autoRepo.getById(id));
+        model.addAttribute("session", rs);
+        model.addAttribute("accessories", accessoriesList.getAllTypes());
+        return "/udlejningsinfo";
+
+    }
+
+
+
+
+
+    @PostMapping("/checkout")
+    public String checkout(Model model, @RequestParam(name="accessoryCheck", required = false) int[] accessoryCheck, @RequestParam RentalSession session,@ModelAttribute Rental newRental ) {
+        newRental.setAutocamperId(session.getAutocamper().getId());
+
+        if(accessoryCheck != null) {
+            for (int i : accessoryCheck) {
+                ArrayList<Accessory> all = accessoriesList.getByParameter(Integer.toString(i), "fk_accessory_type_id");
+
+                for (Accessory a : all) {
+                    if (a.getRentalId() == 0) {
+                        a.setRentalId(newRental.getId());
+                        //accessoriesList.update(a);
+                        continue;
+                    }
+                }
+            }
+        }
+
+        /*RentalSession rs = new RentalSession();
+       // rs.setAutocamper(autoRepo.getById(id));
+        model.addAttribute("session", rs);*/
+
+        return "/salesAssistant/checkOut"; }
 
 
 }

@@ -60,6 +60,7 @@ public class AutocamperDetailsController{
         System.out.println(auto);
         model.addAttribute("auto", auto);
         return "/salesAssistant/autocamperDetails";
+
     }
 }
 
