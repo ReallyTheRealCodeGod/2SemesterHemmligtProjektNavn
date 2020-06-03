@@ -12,10 +12,51 @@
 
    <!-- geolocation mapbox  -->
 
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
+    <script type="text/javascript">
+        var map, map2;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map_canvas'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            });
+            map2 = new google.maps.Map(document.getElementById('map_canvas2'), {
+                center: {lat: -34.397, lng: 150.644},
+                zoom: 8
+            });
+        }
 
+
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmYBZu0baUdqQaMHM9JTP244CkDztnTNo&callback=initMap"
+            async defer></script>
     <title>Udlejnings Info</title>
+
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 50%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+        #map2 {
+            height: 50%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 
@@ -66,11 +107,15 @@
                     </table>
                 </div>
         </div>
-            <!-- maps -->
-        <div class="mt-4">
+
+
+<!--google maps api and adress forms-->
+        <div class="container">
             <div class="row">
-                <!-- pick-up -->
-                <div class="col">
+
+                <div class="col-sm">
+
+                    <!--  One of three columns-->
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                         <label class="form-check-label" for="defaultCheck1">
@@ -80,22 +125,33 @@
                     <div class="form-group">
                         <input type="adress" class="form-control" id="exampleInput" placeholder="Adresse" required>
                     </div>
-                    <div class="p-3">
-                    </div>
+                <!-- mappen -->
+                    <div id="map_canvas" style="width:500px; height:500px; margin-left:12px;"></div>
+
                 </div>
-                <!-- drop-off -->
-                <div class="col">
+
+                <div class="col-sm">
+                    <!--  One of three columns-->
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" onclick="fun()">
-                        <label class="form-check-label" for="defaultCheck1">
-                            Drop-off
-                        </label>
+                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" onclick="fun()">
+                    <label class="form-check-label" for="defaultCheck1">
+                        Drop-off
+                    </label>
                     </div>
-                        <div class="form-group">
-                            <input type="adress" class="form-control" id="exampleInput" placeholder="Adresse" required>
-                        </div>
+                    <div class="form-group">
+                        <input type="adress" class="form-control" id="exampleInput" placeholder="Adresse" required>
+                    </div>
+                    <!-- mappen -->
+                        <div id="map_canvas2" style="width:500px; height:500px; margin-left:12px;"></div>
+
                 </div>
+
             </div>
+        </div>
+
+
+
+
         </div>
         <div class="row">
             <button class="btn btn-lg btn-primary" type="submit" >Submit</button>
@@ -112,6 +168,10 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmYBZu0baUdqQaMHM9JTP244CkDztnTNo&callback=initMap"
+        async defer></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
