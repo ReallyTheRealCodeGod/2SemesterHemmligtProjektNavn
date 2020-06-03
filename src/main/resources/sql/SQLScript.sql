@@ -78,6 +78,7 @@ CREATE TABLE maintenance (
   mileage INT NOT NULL,
   cleaning_price INT NOT NULL,
   maintenance_notes VARCHAR(500) DEFAULT NULL,
+  cleaning_notes VARCHAR(500) DEFAULT NULL,
   frame TINYINT NOT NULL,
   wheels TINYINT NOT NULL,
   lights TINYINT NOT NULL,

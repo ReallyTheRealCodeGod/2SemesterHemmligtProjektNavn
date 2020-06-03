@@ -21,34 +21,13 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
     public MaintenanceReport getById(int id) {
         try {
             String sql = "SELECT * \n" +
-                    "FROM maintenance m\n" +
+                    "FROM maintenance \n" +
                     "WHERE id = ?;";
             PreparedStatement prep = connection.prepareStatement(sql);
             prep.setInt(1, id);
-            MaintenanceReport maintenance = new MaintenanceReport();
             ResultSet rs = prep.executeQuery();
-            while (rs.next()) {
-                maintenance.setId(rs.getInt("id"));
-                maintenance.setFuelGauge(rs.getInt("fuel_gauge"));
-                maintenance.setMileage(rs.getInt("mileage"));
-                maintenance.setCleaningPrice(rs.getInt("cleaning_price"));
-                maintenance.setMaintenanceNote(rs.getString("maintenance_notes"));
-                HashMap<String, Integer> parts = new HashMap<>();
-                parts.put("frame", rs.getInt("frame"));
-                parts.put("wheels", rs.getInt("wheels"));
-                parts.put("lights", rs.getInt("lights"));
-                parts.put("oil", rs.getInt("oil"));
-                parts.put("battery", rs.getInt("battery"));
-                parts.put("interior", rs.getInt("interior"));
-                parts.put("coolingflued", rs.getInt("coolingflued"));
-                parts.put("brakes", rs.getInt("brakes"));
-                parts.put("suspention", rs.getInt("suspention"));
-                maintenance.setPartStatus(parts);
-                maintenance.setRepairCost(rs.getInt("repair_cost"));
-                maintenance.setDate(rs.getDate("maintenance_date").toLocalDate());
-                maintenance.setAutocamperId(rs.getInt("fk_autocamper_id"));
-            }
-            return maintenance;
+            rs.next();
+            return load(rs);
         } catch (SQLException sql) {
             sql.printStackTrace();
             return null;
@@ -64,27 +43,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
             ResultSet rs = prep.executeQuery();
 
             while (rs.next()) {
-                MaintenanceReport maintenance = new MaintenanceReport();
-                maintenance.setId(rs.getInt("id"));
-                maintenance.setFuelGauge(rs.getInt("fuel_gauge"));
-                maintenance.setMileage(rs.getInt("mileage"));
-                maintenance.setCleaningPrice(rs.getInt("cleaning_price"));
-                maintenance.setMaintenanceNote(rs.getString("maintenance_notes"));
-                HashMap<String, Integer> parts = new HashMap<>();
-                parts.put("frame", rs.getInt("frame"));
-                parts.put("wheels", rs.getInt("wheels"));
-                parts.put("lights", rs.getInt("lights"));
-                parts.put("oil", rs.getInt("oil"));
-                parts.put("battery", rs.getInt("battery"));
-                parts.put("interior", rs.getInt("interior"));
-                parts.put("coolingflued", rs.getInt("coolingflued"));
-                parts.put("brakes", rs.getInt("brakes"));
-                parts.put("suspention", rs.getInt("suspention"));
-                maintenance.setPartStatus(parts);
-                maintenance.setRepairCost(rs.getInt("repair_cost"));
-                maintenance.setDate(rs.getDate("maintenance_date").toLocalDate());
-                maintenance.setAutocamperId(rs.getInt("fk_autocamper_id"));
-                list.add(maintenance);
+                list.add(load(rs));
             }
             return list;
         } catch (SQLException sql) {
@@ -113,27 +72,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
             ResultSet rs = prep.executeQuery();
 
             while (rs.next()) {
-                MaintenanceReport maintenance = new MaintenanceReport();
-                maintenance.setId(rs.getInt("id"));
-                maintenance.setFuelGauge(rs.getInt("fuel"));
-                maintenance.setMileage(rs.getInt("mileage"));
-                maintenance.setCleaningPrice(rs.getInt("price"));
-                maintenance.setMaintenanceNote(rs.getString("note"));
-                HashMap<String, Integer> parts = new HashMap<>();
-                parts.put("frame", rs.getInt("frame"));
-                parts.put("wheels", rs.getInt("wheels"));
-                parts.put("lights", rs.getInt("lights"));
-                parts.put("oil", rs.getInt("oil"));
-                parts.put("battery", rs.getInt("battery"));
-                parts.put("interior", rs.getInt("interior"));
-                parts.put("coolingflued", rs.getInt("coolingflued"));
-                parts.put("brakes", rs.getInt("brakes"));
-                parts.put("suspention", rs.getInt("suspention"));
-                maintenance.setPartStatus(parts);
-                maintenance.setRepairCost(rs.getInt("repair_cost"));
-                maintenance.setDate(rs.getDate("maintenance_date").toLocalDate());
-                maintenance.setAutocamperId(rs.getInt("autocamperID"));
-                list.add(maintenance);
+                list.add(load(rs));
             }
             return list;
         }catch(SQLException sql){
@@ -149,6 +88,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
                     " mileage," +
                     "cleaning_price," +
                     "maintenance_notes," +
+                    "cleaning_notes," +
                     "frame," +
                     "wheels," +
                     "lights," +
@@ -167,6 +107,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
             prep.setInt(2, maintenance.getMileage());
             prep.setInt(3, maintenance.getCleaningPrice());
             prep.setString(4, maintenance.getMaintenanceNote());
+            prep.setString(5, maintenance.getCleaningNote());
             prep.setInt(5, maintenance.getPartStatus().get("frame"));
             prep.setInt(6, maintenance.getPartStatus().get("wheels"));
             prep.setInt(7, maintenance.getPartStatus().get("lights"));
@@ -215,6 +156,7 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
         prep.setInt(2, maintenance.getMileage());
         prep.setInt(3, maintenance.getCleaningPrice());
         prep.setString(4, maintenance.getMaintenanceNote());
+        prep.setString(5, maintenance.getCleaningNote());
         prep.setInt(5, maintenance.getPartStatus().get("frame"));
         prep.setInt(6, maintenance.getPartStatus().get("wheels"));
         prep.setInt(7, maintenance.getPartStatus().get("lights"));
@@ -248,5 +190,30 @@ public class MaintenanceReportRepository implements IRepository<MaintenanceRepor
             sql.printStackTrace();
             return false;
         }
+    }
+
+    private MaintenanceReport load(ResultSet rs) throws SQLException{
+        MaintenanceReport maintenance = new MaintenanceReport();
+        maintenance.setId(rs.getInt("id"));
+        maintenance.setFuelGauge(rs.getInt("fuel_gauge"));
+        maintenance.setMileage(rs.getInt("mileage"));
+        maintenance.setCleaningPrice(rs.getInt("cleaning_price"));
+        maintenance.setMaintenanceNote(rs.getString("maintenance_notes"));
+        maintenance.setCleaningNote(rs.getString("cleaning_notes"));
+        HashMap<String, Integer> parts = new HashMap<>();
+        parts.put("frame", rs.getInt("frame"));
+        parts.put("wheels", rs.getInt("wheels"));
+        parts.put("lights", rs.getInt("lights"));
+        parts.put("oil", rs.getInt("oil"));
+        parts.put("battery", rs.getInt("battery"));
+        parts.put("interior", rs.getInt("interior"));
+        parts.put("coolingflued", rs.getInt("coolingflued"));
+        parts.put("brakes", rs.getInt("brakes"));
+        parts.put("suspention", rs.getInt("suspention"));
+        maintenance.setPartStatus(parts);
+        maintenance.setRepairCost(rs.getInt("repair_cost"));
+        maintenance.setDate(rs.getDate("maintenance_date").toLocalDate());
+        maintenance.setAutocamperId(rs.getInt("fk_autocamper_id"));
+        return maintenance;
     }
 }

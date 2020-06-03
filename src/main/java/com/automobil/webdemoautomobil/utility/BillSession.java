@@ -90,11 +90,12 @@ public class BillSession {
         int dayPrice = autocamper.getType().getPrice();
         int days = (int) (rental.getEndDate().toEpochDay() - rental.getStartDate().toEpochDay());
         int rentalPrice = (days * (dayPrice * (100/prices.getCurrentSeason().getSurchargePercentage() + 1)));
-        int totalprice = rentalPrice + accessoryCost + maintenanceReport.getCleaningPrice() + maintenanceReport.getRepairCost();
-
+        int totalprice = rentalPrice + accessoryCost + maintenanceReport.getCleaningPrice() + maintenanceReport.getRepairCost() ;
+        if(maintenanceReport.getFuelGauge() <= 50){
+            totalprice += prices.getFuelPrice();
+        }
         Bill bill = new Bill(LocalDate.now(), customer.getFirstName(), customer.getLastName(), customer.getPostalCode(),
                 customer.getStreetName(),customer.getHouseNr(),customer.getFloor(), accessoryCost, rentalPrice, totalprice);
-
 
             bill = billrepo.create(bill);
             for(Accessory a: accessoryList) {
@@ -103,7 +104,7 @@ public class BillSession {
             }
             custRep.delete(customer);
 
-            autocamper.setStatus(1);
+            autocamper.setStatus(Autocamper.AVAILABLE);
             autoRep.update(autocamper);
 
             rentRep.delete(rental);

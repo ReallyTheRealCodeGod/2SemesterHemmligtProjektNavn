@@ -10,19 +10,19 @@ public class MaintenanceReport {
     private int mileage;
     private HashMap<String, Integer> partStatus;
     private String maintenanceNote;
+    private String cleaningNote;
     private int repairCost;
     private LocalDate Date;
     private int autocamperId;
 
     public MaintenanceReport(){}
-    public MaintenanceReport(int id, int cleaningPrice, int fuelGauge, int mileage, HashMap<String, Integer> partStatus, int repairCost, LocalDate date, int autocamperId) {
-        this.cleaningPrice = cleaningPrice;
-        this.fuelGauge = fuelGauge;
-        this.mileage = mileage;
-        this.partStatus = partStatus;
-        this.repairCost = repairCost;
-        Date = date;
-        this.autocamperId = autocamperId;
+
+    public String getCleaningNote() {
+        return cleaningNote;
+    }
+
+    public void setCleaningNote(String cleaningNote) {
+        this.cleaningNote = cleaningNote;
     }
 
     public int getId() {

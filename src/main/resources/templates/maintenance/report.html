@@ -162,13 +162,10 @@
                 <label for="repPrice">Reperations pris:</label>
                 <input name="repair_cost" type="text" class="form-control" id="repPrice" placeholder="Indtast pris">
             </div>
-            <div class="col-md-2">
-                <label for="cleaningPrice">Rengørings pris:</label>
-                <input name="cleaning_price" type="text" class="form-control" id="cleaningPrice" placeholder="Indtast pris">
-            </div>
         </div>
         <br>
-
+        <input type="hidden" name="cleaningNote" th:value="${cleaningNote}">
+        <input type="hidden" name="cleaningPrice" th:value="${cleaningPrice}">
         <button type="submit" class="btn btn-success">Godkend</button>
     </form><br>
 

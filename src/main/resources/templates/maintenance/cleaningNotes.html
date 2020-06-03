@@ -10,32 +10,28 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 
-    <title>Hello, world!</title>
+    <title>Cleaning</title>
 </head>
 <body>
 
 <div class="container">
     <h1 class="display-4 m-5">Rengøring</h1>
 
-
-
-    <form>
+    <form action="/maintenance/report" method="post">
         <div style="background: #87CEEA;" class="form-group m-5 p-5 rounded">
             <label class="  mb-1 p-2 rounded text-muted" style="font-size: 1.5rem; color: black; " for="formControlRange">Pris for rengøring</label>
-            <input type="range" class="form-control-range" th:value="${pricesmin}" th:min="${pricesmin}" th:max="${pricesmax}" id="formControlRange">
+            <input type="range" name="cleaningPrice"; class="form-control-range" th:value="${pricesmin}" th:min="${pricesmin}" th:max="${pricesmax}" id="formControlRange">
             <p  class="badge badge-primary mt-3 p-2 rounded" style="font-weight: normal;  font-size: 1rem; background: white; color: black;">Rengørings omkostninger: <span class="font-weight-bold" id="moneyCount"></span>kr.-</p>
         </div>
 
-    </form>
-
-    <div class="input-group  p-5">
-        <div class="input-group-prepend">
-            <span class="input-group-text">Rengørings-note</span>
+        <div class="input-group  p-5">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Rengørings noter</span>
+            </div>
+            <textarea name="cleaningNote" class="form-control ml-2" aria-label="With textarea"></textarea>
         </div>
-        <textarea class="form-control ml-2" aria-label="With textarea"></textarea>
-    </div>
-
     <button type="button" class="btn btn-primary ml-5">Submit</button>
+    </form>
 
 </div>
 

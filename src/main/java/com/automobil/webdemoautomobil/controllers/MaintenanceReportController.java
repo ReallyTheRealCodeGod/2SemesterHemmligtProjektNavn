@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 
@@ -46,14 +47,15 @@ public class MaintenanceReportController {
         bs.setCustomer(customerRepository.getById(bs.getRental().getCustomerId()));
         bs.setAccessoryList(accRep.getByParameter(Integer.toString(bs.getRental().getId()), "fk_rental_id"));
         bs.setPrices(priceRepo.getPrices());
-        return "redirect:/maintenance/report";
+        return "redirect:/maintenance/cleaning-notes";
     }
 
-    @GetMapping("/report")
-    public String maintenanceReport(Model model, HttpServletRequest request){
-        System.out.println(getSession(request).getRental());
-        System.out.println(getSession(request).getCustomer());
+    @PostMapping("/report")
+    public String maintenanceReport(Model model, HttpServletRequest request, @RequestParam String cleaningNote, @RequestParam int cleaningPrice){
+
         model.addAttribute("sesh", getSession(request));
+        model.addAttribute("cleaningNote", cleaningNote);
+        model.addAttribute("cleaningPrice", cleaningPrice);
         return "/maintenance/report";
     }
 
@@ -65,7 +67,6 @@ public class MaintenanceReportController {
 
     @GetMapping("/cleaning-notes")
     public String note(Model model){
-
         model.addAttribute("pricesmax", priceRepo.getPrices().getCleaningMaxPrice());
         model.addAttribute("pricesmin", priceRepo.getPrices().getCleaningMinPrice());
         return "/maintenance/cleaningNotes";
@@ -74,15 +75,14 @@ public class MaintenanceReportController {
 
 
     @PostMapping("/fillMaintenanceReport")
-    public String makeReport(@ModelAttribute MaintenanceReport report, HttpServletRequest request){
+    public String makeReport(@ModelAttribute MaintenanceReport report , HttpServletRequest request){
         getSession(request).setMaintenanceReport(report);
-        getSession(request).save();
-        return "redirect:/autocampers/list?status=3";
-    }
 
-    @PostMapping("/changeStatus")
-    public String changeStatus(@ModelAttribute Autocamper autocamperFromPost){
-        autocamperRepository.update(autocamperFromPost);
+        try {
+            getSession(request).save();
+        }catch(SQLException sql){
+            sql.printStackTrace();
+        }
         return "redirect:/autocampers/list?status=3";
     }
 
