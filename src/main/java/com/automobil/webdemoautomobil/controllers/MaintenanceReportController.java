@@ -51,6 +51,7 @@ public class MaintenanceReportController {
 
     @GetMapping("/report")
     public String maintenanceReport(Model model, HttpServletRequest request){
+        System.out.println(getSession(request).getRental());
         System.out.println(getSession(request).getCustomer());
         model.addAttribute("sesh", getSession(request));
         return "/maintenance/report";
@@ -63,17 +64,16 @@ public class MaintenanceReportController {
     }
 
     @PostMapping("/fillMaintenanceReport")
-    public String makeReport(@ModelAttribute MaintenanceReport reportFromPost){
-        System.out.println(reportFromPost.getPartStatus());
-                maintenanceReportRepository.create(reportFromPost);
-
-        return "redirect:/maintenance/finishedrentals";
+    public String makeReport(@ModelAttribute MaintenanceReport report, HttpServletRequest request){
+        getSession(request).setMaintenanceReport(report);
+        getSession(request).save();
+        return "redirect:/autocampers/list?status=3";
     }
 
     @PostMapping("/changeStatus")
     public String changeStatus(@ModelAttribute Autocamper autocamperFromPost){
         autocamperRepository.update(autocamperFromPost);
-        return "redirect:/maintenance/finishedrentals";
+        return "redirect:/autocampers/list?status=3";
     }
 
     private BillSession getSession(HttpServletRequest request){

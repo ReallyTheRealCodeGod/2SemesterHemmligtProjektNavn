@@ -57,4 +57,8 @@ public class RepoInitConfig {
         return new UserRepository();
     }
 
+    @Bean
+    public BillRepository getBillRepo() throws SQLException{
+        return new BillRepository();
+    }
 }

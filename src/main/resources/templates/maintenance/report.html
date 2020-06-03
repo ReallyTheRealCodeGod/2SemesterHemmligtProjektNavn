@@ -7,7 +7,8 @@
 </head>
 
 <body class="ml-4 mt-4 mr-4 mb-4">
-<h1 class="masthead-heading mb-0">Rapporter Status<span></span></h1>
+<div class="container">
+<h1 class="masthead-heading mb-0" id="title">Rapporter Status<span></span></h1>
 <div class="divider-custom">
     <div class="divider-custom-line"></div>
     <div class="divider-custom-icon"> <img style="    width: 24px !important;
@@ -30,12 +31,12 @@
         </thead>
         <tbody>
         <tr>
-            <td th:text="${sesh.getCustomer()?.getFirstName() + ' ' + sesh.getCustomer()?.getLastName()}"></td>
-            <td th:text="${sesh.getAutocamper()?.getId()}"></td>
-            <td th:text="${sesh.getAutocamper()?.getType().getBrand()}"></td>
-            <td th:text="${sesh.getAutocamper()?.getType().getModel()}"></td>
-            <td th:text="${sesh.getRental()?.getStartDate()}"></td>
-            <td th:text="${sesh.getRental()?.getEndDate()}"></td>
+            <td th:text="${sesh?.getCustomer()?.getFirstName() + ' ' + sesh?.getCustomer()?.getLastName()}"></td>
+            <td th:text="${sesh?.getAutocamper()?.getId()}"></td>
+            <td th:text="${sesh?.getAutocamper()?.getType().getBrand()}"></td>
+            <td th:text="${sesh?.getAutocamper()?.getType().getModel()}"></td>
+            <td th:text="${sesh?.getRental()?.getStartDate()}"></td>
+            <td th:text="${sesh?.getRental()?.getEndDate()}"></td>
         </tr>
         </tbody>
     </table>
@@ -44,20 +45,20 @@
 <br>
 <div>
 
-    <form action="/user/fillMaintenanceReport" method="post">
+    <form action="/maintenance/fillMaintenanceReport" method="post">
         <h5>Kundens forbrug:</h5>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-add">Kilometer tilstand</span>
             </div>
-            <input type="number" name="fuel_gauge" class="form-control" placeholder="Indtast her" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="number" name="mileage" class="form-control" placeholder="Indtast her" th:value="${sesh?.getAutocamper()?.getMileage()}">
         </div>
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon2">Benzin mængde ved aflevering (0-100%)</span>
             </div>
-            <input type="number" name="mileage" class="form-control" placeholder="Indtast her" aria-label="Username" aria-describedby="basic-addon1">
+            <input type="number" name="fuelGauge" class="form-control" placeholder="Indtast her" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         <h5>Kontrol af mekaniske egenskaber:</h5>
@@ -172,7 +173,7 @@
     </form><br>
 
 </div>
-
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

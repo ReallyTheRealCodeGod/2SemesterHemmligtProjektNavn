@@ -1,5 +1,6 @@
 package com.automobil.webdemoautomobil.models;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 public class VariablePrices {
@@ -77,6 +78,16 @@ public class VariablePrices {
 
     public void setSeasons(Season[] seasons) {
         this.seasons = seasons;
+    }
+
+    public Season getCurrentSeason(){
+        for(Season s : seasons){
+            LocalDate now = LocalDate.now();
+            if(s.getStartDate().isBefore(now) && s.getEndDate().isAfter(now)){
+                return s;
+            }
+        }
+        return null;
     }
 
     @Override
