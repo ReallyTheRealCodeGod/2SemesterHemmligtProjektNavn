@@ -1,4 +1,5 @@
 <!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -21,7 +22,7 @@
     <form>
         <div style="background: #87CEEA;" class="form-group m-5 p-5 rounded">
             <label class="  mb-1 p-2 rounded text-muted" style="font-size: 1.5rem; color: black; " for="formControlRange">Pris for rengøring</label>
-            <input type="range" class="form-control-range" th:min="$prices.get()" th:max="$prices.get()" id="formControlRange">
+            <input type="range" class="form-control-range" th:value="${pricesmin}" th:min="${pricesmin}" th:max="${pricesmax}" id="formControlRange">
             <p  class="badge badge-primary mt-3 p-2 rounded" style="font-weight: normal;  font-size: 1rem; background: white; color: black;">Rengørings omkostninger: <span class="font-weight-bold" id="moneyCount"></span>kr.-</p>
         </div>
 
@@ -39,6 +40,8 @@
 </div>
 
 <script>
+
+
     var slider = document.getElementById("formControlRange");
     var output = document.getElementById("moneyCount");
     output.innerHTML = slider.value;

@@ -138,3 +138,6 @@ values('user', 'ROLE_USER');
 
 INSERT INTO authorities (username, authority)
 values('sales', 'ROLE_SALES');
+
+INSERT INTO variable_prices (excessKilometer_price, fuel_price, dropOffKilometer_price, pickUpKilometer_price, cleaning_max_price, cleaning_min_price) values(7, 521, 400, 30, 5000, 350);
+

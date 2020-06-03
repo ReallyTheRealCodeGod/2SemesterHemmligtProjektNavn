@@ -63,6 +63,16 @@ public class MaintenanceReportController {
         return "/maintenance/mechComments";
     }
 
+    @GetMapping("/cleaning-notes")
+    public String note(Model model){
+
+        model.addAttribute("pricesmax", priceRepo.getPrices().getCleaningMaxPrice());
+        model.addAttribute("pricesmin", priceRepo.getPrices().getCleaningMinPrice());
+        return "/maintenance/cleaningNotes";
+
+    }
+
+
     @PostMapping("/fillMaintenanceReport")
     public String makeReport(@ModelAttribute MaintenanceReport report, HttpServletRequest request){
         getSession(request).setMaintenanceReport(report);
