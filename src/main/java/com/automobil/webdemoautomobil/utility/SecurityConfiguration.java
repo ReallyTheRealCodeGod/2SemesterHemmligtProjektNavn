@@ -1,5 +1,6 @@
 package com.automobil.webdemoautomobil.utility;
 
+import com.automobil.webdemoautomobil.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +12,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
 // Tells spring that this is a web security application
@@ -49,8 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/salesAssistant").hasAnyRole("ADMIN", "SALES")
-                .antMatchers("/**", "static/css", "static/img").permitAll() // Accessible by all roles, without authentication
+                .antMatchers("static/css", "static/img").permitAll() // Accessible by all roles, without authentication
                 .and().formLogin();
-
     }
 }

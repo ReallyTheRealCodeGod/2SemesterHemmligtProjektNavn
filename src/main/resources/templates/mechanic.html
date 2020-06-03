@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Salg-menu</title>
+    <title>Mekaniker</title>
     <!-- Font Awesome icons (free version)-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
     <!-- Core theme CSS (includes Bootstrap)-->
@@ -62,38 +62,38 @@
         <!-- Portfolio Grid Items-->
         <div class="row justify-content-center">
             <!-- Portfolio Items-->
+            <!-- alle autocamper-->
             <div class="col-md-6 col-lg-4 mb-5">
+                <a href="/autocampers/list">
                 <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal0">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                         <div class="portfolio-item-caption-content text-center text-white">ALLE AUTOCAMPERE</div>
                     </div>
                     <div class="text-button-menu">
-
                         <p class="font-weight-bolder">
                             Alle Autocampere
                         </p>
-
                     </div>
-                    <img class="img-fluid" src="../img/portfolio/allMotohomesInStock.png" alt="Log Cabin"/>
+                        <img class="img-fluid" src="../img/portfolio/allMotohomesInStock.png" alt="Log Cabin"/>
                 </div>
-
+                </a>
             </div>
+            <!-- under vedligeholdelse-->
             <div class="col-md-6 col-lg-4 mb-5">
+                <a href="/autocampers/list?status=3">
                 <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal1">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <a href="/user/underRepList">
-                        <div class="portfolio-item-caption-content text-center text-white">ALLE AUTOCAMPERE UNDER VEDLIGEHOLDELSE</div>
-                        </a>
+                        <div class="portfolio-item-caption-content text-center text-white">AUTOCAMPERE UNDER VEDLIGEHOLDELSE</div>
                     </div>
                     <div class="text-button-menu">
                         <p class="font-weight-bolder">
                             Under vedligeholdelse
                         </p>
                     </div>
-                    <img class="img-fluid" src="../img/portfolio/repairRV.png" alt="Tasty Cake"/>
+                            <img class="img-fluid" src="../img/portfolio/repairRV.png" alt="Tasty Cake"/>
                 </div>
+                </a>
             </div>
-
             <!-- Icon Divider-->
             <div class="divider-custom">
                 <div class="divider-custom-line"></div>
@@ -102,36 +102,39 @@
                 <div class="divider-custom-line"></div>
             </div>
 
+            <!-- udlejet autocamper -->
             <div class="col-md-6 col-lg-4 mb-5">
+                <a href="/autocampers/list?status=4">
                 <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal2">
                     <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                        <div class="portfolio-item-caption-content text-center text-white">AKTIVE & UDLEJEDE AUTOCAMPERE I BRUG</div>
+                        <div class="portfolio-item-caption-content text-center text-white">UDLEJEDE AUTOCAMPERE</div>
                     </div>
                     <div class="text-button-menu">
                         <p class="font-weight-bolder">
-                            Aktive Autocampere
+                            Udlejede Autocampere
                         </p>
                     </div>
                     <img class="img-fluid" src="../img/portfolio/AutocamperRentedOut.png" alt="Circus Tent"/>
                 </div>
+                </a>
             </div>
-            <div class="col-md-6 col-lg-4 mb-5">
-                <a href="/user/finishedrentals">
+            <!-- mangler reparation-->
+           <div class="col-md-6 col-lg-4 mb-5">
+               <a href="/autocampers/list?status=5">
                     <div class="portfolio-item mx-auto  border border-light" data-toggle="modal" data-target="#portfolioModal3">
                         <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                            <div class="portfolio-item-caption-content text-center text-white">AFLEVEREDE AUTOCAMPERE AFVENTER GODKENDELSE AF MEDARBEJDERE</div>
+                            <div class="portfolio-item-caption-content text-center text-white">Mangler Reparation</div>
                         </div>
                         <div class="text-button-menu">
                             <p class="font-weight-bolder">
                                 Afsluttede udlejninger
                             </p>
                         </div>
-                        <img class="img-fluid" src="../img/portfolio/CampersAtWork.png" alt="Controller"/>
-                    </div> </a>
+                            <img class="img-fluid" src="../img/portfolio/CampersAtWork.png" alt="Controller"/>
+                    </div>
+               </a>
             </div>
-
         </div>
-    </div>
     </div>
 </section>
 

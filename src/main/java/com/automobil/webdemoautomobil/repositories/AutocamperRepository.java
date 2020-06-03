@@ -64,7 +64,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
 
             String select = "SELECT * \n" +
                     "FROM autocamper " +
-                    "WHERE " + sb + " LIKE ?";
+                    "WHERE " + sb + " LIKE ? ORDER BY id";
             PreparedStatement prep = connection.prepareStatement(select);
             prep.setString(1, parameter);
 
@@ -84,7 +84,8 @@ public class AutocamperRepository implements IRepository<Autocamper> {
         ArrayList<Autocamper> list = new ArrayList<>();
         try {
             String sql = "SELECT * " +
-                    "FROM autocamper";
+                    "FROM autocamper " +
+                    "ORDER BY id";
             PreparedStatement prep = connection.prepareStatement(sql);
             ResultSet rs = prep.executeQuery();
 
@@ -121,11 +122,11 @@ public class AutocamperRepository implements IRepository<Autocamper> {
     public boolean update(Autocamper autocamper) {
         try {
             String update = "UPDATE autocamper " +
-                    "SET mileage = ?," +
-                    "current_status = ?," +
-                    "picture = ?" +
-                    "fk_brand = ?" +
-                    "fk_model = ?;" +
+                    "SET mileage = ?, " +
+                    "current_status = ?, " +
+                    "picture = ?, " +
+                    "fk_brand = ?, " +
+                    "fk_model = ?," +
                     "WHERE id = ?";
             PreparedStatement prep = connection.prepareStatement(update);
             prep.setInt(1, autocamper.getMileage());

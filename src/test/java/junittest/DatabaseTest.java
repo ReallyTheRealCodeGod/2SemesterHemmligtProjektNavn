@@ -60,7 +60,6 @@ public class DatabaseTest {
 
     @Test
     public void getEntities(){
-
         assertTrue(acc.getById(1) != null, "accessory could not be Created");
         assertTrue(auto.getById(1) != null, "accessory could not be Created");
         assertTrue(bill.getById(1) != null, "accessory could not be Created");

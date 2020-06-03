@@ -30,7 +30,7 @@
                             <td th:text="${autocamper.getType().getModel()}"></td>
                             <td th:text="${maintenance.getDate()}"></td>
                             <td>
-                                <a th:href="@{/user/mechComments(id=${maintenance.getId()})}">
+                                <a th:href="@{/mechanic/mechComments(id=${maintenance.getId()})}">
                                     <button type="button" class="btn btn-success">Se Kommentar</button>
                                 </a>
                             </td>

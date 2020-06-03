@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v4.0.1">
-    <title>Checkout example · Bootstrap</title>
+    <title>Kunde Info</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -33,26 +30,28 @@
     <link href="checkOut.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-<div class="container">
-    <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 
-
+    <div class="container">
+        <div class="row justify-content-start m-4">
+            <div class="col">
+                <h1 class="display-3">Kunde oplysninger</h1>
+            </div>
+        </div>
     </div>
-    <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Kunde oplysninger</h4>
+
+    <div class="container">
         <form action="/rental/addCustomer" method="post" class="needs-validation" novalidate>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="firstName">Fornavn</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Fornavn" value="" required>
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Fornavn" th:value="${customer?.getFirstName()}" required>
                     <div class="invalid-feedback">
                         Udfyld venligst fornavn.
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="lastName">Efternavn</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Efternavn" value="" required>
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Efternavn" th:value="${customer?.getLastName()}" required>
                     <div class="invalid-feedback">
                         Udfyld venligst efternavn.
                     </div>
@@ -61,7 +60,7 @@
 
             <div class="mb-3">
                 <label for="cpr">CPR nummer <span class="text-muted"></span></label>
-                <input type="cpr" class="form-control" id="cpr" name="cprNr" placeholder="xxxxxxxxxx">
+                <input type="number" class="form-control" id="cpr" name="cprNr" th:value="${customer?.getCprNr()}" placeholder="xxxxxxxxxx">
                 <div class="invalid-feedback">
                     Indtast korrekt cpr nummer.
                 </div>
@@ -70,7 +69,7 @@
 
             <div class="mb-3">
                 <label for="email">Email <span class="text-muted"></span></label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="dig@eksempel.dk">
+                <input type="email" class="form-control" id="email" name="email" th:value="${customer?.getEmail()}" placeholder="dig@eksempel.dk">
                 <div class="invalid-feedback">
                     Email er påkrævet som brugerinformation.
                 </div>
@@ -78,7 +77,7 @@
 
             <div class="mb-3">
                 <label for="street">Gadenavn</label>
-                <input type="text" class="form-control" id="street" name="streetName" placeholder="Hovedgade" required>
+                <input type="text" class="form-control" id="street" name="streetName" th:value="${customer?.getStreetName()}" placeholder="Hovedgade" required>
                 <div class="invalid-feedback">
                     Udfyld venligst korrekt gadenavn.
                 </div>
@@ -87,7 +86,7 @@
             <div class="row">
                 <div class="col-md-5 mb-3">
                     <label for="streetNumber">Nr.</label>
-                    <input type="text" class="form-control" id="streetNumber" name="houseNr" placeholder="230B" required>
+                    <input type="text" class="form-control" id="streetNumber" name="houseNr" th:value="${customer?.getHouseNr()}" placeholder="230B" required>
                     <div class="invalid-feedback">
                         Udfyld venligst et korrekt husnummer.
                     </div>
@@ -95,12 +94,12 @@
                 <div class="col-md-4 mb-3">
                     <label for="floor">Etage</label>
                     <span class="text-muted">(Valgfrit)</span>
-                    <input type="text" class="form-control" id="floor" name="floor" placeholder="1TH" required>
+                    <input type="text" class="form-control" id="floor" name="floor"  th:value="${customer?.getFloor()}" placeholder="1TH" required>
 
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="zip">Postnummer</label>
-                    <input type="text" class="form-control" id="zip" name="postalCode" placeholder="2300" required>
+                    <input type="number" class="form-control" id="zip" name="postalCode" placeholder="2300" th:value="${customer?.getPostalCode()}" required>
                     <div class="invalid-feedback">
                         Udfyld venligst postnummer.
                     </div>
@@ -109,7 +108,7 @@
 
             <div class="mb-3">
                 <label for="telephone">Telefon <span class="text-muted"></span></label>
-                <input type="text" class="form-control" name="phoneNr" id="telephone" placeholder="+45 31722951">
+                <input type="text" class="form-control" name="phoneNr" th:value="${customer?.getPhoneNr()}"id="telephone" placeholder="+45 31722951">
             </div>
 
 
@@ -140,7 +139,7 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="cc-number">Kortnummer</label>
-                    <input type="text" class="form-control" id="cc-number" name="cardNr" placeholder="" required>
+                    <input type="number" class="form-control" id="cc-number" name="cardNr" min="0" max="9999999999999999" placeholder="" required>
                     <div class="invalid-feedback">
                         Gyldigt kortnummer er påkrævet.
                     </div>
@@ -149,14 +148,14 @@
             <div class="row">
                 <div class="col-md-3 mb-3">
                     <label for="cc-expiration">Udløbsdato</label>
-                    <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                    <input type="month" class="form-control" id="cc-expiration" placeholder="2020-07" required>
                     <div class="invalid-feedback">
                         Udløbsdato.
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label for="cc-cvv">CVV</label>
-                    <input type="text" class="form-control" id="cc-cvv" name="cardCVV" placeholder="" required>
+                    <input type="number" class="form-control" min="0" max="999" id="cc-cvv" name="cardCVV" placeholder="" required>
                     <div class="invalid-feedback">
                         Security code required
                     </div>
@@ -175,13 +174,12 @@
                 </div>
             </div>
         </form>
-        <ol class="carousel-indicators row" style="position: relative; background-color: #1abc9c">
-            <a href="/rental/customer"><li class="active"></li></a>
-            <a href="/rental/rentalDetails"><li></li></a>
-            <a href="/rental/confirmation"><li></li></a>
+        <ol class="carousel-indicators row" style="position: relative">
+            <a href="/rental/customer"><li class="active" style="background-color: #1abc9c"></li></a>
+            <a href="/rental/rentalDetails"><li style="background-color: #1abc9c"></li></a>
+            <a href="/rental/confirmation"><li style="background-color: #1abc9c"></li></a>
         </ol>
     </div>
-</div>
 
 <footer class="my-5 pt-5 text-muted text-center text-small">
     <p class="mb-1">&copy; 2020 Bandsejanwo security</p>

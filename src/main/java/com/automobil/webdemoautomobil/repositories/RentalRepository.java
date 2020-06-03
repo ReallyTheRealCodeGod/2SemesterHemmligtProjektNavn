@@ -46,8 +46,8 @@ public class RentalRepository implements IRepository<Rental>{
 
         try {
             PreparedStatement getAllRentals = conn.prepareStatement(
-                    "SELECT * FROM rental" +
-                    "WHERE "+sb+" LIKE %?%");
+                    "SELECT * FROM rental " +
+                    "WHERE "+sb+" LIKE ?");
             getAllRentals.setString(1,parameter);
             ResultSet rs = getAllRentals.executeQuery();
 
@@ -94,8 +94,8 @@ public class RentalRepository implements IRepository<Rental>{
                     " VALUES " +
                     " (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, NULL)";
             PreparedStatement createRental = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            createRental.setDate(1, Date.valueOf(rental.getStartDate()));
-            createRental.setDate(2,Date.valueOf(rental.getEndDate()));
+            createRental.setDate(1, Date.valueOf(rental.getStartDate().toLocalDate()));
+            createRental.setDate(2,Date.valueOf(rental.getEndDate().toLocalDate()));
             createRental.setLong(3,rental.getLongPickUpLoc());
             createRental.setLong(4,rental.getLatPickUpLoc());
             createRental.setLong(5, rental.getLongDropOffLoc());
@@ -125,11 +125,11 @@ public class RentalRepository implements IRepository<Rental>{
                             "lat_dropOff_loc = ?, " +
                             "fk_autocamper_id = ?, " +
                             "fk_customer_id = ?, " +
-                            "fk_maintenance_id = ?" +
+                            "fk_maintenance_id = ? " +
 
                             "WHERE rental_id = ?");
-            updateRental.setDate(1, Date.valueOf(rental.getStartDate()));
-            updateRental.setDate(2,Date.valueOf(rental.getEndDate()));
+            updateRental.setDate(1, Date.valueOf(rental.getStartDate().toLocalDate()));
+            updateRental.setDate(2,Date.valueOf(rental.getStartDate().toLocalDate()));
             updateRental.setLong(3,rental.getLongPickUpLoc());
             updateRental.setLong(4,rental.getLatPickUpLoc());
             updateRental.setLong(5, rental.getLongDropOffLoc());
@@ -163,8 +163,8 @@ public class RentalRepository implements IRepository<Rental>{
     private Rental load(ResultSet rs) throws SQLException{
         Rental rental = new Rental();
         rental.setId(rs.getInt(1));
-        rental.setStartDate(rs.getDate(2).toLocalDate());
-        rental.setEndDate(rs.getDate(3).toLocalDate());
+        rental.setStartDate(rs.getDate(2).toLocalDate().atStartOfDay());
+        rental.setEndDate(rs.getDate(3).toLocalDate().atStartOfDay());
         rental.setLongPickUpLoc(rs.getLong(4));
         rental.setLatPickUpLoc(rs.getLong(5));
         rental.setLongDropOffLoc(rs.getLong(6));

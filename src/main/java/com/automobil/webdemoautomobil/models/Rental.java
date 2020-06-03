@@ -2,15 +2,15 @@ package com.automobil.webdemoautomobil.models;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Rental {
     private int id;
     private int accumulatedPrice;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate startDate;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate endDate;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime startDate;
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME)
+    private LocalDateTime endDate;
     private long longPickUpLoc;
     private long latPickUpLoc;
     private long longDropOffLoc;
@@ -22,7 +22,7 @@ public class Rental {
     public Rental() {
     }
 
-    public Rental(int id, int accumulatedPrice, LocalDate startDate, LocalDate endDate, long longPickUpLoc, long latPickUpLoc, long longDropOffLoc, long latDropOffLoc, int autocamperId, int maintenanceId, int customerId) {
+    public Rental(int id, int accumulatedPrice, LocalDateTime startDate, LocalDateTime endDate, long longPickUpLoc, long latPickUpLoc, long longDropOffLoc, long latDropOffLoc, int autocamperId, int maintenanceId, int customerId) {
         this.accumulatedPrice = accumulatedPrice;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -51,19 +51,19 @@ public class Rental {
         this.accumulatedPrice = accumulatedPrice;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-1.2.6.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/jquery-ui-personalized-1.5.2.packed.js"></script>
+    <script language="JavaScript" type="text/javascript" src="/js/sprinkle.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../css/autocamperlist.css"/>
+
+    <script src="../js/autocamperList.js" type="text/javascript"></script>
+    <title>Autocampers</title>
+</head>
+<body>
+<h1 class="masthead-heading mb-0" id="title">Autocampere : <span th:text="${title}"></span></h1>
+<div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"> <img style="    width: 24px !important;
+        height: 24px !important;" src="../img/transportation.png"></div>
+    <div class="divider-custom-line"></div>
+</div>
+<div class="card" id="accordianTable">
+    <button data-target="#filterForm" class="btn btn-primary  card-body" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="filterForm"><i class="fas fa-angle-down fa-lg"></i></button>
+    <div class="collapse" id="filterForm">
+        <button data-target="#mærker" class="btn btn-primary  card-body" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="mærke">Mærker</button>
+        <table class="card-body collapse" id="mærker">
+            <tr th:each="autoType : ${autoTypes}" class="card-body">
+                <td><span th:text="${autoType.getBrand()}"> </span></td>
+                <td><input type="checkbox" class="autotypes right-align" name="brand" th:value="${autoType.getBrand()}" onclick="brandUpdate()"/></td>
+            </tr>
+        </table>
+
+        <button data-target="#priceSlider" class="btn btn-primary  card-body" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="priceSlider">Priser</button>
+        <div class="card-body collapse" id="priceSlider">
+            <form class="slidecontainer">
+                <p>Pris pr. dag: <span id="price">0</span></p>
+                <input id="slide" class="slider" type="range" min="0" max="500" value="0" oninput="update()" />
+            </form>
+        </div>
+
+        <button data-target="#features" class="btn btn-primary  card-body" type="button" data-toggle="collapse" aria-expanded="false" aria-controls="priceSlider">Indbygget Tilbehør</button>
+        <table class="card-body collapse" id="features">
+            <tr th:each="feature : ${features}">
+                <td th:text="${feature.getName()}"></td><td><input type="checkbox" class=" right-align" name="features" th:value="${feature.getName()}" onclick="featureUpdate()"/></td>
+            </tr>
+        </table>
+        <button id="search" style="color: white" onmouseover="this.style.backgroundColor='#ffc107';" onmouseout="this.style.backgroundColor='#87ceea';" class="btn btn-primary  card-body" onclick="show()" type="button">Ryd</button>
+
+        <button onclick="location.href='/admin';" style="color: white" onmouseover="this.style.backgroundColor='#dc3545';" onmouseout="this.style.backgroundColor='#87ceea';" class="btn  card-body" type="button">Tilbage</button>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <th:block th:each = "auto : ${autos}">
+            <div th:class="${auto.getType().getBrand() + ' ' + 'item col-md-4'}" th:value="${auto.getType().getBrand() + ' ' + auto.getType().getModel()}">
+                <div class="card mb-4 shadow-sm camperElement">
+                    <img th:src="${auto.getPicture() != null}? ${auto.getPicture()}: '/img/transportation.png'" class="bd-placeholder-img card-img-top" width="100%" height="225" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"/>
+                    <div class="card-body">
+                        <h3 th:if="${auto.getStatus()} == 1" class="badge badge-success">Ledig</h3>
+                        <h3 th:if="${auto.getStatus()} == 2" class="badge badge-success">Reserved</h3>
+                        <h3 th:if="${auto.getStatus()} == 3" class="badge badge-info">Under Vedligeholdelse</h3>
+                        <h3 th:if="${auto.getStatus()} == 4" class="badge badge-danger">Udlejet</h3>
+                        <h3 th:if="${auto.getStatus()} == 5" class="badge badge-danger">Mangler Reparation</h3>
+
+                        <p class="badge badge-primary"><span th:text="${auto.getType().getBrand()}"></span> : <span th:text="${auto.getType().getModel()}"></span></p>
+                        <p class="badge badge-info"><span> ID </span> : <span th:text="${auto.getId()}"></span></p>
+                        <p class="card-text" th:text="${auto.getType().getDescription()}"></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <a th:href="@{/autocampers/details(id=${auto.getId()})}"><button type="button" class="btn  btn-outline-secondary">View</button></a>
+                                <th:block th:switch="${role}">
+                                    <a th:case="ROLE_ADMIN" th:href="@{/autocampers/crud(id=${auto.getId()})}"><button type="button" class="btn btn-block btn-warning" style="font-size: 75% ">Rediger</button></a>
+                                    <a th:case="ROLE_SALES" th:href="@{/rental(id=${auto.getId()})}"><button type="button" class="btn btn-block btn-success" style="font-size: 75% ">Udlej</button></a>
+                                    <a th:case="ROLE_CLEANING" th:href="@{/maintenance/cleaning(id=${auto.getId()})}"><button type="button" class="btn btn-block btn-info" style="font-size: 75% ">Rengøringsrapport</button></a>
+                                    <a th:case="ROLE_USER" th:href="@{/maintenance(id=${auto.getId()})}"><button type="button" class="btn  btn-block btn-info" style="font-size: 75% ">Rapportter Status</button></a>
+                                </th:block>
+                            </div>
+                            <small class="text-muted"> <span class="price" th:value="${auto.getType().getPrice()}" th:text="${auto.getType().getPrice()}"></span> <span> Kr/dag</span></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
+

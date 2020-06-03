@@ -34,22 +34,14 @@
                     <p class="lead row w-100 card-header border">Start dato og tid</p>
                     <div class="row w-100">
                         <label for="startDate" class="text-muted my-0">Start Udlejningsdato:</label>
-                        <input id="startDate" name="startDate" type="date" class="form-control" >
-                    </div>
-                    <div class="mb-2 row w-100">
-                        <label for="startTime" class="text-muted my-0">Tid for afhentning</label>
-                        <input id="startTime" name="startTime" type="time" class="form-control" placeholder="Select time">
+                        <input id="startDate" name="startDate" type="datetime-local" class="form-control" >
                     </div>
                 </div>
                 <div class="row w-100">
                     <p class="lead row w-100 card-header border">Slut dato og tid</p>
                     <div class="row w-100">
                         <label for="endDate" class="text-muted my-0">Slut Udlejningsdato:</label>
-                        <input id="endDate" name="endDate" type="date" class="form-control" >
-                    </div>
-                    <div class="row w-100">
-                        <label for="endTime" class="text-muted my-0">Tid for afhentning</label>
-                        <input id="endTime" name="endTime" type="time" class="form-control" placeholder="Select time">
+                        <input id="endDate" name="endDate" type="datetime-local" class="form-control" >
                     </div>
                 </div>
             </div>
@@ -109,10 +101,10 @@
             <button class="btn btn-lg btn-primary" type="submit" >Submit</button>
         </div>
 
-        <ol class="carousel-indicators row" style="position: relative; background-color: #1abc9c">
-            <a href="/rental/customer"><li></li></a>
-            <a href="/rental/rentalDetails"><li class="active"></li></a>
-            <a href="/rental/confirmation"><li></li></a>
+        <ol class="carousel-indicators row" style="position: relative">
+            <a href="/rental/customer"><li style="background-color: #1abc9c"></li></a>
+            <a href="/rental/rentalDetails"><li class="active" style="background-color: #1abc9c"></li></a>
+            <a href="/rental/confirmation"><li style="background-color: #1abc9c"></li></a>
         </ol>
     </div>
 </form>

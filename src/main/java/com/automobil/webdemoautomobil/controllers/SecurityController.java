@@ -8,7 +8,7 @@ public class SecurityController {
 
     @GetMapping("/login")
     public String security(){
-        return "/index";
+        return "redirect:/";
     }
 
     @GetMapping("/logout")

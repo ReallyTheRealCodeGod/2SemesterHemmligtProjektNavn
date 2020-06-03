@@ -36,7 +36,9 @@ public class RentalController {
 
     @PostMapping("")
     public String addAutocamper(@RequestParam int id, HttpServletRequest request){
-        getSession(request).setAutocamper(autoRepo.getById(id));
+        RentalSession rs = getSession(request);
+        rs.setAutocamper(autoRepo.getById(id));
+
         return "redirect:/rental/customer";
     }
 
@@ -64,7 +66,8 @@ public class RentalController {
     }
 
     @GetMapping("/customer")
-    public String customerInfo(){
+    public String customerInfo(HttpServletRequest request, Model model){
+        model.addAttribute("customer", getSession(request).getCustomer());
         return "/rental/customerInfo";
     }
 
@@ -82,18 +85,18 @@ public class RentalController {
 
     @GetMapping("/save")
     public String save(HttpServletRequest request){
-        try {
-            getSession(request).save();
-        }catch(SQLException sql){
-            sql.printStackTrace();
-        }
+        getSession(request).save();
         return "/admin/admin";
     }
 
-    private RentalSession getSession(HttpServletRequest request){
+    private RentalSession getSession(HttpServletRequest request) {
         RentalSession rs = (RentalSession) request.getSession().getAttribute("session");
         if(rs == null){
-            rs = new RentalSession();
+            try {
+                rs = new RentalSession();
+            }catch(SQLException sql){
+                sql.printStackTrace();
+            }
             request.getSession().setAttribute("session", rs);
         }
         System.out.println(rs);

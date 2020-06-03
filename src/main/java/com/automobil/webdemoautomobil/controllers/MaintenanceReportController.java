@@ -2,18 +2,20 @@ package com.automobil.webdemoautomobil.controllers;
 
 import com.automobil.webdemoautomobil.models.*;
 import com.automobil.webdemoautomobil.repositories.*;
+import com.automobil.webdemoautomobil.utility.BillSession;
 import com.automobil.webdemoautomobil.utility.RepoInitConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 @Controller
-@RequestMapping("/mechanic")
+@RequestMapping("/maintenance")
 public class MaintenanceReportController {
 
 
@@ -21,60 +23,43 @@ public class MaintenanceReportController {
     private AutocamperRepository autocamperRepository;
     private RentalRepository rentalRepository;
     private MaintenanceReportRepository maintenanceReportRepository;
-    private AutocamperTypeRepository autocamperTypeRepository;
+    private AccessoryRepository accRep;
+    private VariablePricesRepository priceRepo;
 
     @Autowired
     public MaintenanceReportController(CustomerRepository customerRepository, AutocamperRepository autocamperRepository, RentalRepository rentalRepository,
-    MaintenanceReportRepository maintenanceReportRepository, AutocamperTypeRepository autocamperTypeRepository){
+    MaintenanceReportRepository maintenanceReportRepository, AccessoryRepository accRep, VariablePricesRepository priceRepo){
         this.customerRepository = customerRepository;
         this.autocamperRepository = autocamperRepository;
         this.rentalRepository = rentalRepository;
         this.maintenanceReportRepository = maintenanceReportRepository;
-        this.autocamperTypeRepository = autocamperTypeRepository;
-
+        this.accRep = accRep;
+        this.priceRepo = priceRepo;
     }
 
-    @GetMapping("/finishedrentals")
-    public String finished(Model model){
-        ArrayList<Autocamper> autocampers = autocamperRepository.getByParameter(Integer.toString(Autocamper.UNDER_MAINTENANCE), "current_status");
-        ArrayList<Customer> customers = customerRepository.getAll();
-        ArrayList<Rental> rental = rentalRepository.getAll();
+    @GetMapping("")
+    public String start(HttpServletRequest request, @RequestParam int id){
+        BillSession bs = getSession(request);
 
-        model.addAttribute("autocampers", autocampers);
-        model.addAttribute("rentals", rental);
-        model.addAttribute("customers", customers);
-
-        return "/autocampers/finishedrentals";
+        bs.setAutocamper(autocamperRepository.getById(id));
+        bs.setRental(rentalRepository.getByParameter(Integer.toString(bs.getAutocamper().getId()), "fk_autocamper_id").get(0));
+        bs.setCustomer(customerRepository.getById(bs.getRental().getCustomerId()));
+        bs.setAccessoryList(accRep.getByParameter(Integer.toString(bs.getRental().getId()), "fk_rental_id"));
+        bs.setPrices(priceRepo.getPrices());
+        return "redirect:/maintenance/report";
     }
 
     @GetMapping("/report")
-    public String maintenanceReport(Model model, @RequestParam int id){
-        ArrayList<Customer> customer = customerRepository.getAll();
-        ArrayList<Rental> rental = rentalRepository.getAll();
-
-        model.addAttribute("ids", autocamperRepository.getById(id));
-        model.addAttribute("customers", customer);
-        model.addAttribute("rentals", rental);
-
-        return "/mechanic/report";
-    }
-
-    @GetMapping("/underRepList")
-    public String repList(Model model){
-
-        ArrayList<Autocamper> autocamper = autocamperRepository.getByParameter(Integer.toString(Autocamper.NEEDS_FIXING), "current_status");
-        ArrayList<MaintenanceReport> maintenance = maintenanceReportRepository.getAll();
-
-        model.addAttribute("autocampers", autocamper);
-        model.addAttribute("maintenances", maintenance);
-        return "/mechaninic/underRepList";
+    public String maintenanceReport(Model model, HttpServletRequest request){
+        System.out.println(getSession(request).getCustomer());
+        model.addAttribute("sesh", getSession(request));
+        return "/maintenance/report";
     }
 
     @GetMapping("/mechComments")
     public String comments(Model model, @RequestParam int id){
         model.addAttribute("note", maintenanceReportRepository.getById(id));
-
-        return "/mechanic/mechComments";
+        return "/maintenance/mechComments";
     }
 
     @PostMapping("/fillMaintenanceReport")
@@ -82,14 +67,24 @@ public class MaintenanceReportController {
         System.out.println(reportFromPost.getPartStatus());
                 maintenanceReportRepository.create(reportFromPost);
 
-        return "redirect:/mechanic/finishedrentals";
+        return "redirect:/maintenance/finishedrentals";
     }
 
     @PostMapping("/changeStatus")
     public String changeStatus(@ModelAttribute Autocamper autocamperFromPost){
         autocamperRepository.update(autocamperFromPost);
-        return "redirect:/mechanic/finishedrentals";
+        return "redirect:/maintenance/finishedrentals";
     }
+
+    private BillSession getSession(HttpServletRequest request){
+        BillSession session = (BillSession) request.getSession().getAttribute("session");
+        if(session == null){
+            session = new BillSession();
+            request.getSession().setAttribute("session", session);
+        }
+        return session;
+    }
+
 
 }
 

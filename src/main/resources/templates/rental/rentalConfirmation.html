@@ -76,30 +76,30 @@
         </div>
     </div>
     <div class="container card">
-        <p class="card-header lead">Udlejning</p>
+        <p class="card-header row lead">Udlejning</p>
         <div class="row">
-            <div class="col">
-                <table class="table card-body">
-                    <tr class="row">
+                <table class="table">
+                    <tr>
                         <th class="col m-0 alert alert-primary">Udlejnings Periode</th>
-                        <td class="col">
+                        <td>
                             <span th:text="${rentalSession.getRental()?.getStartDate()}">#</span>
                             <span> - </span>
                             <span th:text="${rentalSession.getRental()?.getEndDate()}">#</span>
                         </td>
                     </tr>
-                    <tr class="row">
-                        <th class="col m-0 alert alert-primary">Pick-Up Lokation</th>
-                        <td class="col" th:text="${rentalSession.getRental()?.getLongPickUpLoc()}">#</td>
+                    <tr>
+                            <th class="col m-0 alert alert-primary">Pick-Up Lokation</th>
+                            <td class="col" th:text="${rentalSession.getRental()?.getLongPickUpLoc()}">#</td>
                     </tr>
-                    <tr class="row">
-                        <th class="col m-0 alert alert-primary">Drop-Off Lokation</th>
-                        <td class="col" th:text="${rentalSession.getRental()?.getLongDropOffLoc()}">#</td>
+                    <tr>
+                            <th class="col m-0 alert alert-primary">Drop-Off Lokation</th>
+                            <td class="col" th:text="${rentalSession.getRental()?.getLongDropOffLoc()}">#</td>
                     </tr>
                 </table>
             </div>
-            <div class="col">
-                <p class="lead card-header">Tilbehør</p>
+
+            <p class="lead row card-header">Tilbehør</p>
+            <div class="row">
                 <table class="table card-body">
                     <thead class="alert alert-primary">
                     <tr>
@@ -117,7 +117,6 @@
             </div>
         </div>
     </div>
-</div>
 <!-- Nederste række -->
 
 <div class="container">
@@ -126,10 +125,10 @@
 </div>
 
 <div class="container">
-    <ol class="carousel-indicators row" style="position: relative; background-color: #1abc9c">
-        <a href="/rental/customer"><li></li></a>
-        <a href="/rental/rentalDetails"><li></li></a>
-        <a href="/rental/confirmation" ><li class="active"></li></a>
+    <ol class="carousel-indicators row" style="position: relative">
+        <a href="/rental/customer"><li style="background-color: #1abc9c"></li></a>
+        <a href="/rental/rentalDetails"><li style="background-color: #1abc9c"></li></a>
+        <a href="/rental/confirmation" ><li style="background-color: #1abc9c" class="active"></li></a>
     </ol>
 </div>
 

@@ -17,12 +17,22 @@ import java.util.ArrayList;
 public class RentalSession {
     private LocalDateTime timer;
 
+    CustomerRepository cRep;
+    RentalRepository rRep;
+    AccessoryRepository accRep;
+    AutocamperRepository autoRep;
+
     private Autocamper autocamper;
     private Customer customer;
     private Rental rental;
     private ArrayList<Accessory> accessories;
 
-    public RentalSession(){
+    public RentalSession() throws SQLException{
+        cRep = new CustomerRepository();
+        rRep = new RentalRepository();
+        accRep = new AccessoryRepository();
+        autoRep = new AutocamperRepository();
+
         rental = null;
         autocamper = null;
         customer = null;
@@ -34,6 +44,8 @@ public class RentalSession {
         return autocamper;
     }
     public void setAutocamper(Autocamper autocamper) {
+        autocamper.setStatus(Autocamper.RESERVED);
+        autoRep.update(autocamper);
         this.autocamper = autocamper;
     }
 
@@ -58,11 +70,7 @@ public class RentalSession {
         this.accessories = accessories;
     }
 
-    public void save() throws SQLException{
-        CustomerRepository cRep = new CustomerRepository();
-        RentalRepository rRep = new RentalRepository();
-        AccessoryRepository accRep = new AccessoryRepository();
-
+    public void save(){
         rental.setAutocamperId(autocamper.getId());
         rental.setCustomerId(cRep.create(customer).getId());
         rental = rRep.create(rental);

@@ -3,12 +3,19 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="../css/autocamperlist.css"/>
 </head>
+
 <body class="ml-4 mt-4 mr-4 mb-4">
-<h1>Raporter Status</h1>
+<h1 class="masthead-heading mb-0">Rapporter Status<span></span></h1>
+<div class="divider-custom">
+    <div class="divider-custom-line"></div>
+    <div class="divider-custom-icon"> <img style="    width: 24px !important;
+        height: 24px !important;" src="../img/transportation.png"></div>
+    <div class="divider-custom-line"></div>
+</div>
 <a href="/user/finishedrentals"><button type="button" class="btn btn-secondary">Tilbage</button></a>
-<br><br>
+<br/>
 <div>
     <table class="table" >
         <thead>
@@ -23,20 +30,12 @@
         </thead>
         <tbody>
         <tr>
-            <th:block th:each="rental : ${rentals}">
-                <th:block th:if="${rental.getAutocamperId()} == ${ids.getId()}">
-                    <th:block th:each="customer : ${customers}">
-                        <th:block th:if="${rental.getCustomerId()} == ${customer.getId()}">
-                            <td scope="row" th:text="${customer.getFirstName()+ ' ' + customer.getLastName()}"></td>
-                            <td th:text="${ids.getId()}"></td>
-                            <td th:text="${ids.getType().getBrand()}"></td>
-                            <td th:text="${ids.getType().getModel()}"></td>
-                            <td th:text="${rental.getStartDate()}"></td>
-                            <td th:text="${rental.getEndDate()}"></td>
-                        </th:block>
-                    </th:block>
-                </th:block>
-            </th:block>
+            <td th:text="${sesh.getCustomer()?.getFirstName() + ' ' + sesh.getCustomer()?.getLastName()}"></td>
+            <td th:text="${sesh.getAutocamper()?.getId()}"></td>
+            <td th:text="${sesh.getAutocamper()?.getType().getBrand()}"></td>
+            <td th:text="${sesh.getAutocamper()?.getType().getModel()}"></td>
+            <td th:text="${sesh.getRental()?.getStartDate()}"></td>
+            <td th:text="${sesh.getRental()?.getEndDate()}"></td>
         </tr>
         </tbody>
     </table>
@@ -67,8 +66,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Karosseri</label>
                     <select name="partStatus['frame']" class="form-control" id="exampleFormControlSelect1">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>
@@ -76,8 +75,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect2">Dæk</label>
                     <select name="partStatus['wheels']" class="form-control" id="exampleFormControlSelect2">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>
@@ -85,8 +84,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect3">Batteri</label>
                     <select name="partStatus['battery']" class="form-control" id="exampleFormControlSelect3">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>
@@ -96,8 +95,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect4">Bremser</label>
                     <select name="partStatus['brakes']" class="form-control" id="exampleFormControlSelect4">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>
@@ -105,8 +104,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect5">Støddæmpere</label>
                     <select name="partStatus['suspention']" class="form-control" id="exampleFormControlSelect5">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>
@@ -114,8 +113,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect6">Lygter</label>
                     <select name="partStatus['lights']" class="form-control" id="exampleFormControlSelect6">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>
@@ -125,8 +124,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect7">Interiør</label>
                     <select name="partStatus['interior']" class="form-control" id="exampleFormControlSelect7">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>
@@ -134,8 +133,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect8">Olie</label>
                     <select name="partStatus['oil']" class="form-control" id="exampleFormControlSelect8">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>
@@ -143,8 +142,8 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect9">Kølervæske</label>
                     <select name="partStatus['coolingflued']" class="form-control" id="exampleFormControlSelect9">
-                        <option value="1">Functional</option>
-                        <option value="2">Needs Repair</option>
+                        <option value="1">Funktionel</option>
+                        <option value="2">Skal Repareres</option>
                     </select>
                 </div>
             </div>

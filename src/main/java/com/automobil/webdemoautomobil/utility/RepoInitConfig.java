@@ -51,4 +51,10 @@ public class RepoInitConfig {
     public AccessoryRepository getAccessory() throws SQLException {
         return new AccessoryRepository();
     }
+
+    @Bean
+    public UserRepository getUserRepo() throws SQLException {
+        return new UserRepository();
+    }
+
 }
