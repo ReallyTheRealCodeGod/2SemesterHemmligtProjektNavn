@@ -23,7 +23,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // set configuration on the auth object here
-
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select username,password,enabled "
@@ -32,36 +31,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username,authority "
                     + "from authorities "
                     + "where username = ? ");
-
-
-        /*
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .withDefaultSchema() // h2 default database
-                .withUser(
-                        User.withUsername("user")
-                        .password("pass")
-                        .roles("USER")
-                )
-                .withUser(
-                        User.withUsername("admin")
-                                .password("pass")
-                                .roles("ADMIN")
-                );
-         */
-
-        /* This is an in memory implementation
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("pass")
-                .roles("USER")
-                .and() // Tilføj flere usernames
-                .withUser("admin")
-                .password("pass")
-                .roles("ADMIN");
-
-         */
-
     }
 
     //You need to provide a password encoder for web apps. Don't use NoOpPasswordEncoder in final product as it does not

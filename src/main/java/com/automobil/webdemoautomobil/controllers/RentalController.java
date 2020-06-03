@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Access;
 import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Controller
@@ -81,9 +82,11 @@ public class RentalController {
 
     @GetMapping("/save")
     public String save(HttpServletRequest request){
-        if(getSession(request).save()){
-            System.out.println("success");
-        };
+        try {
+            getSession(request).save();
+        }catch(SQLException sql){
+            sql.printStackTrace();
+        }
         return "/admin/admin";
     }
 

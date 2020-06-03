@@ -10,6 +10,7 @@ import com.automobil.webdemoautomobil.repositories.CustomerRepository;
 import com.automobil.webdemoautomobil.repositories.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -21,27 +22,12 @@ public class RentalSession {
     private Rental rental;
     private ArrayList<Accessory> accessories;
 
-    @Autowired
-    private AutocamperRepository aRep;
-    @Autowired
-    private CustomerRepository cRep;
-    @Autowired
-    private RentalRepository rRep;
-    @Autowired
-    private AccessoryRepository accRep;
-
     public RentalSession(){
         rental = null;
         autocamper = null;
         customer = null;
         accessories = new ArrayList<>();
         timer = LocalDateTime.now();
-    }
-
-
-    public int timeOut(){
-        System.out.println(LocalDateTime.now().compareTo(timer));
-        return LocalDateTime.now().compareTo(timer);
     }
 
     public Autocamper getAutocamper() {
@@ -72,8 +58,7 @@ public class RentalSession {
         this.accessories = accessories;
     }
 
-    public boolean save(){
-        AutocamperRepository aRep = new AutocamperRepository();
+    public void save() throws SQLException{
         CustomerRepository cRep = new CustomerRepository();
         RentalRepository rRep = new RentalRepository();
         AccessoryRepository accRep = new AccessoryRepository();
@@ -85,7 +70,6 @@ public class RentalSession {
             a.setRentalId(rental.getId());
             accRep.update(a);
         }
-        return true;
     }
 
     @Override
