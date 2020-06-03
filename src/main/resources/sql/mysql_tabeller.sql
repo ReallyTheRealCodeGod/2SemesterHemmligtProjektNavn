@@ -72,7 +72,7 @@ INSERT INTO `autocamper_db`.`maintenance`
 `mileage`,
 `cleaning_price`,
 `maintenance_notes`,
- 'cleaning_notes',
+'cleaning_notes',
 `frame`,
 `wheels`,
 `lights`,
@@ -85,7 +85,7 @@ INSERT INTO `autocamper_db`.`maintenance`
 `maintenance_date`,
 `fk_autocamper_id`)
 VALUES
-(DEFAULT, 50, 378, 200, "no notes", NULL,1, 1, 1, 1, 1, 1, 1, 1, 1, "2020-12-08", 1);
+(DEFAULT, 50, 378, 200, "no notes", "no notes",1, 1, 1, 1, 1, 1, 1, 1, 1, "2020-12-08", 1);
 
 
 INSERT INTO `autocamper_db`.`rental`
