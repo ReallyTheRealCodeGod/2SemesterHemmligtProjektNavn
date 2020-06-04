@@ -87,6 +87,8 @@ INSERT INTO `autocamper_db`.`maintenance`
 VALUES
 (DEFAULT, 50, 378, 200, "no notes", NULL,1, 1, 1, 1, 1, 1, 1, 1, 1, "2020-12-08", 1);
 
+INSERT INTO season(season_name,  charge_percentage, start_date, end_date) values ("high", 60, "2020-12-08", "2021-04-02");
+
 
 INSERT INTO `autocamper_db`.`rental`
 (`id`,
