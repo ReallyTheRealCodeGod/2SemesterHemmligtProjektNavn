@@ -148,3 +148,6 @@ values('sales', 'ROLE_SALES');
 
 INSERT INTO variable_prices (excessKilometer_price, fuel_price, dropOffKilometer_price, pickUpKilometer_price, cleaning_max_price, cleaning_min_price) values(7, 521, 400, 30, 5000, 350);
 
+INSERT INTO season(season_name,  charge_percentage, start_date, end_date) values ("High", 60, "2020-01-01", "2021-04-07");
+INSERT INTO season(season_name,  charge_percentage, start_date, end_date) values ("Mid", 30, "2020-04-08", "2021-08-02");
+INSERT INTO season(season_name,  charge_percentage, start_date, end_date) values ("Low", 0, "2020-08-03", "2021-12-31");
