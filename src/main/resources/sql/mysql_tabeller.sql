@@ -15,19 +15,19 @@ VALUES (default, 1, NULL), (default, 2, NULL), (default, 3, NULL), (default, 4, 
 
 INSERT INTO `autocamper_db`.`autocamper_type`
 (`brand`,
-`model`,
-`price`,
-`production_year`,
-`weight`,
-`fuel_capacity`,
-`horse_power`,
-`max_speed`,
-`standing_height`,
-`area_sqm`,
-`height`,
-`length`,
-`width`,
-`description`)
+ `model`,
+ `price`,
+ `production_year`,
+ `weight`,
+ `fuel_capacity`,
+ `horse_power`,
+ `max_speed`,
+ `standing_height`,
+ `area_sqm`,
+ `height`,
+ `length`,
+ `width`,
+ `description`)
 VALUES
 ("Farrari","Moccasin","1332","2010","4287","49","26","104","3","12","4","14","4","Dinah my dear! Let this be a book of rules for shutting people up like telescopes: this time it all seemed quite dull and stupid for life to go among mad people,' Alice remarked. 'Oh, you foolish."),
 ("Skiles IV","PaleGoldenRod","878","1983","2126","30","50","108","5","8","7","13","4","NOT a serpent!' said Alice angrily. 'It wasn't very civil of you to death.""' 'You are old,' said the Cat. '--so long as it was as much as she could not think of any good reason, and as for the White."),
@@ -49,56 +49,56 @@ INSERT INTO autocamper_db.autocamper
 
 INSERT INTO `autocamper_db`.`customer`
 (`id`,
-`last_name`,
-`first_name`,
-`email`,
-`phone_nr`,
-`cpr_nr`,
-`postalcode`,
-`street_name`,
-`street_nr`,
-`apartment_floor`,
-`card_nr`,
-`cvv`)
-VALUES 
-(1,"Altenwerth","Madisyn","shanny.maggio@example.com","+72(2)4333140061","0","47709","Jude Viaduct","1869","","4556757599654136","7"),
-(2,"Donnelly","Otto","xrutherford@example.net","+15(4)5149393254","500","59206","Juanita Corners","7033","7","4929443955697897","7"),
-(3,"Upton","Selina","jonatan67@example.org","064-643-5722x57720","5396","49336","Friedrich Loaf","67024","2","4929790115840367","0"),
-(4,"Harber","Hubert","lisa.bahringer@example.org","(415)244-1785x099","306872291","8986","Justina Garden","6016","5","5409385643527559","8");
+ `last_name`,
+ `first_name`,
+ `email`,
+ `phone_nr`,
+ `cpr_nr`,
+ `postalcode`,
+ `street_name`,
+ `street_nr`,
+ `apartment_floor`,
+ `card_nr`,
+ `cvv`)
+VALUES
+(1,"Altenwerth","Madisyn","shanny.maggio@example.com","724333140061","0","47709","Jude Viaduct","1869","","4556757599654136","7"),
+(2,"Donnelly","Otto","xrutherford@example.net","55149393254","500","59206","Juanita Corners","7033","7","4929443955697897","7"),
+(3,"Upton","Selina","jonatan67@example.org","06457720","5396","49336","Friedrich Loaf","67024","2","4929790115840367","0"),
+(4,"Harber","Hubert","lisa.bahringer@example.org","(4153453099","306872291","8986","Justina Garden","6016","5","5409385643527559","8");
 
 INSERT INTO `autocamper_db`.`maintenance`
 (`id`,
-`fuel_gauge`,
-`mileage`,
-`cleaning_price`,
-`maintenance_notes`,
- 'cleaning_notes',
-`frame`,
-`wheels`,
-`lights`,
-`oil`,
-`battery`,
-`interior`,
-`coolingflued`,
-`brakes`,
-`suspention`,
-`maintenance_date`,
-`fk_autocamper_id`)
+ `fuel_gauge`,
+ `mileage`,
+ `cleaning_price`,
+ `maintenance_notes`,
+ `cleaning_notes`,
+ `frame`,
+ `wheels`,
+ `lights`,
+ `oil`,
+ `battery`,
+ `interior`,
+ `coolingflued`,
+ `brakes`,
+ `suspention`,
+ `maintenance_date`,
+ `fk_autocamper_id`)
 VALUES
 (DEFAULT, 50, 378, 200, "no notes", NULL,1, 1, 1, 1, 1, 1, 1, 1, 1, "2020-12-08", 1);
 
 
 INSERT INTO `autocamper_db`.`rental`
 (`id`,
-`start_date`,
-`end_date`,
-`lon_pickUp_loc`,
-`lat_pickUp_loc`,
-`lon_dropOff_loc`,
-`lat_dropOff_loc`,
-`fk_autocamper_id`,
-`fk_customer_id`,
-`fk_maintenance_id`)
+ `start_date`,
+ `end_date`,
+ `lon_pickUp_loc`,
+ `lat_pickUp_loc`,
+ `lon_dropOff_loc`,
+ `lat_dropOff_loc`,
+ `fk_autocamper_id`,
+ `fk_customer_id`,
+ `fk_maintenance_id`)
 VALUES
 (DEFAULT, "2019-12-08", "2020-12-08", 55.676097, 12.568337, 55.676097, 12.568337, 3, 1, NULL);
 

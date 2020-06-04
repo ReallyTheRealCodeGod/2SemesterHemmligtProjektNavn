@@ -44,9 +44,9 @@
                 <th><input disabled type="number" name="amount" th:class="${accessory.getName()} + ' ' + form-control" th:value="${accessories.get(accessory)}"/></th>
                 <td>
                     <input type="hidden" name="typeId" th:value="${accessory.getTypeId()}">
-                    <input type="button" th:id="${accessory.getName()}" class="btn btn-info" onclick="show(id)">
+                    <input type="button" th:id="${accessory.getName()}" class="btn btn-info" onclick="show(id)" value="Rediger">
                     <input formaction="/admin/accessories/edit" type="submit" class="btn btn-info" th:id="${accessory.getName()} + Save" style="display: none">
-                    <input formaction="/admin/accessories/delete" type="submit" class="btn btn-danger" th:value="${accessory.getTypeId()}">
+                    <a th:href="@{/admin/accessories/delete(id=${accessory.getTypeId()})}"><button type="button" class="btn btn-danger">Slet</button></a>
                 </td>
             </div>
 
@@ -60,6 +60,7 @@
     <button class="btn btn-primary my-2 mx-auto" type="button" data-toggle="collapse" data-target="#add" aria-expanded="false" aria-controls="add">
         Tilføj
     </button>
+    <a href="/"><button class="btn btn-danger my-2 mx-auto" type="button">Tilbage</button></a>
 </div>
 <div class="card w-100 collapse container" id="add">
     <form action="/admin/accessories/addAccessory" method="POST">

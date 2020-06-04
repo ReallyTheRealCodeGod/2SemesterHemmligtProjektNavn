@@ -1,6 +1,7 @@
 package com.automobil.webdemoautomobil.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class VariablePrices {
@@ -10,11 +11,11 @@ public class VariablePrices {
     private int pickUpKilometerPrice;
     private int cleaningMinPrice;
     private int cleaningMaxPrice;
-    private Season[] seasons;
+    private ArrayList<Season> seasons;
 
     public VariablePrices(){};
 
-    public VariablePrices(int excessKilometerPrice, int fuelPrice, int dropOffKilometerPrice, int pickUpKilometerPrice, int cleaningMinPrice, int cleaningMaxPrice, Season[] seasons) {
+    public VariablePrices(int excessKilometerPrice, int fuelPrice, int dropOffKilometerPrice, int pickUpKilometerPrice, int cleaningMinPrice, int cleaningMaxPrice, ArrayList<Season> seasons) {
         this.excessKilometerPrice = excessKilometerPrice;
         this.fuelPrice = fuelPrice;
         this.dropOffKilometerPrice = dropOffKilometerPrice;
@@ -72,11 +73,11 @@ public class VariablePrices {
         this.cleaningMaxPrice = cleaningMaxPrice;
     }
 
-    public Season[] getSeasons() {
+    public ArrayList<Season> getSeasons() {
         return seasons;
     }
 
-    public void setSeasons(Season[] seasons) {
+    public void setSeasons(ArrayList<Season> seasons) {
         this.seasons = seasons;
     }
 
@@ -99,7 +100,7 @@ public class VariablePrices {
                 ", pickUpKilometerPrice=" + pickUpKilometerPrice +
                 ", cleaningMinPrice=" + cleaningMinPrice +
                 ", cleaningMaxPrice=" + cleaningMaxPrice +
-                ", seasons=" + Arrays.toString(seasons) +
+                ", seasons=" + seasons +
                 '}';
     }
 }

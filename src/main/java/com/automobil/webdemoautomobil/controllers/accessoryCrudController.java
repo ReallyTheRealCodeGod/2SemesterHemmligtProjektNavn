@@ -38,9 +38,9 @@ public class accessoryCrudController {
         return "redirect:/admin/accessories";
     }
 
-    @PostMapping("/delete")
-    public String delete(@RequestParam String delete){
-        ArrayList<Accessory> accessories = accRep.getByParameter(delete, "fk_accessory_type_id");
+    @GetMapping("/delete")
+    public String delete(@RequestParam int id){
+        ArrayList<Accessory> accessories = accRep.getByParameter(Integer.toString(id), "fk_accessory_type_id");
         for(Accessory a: accessories){
             accRep.delete(a);
         }

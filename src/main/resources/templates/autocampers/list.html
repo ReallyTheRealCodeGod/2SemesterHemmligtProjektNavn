@@ -49,7 +49,7 @@
         </table>
         <button id="search" style="color: white" onmouseover="this.style.backgroundColor='#ffc107';" onmouseout="this.style.backgroundColor='#87ceea';" class="btn btn-primary  card-body" onclick="show()" type="button">Ryd</button>
 
-        <button onclick="location.href='/admin';" style="color: white" onmouseover="this.style.backgroundColor='#dc3545';" onmouseout="this.style.backgroundColor='#87ceea';" class="btn  card-body" type="button">Tilbage</button>
+        <button onclick="location.href='/';" style="color: white" onmouseover="this.style.backgroundColor='#dc3545';" onmouseout="this.style.backgroundColor='#87ceea';" class="btn  card-body" type="button">Tilbage</button>
     </div>
 </div>
 <div class="container">
@@ -61,7 +61,7 @@
                     <div class="card-body">
                         <h3 th:if="${auto.getStatus()} == 1" class="badge badge-success">Ledig</h3>
                         <h3 th:if="${auto.getStatus()} == 2" class="badge badge-success">Reserved</h3>
-                        <h3 th:if="${auto.getStatus()} == 3" class="badge badge-info">Under Vedligeholdelse</h3>
+                        <h3 th:if="${auto.getStatus()} == 3" class="badge badge-info">Under Inspektion</h3>
                         <h3 th:if="${auto.getStatus()} == 4" class="badge badge-danger">Udlejet</h3>
                         <h3 th:if="${auto.getStatus()} == 5" class="badge badge-danger">Mangler Reparation</h3>
 
@@ -72,10 +72,12 @@
                             <div>
                                 <a th:href="@{/autocampers/details(id=${auto.getId()})}"><button type="button" class="btn  btn-outline-secondary">View</button></a>
                                 <th:block th:switch="${role}">
-                                    <a th:case="ROLE_ADMIN" th:href="@{/autocampers/crud(id=${auto.getId()})}"><button type="button" class="btn btn-block btn-warning" style="font-size: 75% ">Rediger</button></a>
-                                    <a th:case="ROLE_SALES" th:href="@{/rental(id=${auto.getId()})}"><button type="button" class="btn btn-block btn-success" style="font-size: 75% ">Udlej</button></a>
-                                    <a th:case="ROLE_CLEANING" th:href="@{/maintenance/cleaning(id=${auto.getId()})}"><button type="button" class="btn btn-block btn-info" style="font-size: 75% ">Rengøringsrapport</button></a>
-                                    <a th:case="ROLE_USER" th:href="@{/maintenance(id=${auto.getId()})}"><button type="button" class="btn  btn-block btn-info" style="font-size: 75% ">Rapportter Status</button></a>
+                                    <th:block th:case="ROLE_USER" th:if="${auto.getStatus == 1}">
+                                        <a th:case="ROLE_SALES" th:href="@{/rental(id=${auto.getId()})}"><button type="button" class="btn btn-block btn-success" style="font-size: 75% ">Udlej</button></a>
+                                    </th:block>
+                                    <th:block th:case="ROLE_USER" th:if="${auto.getStatus == 3}">
+                                        <a th:href="@{/maintenance(id=${auto.getId()})}"><button type="button" class="btn  btn-block btn-info" style="font-size: 75% ">Rapportter Status</button></a>
+                                    </th:block>
                                 </th:block>
                             </div>
                             <small class="text-muted"> <span class="price" th:value="${auto.getType().getPrice()}" th:text="${auto.getType().getPrice()}"></span> <span> Kr/dag</span></small>

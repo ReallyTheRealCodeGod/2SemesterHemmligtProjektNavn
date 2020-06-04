@@ -83,7 +83,7 @@ public class BillRepository implements IRepository<Bill>{
 
     public Bill create(Bill bill) {
         try {
-            String create = "INSERT INTO bill(id, billing_date cus_first_name, cus_last_name," +
+            String create = "INSERT INTO bill(id, billing_date, cus_first_name, cus_last_name," +
                     " rental_cost, accessory_cost, " +
                     "postal_code, street_name, street_nr, apartment_floor) " +
                     "Values (DEFAULT, ?,?,?,?,?,?,?,?,?)";
@@ -99,7 +99,7 @@ public class BillRepository implements IRepository<Bill>{
             prep.setString(9, bill.getApartmentFloor());
             prep.executeUpdate();
             ResultSet rs = prep.getGeneratedKeys();
-
+            System.out.println(bill);
             rs.next();
             bill.setId(rs.getInt(1));
             return bill;
@@ -114,11 +114,11 @@ public class BillRepository implements IRepository<Bill>{
             String update = "UPDATE bill " +
                     "SET billing_date = ?," +
                     "cus_first_name = ?, " +
-                    "cus_last_name = ? " +
+                    "cus_last_name = ?, " +
                     "postal_code = ?, " +
-                    "street_name = ? " +
+                    "street_name = ?, " +
                     "street_nr = ?, " +
-                    "apartment_floor = ? " +
+                    "apartment_floor = ?, " +
                     "rental_cost = ?, " +
                     "accessory_cost = ?, " +
                     "WHERE id = ?";

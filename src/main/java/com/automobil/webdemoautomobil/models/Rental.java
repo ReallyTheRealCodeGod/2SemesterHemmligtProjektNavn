@@ -7,9 +7,9 @@ import java.time.LocalDate;
 public class Rental {
     private int id;
     private int accumulatedPrice;
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME)
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
     private LocalDate startDate;
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE_TIME)
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
     private LocalDate endDate;
     private long longPickUpLoc;
     private long latPickUpLoc;

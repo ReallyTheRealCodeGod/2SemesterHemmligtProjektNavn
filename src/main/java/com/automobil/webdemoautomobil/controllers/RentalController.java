@@ -86,7 +86,7 @@ public class RentalController {
     @GetMapping("/save")
     public String save(HttpServletRequest request){
         getSession(request).save();
-        return "/admin/admin";
+        return "redirect:/";
     }
 
     private RentalSession getSession(HttpServletRequest request) {

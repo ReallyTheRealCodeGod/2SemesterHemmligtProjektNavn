@@ -79,20 +79,20 @@
         <p class="card-header row lead">Udlejning</p>
         <div class="row">
                 <table class="table">
-                    <tr>
-                        <th class="col m-0 alert alert-primary">Udlejnings Periode</th>
-                        <td>
+                    <tr class = "row ">
+                        <th class="col ml-3 alert alert-primary">Udlejnings Periode</th>
+                        <td class="col">
                             <span th:text="${rentalSession.getRental()?.getStartDate()}">#</span>
                             <span> - </span>
                             <span th:text="${rentalSession.getRental()?.getEndDate()}">#</span>
                         </td>
                     </tr>
-                    <tr>
-                            <th class="col m-0 alert alert-primary">Pick-Up Lokation</th>
+                    <tr class="row">
+                            <th class="col ml-3 alert alert-primary">Pick-Up Lokation</th>
                             <td class="col" th:text="${rentalSession.getRental()?.getLongPickUpLoc()}">#</td>
                     </tr>
-                    <tr>
-                            <th class="col m-0 alert alert-primary">Drop-Off Lokation</th>
+                    <tr class="row">
+                            <th class="col m-3 alert alert-primary">Drop-Off Lokation</th>
                             <td class="col" th:text="${rentalSession.getRental()?.getLongDropOffLoc()}">#</td>
                     </tr>
                 </table>

@@ -3,6 +3,7 @@ package com.automobil.webdemoautomobil.repositories;
 import com.automobil.webdemoautomobil.models.Season;
 import com.automobil.webdemoautomobil.models.VariablePrices;
 import com.automobil.webdemoautomobil.utility.JDBCConnection;
+import org.springframework.jdbc.support.xml.SqlXmlFeatureNotImplementedException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -58,88 +59,46 @@ public class VariablePricesRepository{
         return false;
     }
 
-    private Season[] getSeasons(){
+    private ArrayList<Season> getSeasons(){
         ArrayList<Season> list = new ArrayList<>();
         try {
             PreparedStatement prep = conn.prepareStatement("SELECT * FROM season");
             ResultSet rs = prep.executeQuery();
             while(rs.next()){
                 Season s = new Season();
-                s.setName(rs.getString("name"));
-                s.setSurchargePercentage(rs.getInt("surcharge_percentage"));
+                s.setName(rs.getString("season_name"));
+                s.setSurchargePercentage(rs.getInt("charge_percentage"));
                 s.setStartDate(rs.getDate("start_date").toLocalDate());
                 s.setEndDate(rs.getDate("end_date").toLocalDate());
                 list.add(s);
             }
-            return list.toArray(new Season[list.size()]);
+            return list;
         }catch(SQLException sql){
             sql.printStackTrace();
             return null;
         }
-
-    /*tænker det ikke rigtig den her er nødvendigt siden priserne kun har en række;
-    public VariablePrices[] getAll(){
-        ArrayList<VariablePrices> priceList = new ArrayList<VariablePrices>();
+    }
+    public void addSeason(Season season){
         try {
-            PreparedStatement getAllVariablePrices = conn.prepareStatement
-                    ("SELECT * FROM variable_prices");
-            ResultSet rs = getAllVariablePrices.executeQuery();
-
-            while (rs.next()) {
-                VariablePrices variablePrices = new VariablePrices();
-                variablePrices.setVariablePricesId(rs.getInt(1));
-                variablePrices.setExcessKilometerPrice(rs.getInt(2));
-                variablePrices.setFuelPrice(rs.getInt(3));
-                variablePrices.setDropOffKilometerPrice(rs.getInt(4));
-                variablePrices.setPickUpKilometerPrice(rs.getInt(5));
-                variablePrices.setCleaningMaxPrice(rs.getInt(6));
-                variablePrices.setCleaningMinPrice(rs.getInt(7));
-                priceList.add(variablePrices);
-            }
+            PreparedStatement prep = conn.prepareStatement("INSERT INTO season (season_name,  charge_percentage, start_date, end_date) values (?, ?, ?, ?)");
+            prep.setString(1, season.getName());
+            prep.setInt(2, season.getSurchargePercentage());
+            prep.setDate(3, Date.valueOf(season.getStartDate()));
+            prep.setDate(4, Date.valueOf(season.getEndDate()));
+            prep.executeUpdate();
+        }catch(SQLException sql){
+            sql.printStackTrace();
         }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
-        return priceList.toArray(new VariablePrices[priceList.size()]);
     }
 
-
-    public VariablePrices create(VariablePrices variablePrices){
+    public void deleteSeason(String name){
         try {
-            PreparedStatement createVariablePrice = conn.prepareStatement
-                    ("INSERT INTO variable_prices " +
-                            "VALUES (DEFAULT, ?, ?, ?, ?, ?, ?) " + Statement.RETURN_GENERATED_KEYS);
-            createVariablePrice.setInt(1, variablePrices.getExcessKilometerPrice());
-            createVariablePrice.setInt(2,variablePrices.getFuelPrice());
-            createVariablePrice.setInt(3, variablePrices.getDropOffKilometerPrice());
-            createVariablePrice.setInt(4, variablePrices.getPickUpKilometerPrice());
-            createVariablePrice.setInt(5, variablePrices.getCleaningMaxPrice());
-            createVariablePrice.setInt(6, variablePrices.getCleaningMinPrice());
-            createVariablePrice.executeUpdate();
-            ResultSet rs = createVariablePrice.getGeneratedKeys();
-            rs.next();
-            variablePrices.setVariablePricesId(rs.getInt(1));
-        }
-        catch(SQLException sql){
+            PreparedStatement prep = conn.prepareStatement("DELETE FROM season where season_name = ?");
+            prep.setString(1, name);
+            prep.executeUpdate();
+        }catch(SQLException sql){
             sql.printStackTrace();
         }
-        return variablePrices;
-    }*/
-
-    /*
-    public boolean delete(int id){
-        try {
-            PreparedStatement deleteVarPrice = conn.prepareStatement
-                    ("DELETE FROM variable_prices WHERE variable_prices_id = ?");
-            deleteVarPrice.setInt(1, id);
-            deleteVarPrice.executeUpdate();
-            return true;
-        }
-        catch(SQLException sql){
-            sql.printStackTrace();
-        }
-        return false;
-    }*/
 
     }
 }

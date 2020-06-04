@@ -126,7 +126,7 @@ public class AutocamperRepository implements IRepository<Autocamper> {
                     "current_status = ?, " +
                     "picture = ?, " +
                     "fk_brand = ?, " +
-                    "fk_model = ?," +
+                    "fk_model = ? " +
                     "WHERE id = ?";
             PreparedStatement prep = connection.prepareStatement(update);
             prep.setInt(1, autocamper.getMileage());

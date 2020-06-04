@@ -25,19 +25,9 @@ public class CustomerRepository implements IRepository<Customer>{
             getSingleCustomer.setInt(1, id);
             ResultSet rs = getSingleCustomer.executeQuery();
 
-            while (rs.next()) {
-                customerToReturn.setId(rs.getInt(1));
-                customerToReturn.setLastName(rs.getString(2));
-                customerToReturn.setFirstName(rs.getString(3));
-                customerToReturn.setEmail(rs.getString(4));
-                customerToReturn.setCprNr(rs.getInt(5));
-                customerToReturn.setPostalCode(rs.getInt(6));
-                customerToReturn.setStreetName(rs.getString(7));
-                customerToReturn.setHouseNr(rs.getString(8));
-                customerToReturn.setFloor(rs.getString(9));
-                customerToReturn.setCardNr(rs.getLong(10));
-                customerToReturn.setCardCVV(rs.getInt(11));
-            }
+            rs.next();
+            return load(rs);
+
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -67,21 +57,7 @@ public class CustomerRepository implements IRepository<Customer>{
             ResultSet rs = prep.executeQuery();
 
             while (rs.next()) {
-                Customer sampleCustomer = new Customer();
-                sampleCustomer.setId(rs.getInt(1));
-                sampleCustomer.setLastName(rs.getString(2));
-                sampleCustomer.setFirstName(rs.getString(3));
-                sampleCustomer.setEmail(rs.getString(4));
-                sampleCustomer.setPhoneNr(rs.getString(5));
-                sampleCustomer.setCprNr(rs.getInt(6));
-                sampleCustomer.setPostalCode(rs.getInt(7));
-                sampleCustomer.setStreetName(rs.getString(8));
-                sampleCustomer.setHouseNr(rs.getString(9));
-                sampleCustomer.setFloor(rs.getString(10));
-                sampleCustomer.setCardNr(rs.getLong(11));
-                sampleCustomer.setCardCVV(rs.getInt(12));
-
-                list.add(sampleCustomer);
+                list.add(load(rs));
             }
             return list;
         }catch (SQLException sql){
@@ -99,20 +75,7 @@ public class CustomerRepository implements IRepository<Customer>{
             ResultSet rs = getAllCustomers.executeQuery();
             if (rs != null) {
                 while (rs.next()) {
-                    Customer sampleCustomer = new Customer();
-                    sampleCustomer.setId(rs.getInt(1));
-                    sampleCustomer.setLastName(rs.getString(2));
-                    sampleCustomer.setFirstName(rs.getString(3));
-                    sampleCustomer.setEmail(rs.getString(4));
-                    sampleCustomer.setPhoneNr(rs.getString(5));
-                    sampleCustomer.setCprNr(rs.getInt(6));
-                    sampleCustomer.setPostalCode(rs.getInt(7));
-                    sampleCustomer.setStreetName(rs.getString(8));
-                    sampleCustomer.setHouseNr(rs.getString(9));
-                    sampleCustomer.setFloor(rs.getString(10));
-                    sampleCustomer.setCardNr(rs.getLong(11));
-                    sampleCustomer.setCardCVV(rs.getInt(12));
-                    allCustomers.add(sampleCustomer);
+                    allCustomers.add(load(rs));
                 }
             }
         }
@@ -195,6 +158,23 @@ public class CustomerRepository implements IRepository<Customer>{
             sql.printStackTrace();
         }
         return false;
+    }
+
+    private Customer load(ResultSet rs) throws SQLException{
+        Customer sampleCustomer = new Customer();
+        sampleCustomer.setId(rs.getInt(1));
+        sampleCustomer.setLastName(rs.getString(2));
+        sampleCustomer.setFirstName(rs.getString(3));
+        sampleCustomer.setEmail(rs.getString(4));
+        sampleCustomer.setPhoneNr(rs.getString(5));
+        sampleCustomer.setCprNr(rs.getInt(6));
+        sampleCustomer.setPostalCode(rs.getInt(7));
+        sampleCustomer.setStreetName(rs.getString(8));
+        sampleCustomer.setHouseNr(rs.getString(9));
+        sampleCustomer.setFloor(rs.getString(10));
+        sampleCustomer.setCardNr(rs.getLong(11));
+        sampleCustomer.setCardCVV(rs.getInt(12));
+        return sampleCustomer;
     }
 }
 

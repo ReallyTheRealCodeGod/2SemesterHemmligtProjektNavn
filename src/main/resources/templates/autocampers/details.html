@@ -8,15 +8,15 @@
 </head>
 
 <body class="m-4">
-<div class="card">
-    <div id="image">
+<div>
+    <div class="mx-auto img-thumbnail" style="width:70rem" id="image">
         <img th:src="${auto.getPicture() != null}? ${auto.getPicture()}: '/img/autocamperPictures/autocamper.png'" class="card-img-top img-fluid">
     </div>
     <div class="card align-items-center">
-        <div class="row card-title justify-content-center">
-            <span class="col" th:text="${auto.getType().getBrand()}" style="text-align: center; border-right: solid #F7F7F7 1px">Model:</span>
-            <span class="col" th:text="${auto.getType().getModel()}" style="text-align: center">#</span>
-        </div>
+            <h1 class="badge badge-primary row card-title justify-content-center">
+                <span class="col" th:text="${auto.getType().getBrand()}" style="text-align: center; border-right: solid #F7F7F7 1px">Model:</span>
+                <span class="col" th:text="${auto.getType().getModel()}" style="text-align: center">#</span>
+            </h1>
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><img style="    width: 24px !important;
@@ -51,8 +51,25 @@
                 </form>
             </div>
             <div class="w-100 my-2">
-                <button type="button" class="btn w-100 btn-secondary">Tilbage</button>
+                <a href="/"><button type="button" class="btn w-100 btn-secondary">Tilbage</button></a>
             </div>
+            <th:block th:if="${role == 'ROLE_ADMIN'}">
+                <form action="/autocampers/changeStatus" method="post">
+                            <input type="hidden" name="id" th:value="${auto.getId()}">
+
+                            <div class="w-100 border border-danger my-5">
+                            <button class="btn btn-danger w-100" type="submit">Ændre Status</button>
+                            <select name="status" th:value="${auto.getStatus()}" class="form-control" id="exampleFormControlSelect1">
+                                <option value="" selected disabled hidden>Vælg Status</option>
+                                <option value="1">Ledig</option>
+                                <option value="2">Reserveret</option>
+                                <option value="3">Under Inspektion</option>
+                                <option value="4">Udlejet</option>
+                                <option value="5">Under Reparation</option>
+                            </select>
+                        </div>
+                </form>
+            </th:block>
         </div>
         <div class="col ml-2 card">
             <h3 class="card-header row">Detaljer</h3>

@@ -32,7 +32,7 @@ public class IndexController {
             switch(role){
                 case "ROLE_USER":{return "/mechanic";}
                 case "ROLE_ADMIN":{return "redirect:/admin";}
-                case "ROLE_SALER":{return "/salesAssistant";}
+                case "ROLE_SALES":{return "/salesAssistant";}
             }
         }
         return "redirect:/login";

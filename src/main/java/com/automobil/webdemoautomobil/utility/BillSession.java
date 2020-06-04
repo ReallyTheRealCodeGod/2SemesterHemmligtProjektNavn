@@ -89,24 +89,36 @@ public class BillSession {
 
         int dayPrice = autocamper.getType().getPrice();
         int days = (int) (rental.getEndDate().toEpochDay() - rental.getStartDate().toEpochDay());
-        int rentalPrice = (days * (dayPrice * (100/prices.getCurrentSeason().getSurchargePercentage() + 1)));
+        float surcharge = 0;
+        if(prices.getCurrentSeason() != null){surcharge = (100/prices.getCurrentSeason().getSurchargePercentage());}
+        System.out.println(surcharge);
+        int rentalPrice = (int) (days * (dayPrice * (surcharge + 1)));
         int totalprice = rentalPrice + accessoryCost + maintenanceReport.getCleaningPrice() + maintenanceReport.getRepairCost() ;
         if(maintenanceReport.getFuelGauge() <= 50){
             totalprice += prices.getFuelPrice();
         }
-        Bill bill = new Bill(LocalDate.now(), customer.getFirstName(), customer.getLastName(), customer.getPostalCode(),
-                customer.getStreetName(),customer.getHouseNr(),customer.getFloor(), accessoryCost, rentalPrice, totalprice);
+        Bill bill = new Bill();
+        bill.setBillingDate(LocalDate.now());
+        bill.setCustomerFirstName(customer.getFirstName());
+        bill.setCustomerLastName(customer.getLastName());
+        bill.setPostalCode(customer.getPostalCode());
+        bill.setStreetName(customer.getStreetName());
+        bill.setStreetNr(customer.getHouseNr());
+        bill.setApartmentFloor(customer.getFloor());
+        bill.setAccessoryCost(accessoryCost);
+        bill.setRentalCost(rentalPrice);
+        bill.setTotalPrice(totalprice);
 
+        System.out.println(bill.getRentalCost());
             bill = billrepo.create(bill);
             for(Accessory a: accessoryList) {
                 a.setRentalId(0);
                 accRep.update(a);
             }
-            custRep.delete(customer);
-
-            autocamper.setStatus(Autocamper.AVAILABLE);
-            autoRep.update(autocamper);
 
             rentRep.delete(rental);
+            custRep.delete(customer);
+            autocamper.setStatus(Autocamper.AVAILABLE);
+            autoRep.update(autocamper);
     };
 }

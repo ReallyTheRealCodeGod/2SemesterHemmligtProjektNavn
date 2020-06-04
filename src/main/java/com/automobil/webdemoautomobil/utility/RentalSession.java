@@ -74,6 +74,8 @@ public class RentalSession {
         rental.setAutocamperId(autocamper.getId());
         rental.setCustomerId(cRep.create(customer).getId());
         rental = rRep.create(rental);
+        autocamper.setStatus(Autocamper.RENTED);
+        autoRep.update(autocamper);
         for(Accessory a : accessories){
             a.setRentalId(rental.getId());
             accRep.update(a);

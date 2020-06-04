@@ -69,14 +69,6 @@
                 </div>
             </div>
             <br>
-            <div class="card row">
-                <h5 class="card-header card-title">Sæson priser</h5>
-                <div class="input-group mt-2 w-100">
-                    <div class="input-group-prepend"><span class="input-group-text" >Sæson</span></div>
-                    <input type="number" class="form-control" name="Season"  th:value="${prices.getCleaningMinPrice()}">
-                    <div class="input-group-append"><span class="input-group-text" >Procent</span></div>
-                </div>
-            </div>
 
             <br>
             <div class="container">
@@ -84,6 +76,40 @@
                 <a style="" type="button" class="btn btn-lg btn-dark mb-5" href="/admin">Tilbage</a>
             </div>
         </form>
+        <div class="card row">
+            <h5 class="card-header card-title">Sæson priser</h5>
+            <div class="input-group mt-2 w-100">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Sæson</th>
+                        <th scope="col">Start Dato</th>
+                        <th scope="col">Slut Dato</th>
+                        <th scope="col">Tillægsprocent</th>
+                        <th scope="col">Rediger</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="season: ${prices.getSeasons()}">
+                        <th th:text="${season.getName()}"></th>
+                        <td th:text="${season.getStartDate()}"></td>
+                        <td th:text="${season.getEndDate()}"></td>
+                        <td th:text="${season.getSurchargePercentage()}"></td>
+                        <td><a th:href="@{/admin/delete(name=${season.getName()})}"><button class="btn btn-danger"> Slet</button></a></td>
+                    </tr>
+                    <tr>
+                        <form action="/admin/addSeason" method="post">
+                            <th><input type="text" name="name"></th>
+                            <td><input type="date" name="startDate"></td>
+                            <td><input type="date" name="endDate"></td>
+                            <td><input type="number" name="surchargePercentage"></td>
+                            <td><input type="submit" class="btn btn-primary" value="Tilføj"></td>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,5 +1,6 @@
 package com.automobil.webdemoautomobil.controllers;
 
+import ch.qos.logback.core.joran.action.ActionUtil;
 import com.automobil.webdemoautomobil.models.Autocamper;
 import com.automobil.webdemoautomobil.models.AutocamperType;
 import com.automobil.webdemoautomobil.models.BuiltInFeature;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.automobil.webdemoautomobil.repositories.AutocamperRepository;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,14 +83,27 @@ public class AutocamperController {
         model.addAttribute("role", role);
         model.addAttribute("title", title);
         return "autocampers/list";
-
     }
 
     @GetMapping("/details")
-    public String details(@RequestParam int id, Model model){
+    public String details(@RequestParam int id, Model model, HttpServletRequest request){
+        String role = null;
+        for(String r: userRepo.getAuthorities()){
+            if(request.isUserInRole(r)) {
+                role = r;
+            }
+        }
+        model.addAttribute("role", role);
         model.addAttribute("auto", autoRepo.getById(id));
         return "/autocampers/details";
+    }
 
+    @PostMapping("/changeStatus")
+    public String changeStatus(@RequestParam int status, @RequestParam int id){
+        Autocamper auto = autoRepo.getById(id);
+        auto.setStatus(status);
+        autoRepo.update(auto);
+        return "redirect:/autocampers/details?id="+Integer.toString(auto.getId());
     }
 }
 
