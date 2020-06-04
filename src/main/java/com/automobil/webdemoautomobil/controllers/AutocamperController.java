@@ -49,7 +49,7 @@ public class AutocamperController {
                 }
             }
         }
-        model.addAttribute("autos", autoRepo.getAll());
+        model.addAttribute("autos", autos);
         model.addAttribute("autoTypes", autoTypes.getAll());
         model.addAttribute("features", featureRepo.getAll());
         return "/autocampers/available";
