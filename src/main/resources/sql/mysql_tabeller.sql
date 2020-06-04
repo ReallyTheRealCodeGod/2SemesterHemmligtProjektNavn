@@ -45,6 +45,10 @@ INSERT INTO autocamper_db.autocamper
 (DEFAULT, '2000', 1, NULL, 'Toyota', 'Yellow'),
 (DEFAULT, '1034', 3, NULL, 'Volkswagen', 'Gainsboro'),
 (DEFAULT, '3000', 2, NULL, 'Farrari', 'Moccasin');
+(DEFAULT, '2000', 1, NULL, 'Toyota', 'S55 AMG'),
+(DEFAULT, '1034', 3, NULL, 'HONDA', 'TRX450ER'),
+(DEFAULT, '3000', 2, NULL, 'HARLEY DAVIDSON', 'ROAD KING');
+(DEFAULT, '3000', 2, NULL, 'Farrari', 'GRAND CARAVAN');
 
 
 INSERT INTO `autocamper_db`.`customer`
